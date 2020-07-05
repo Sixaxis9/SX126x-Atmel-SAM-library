@@ -1,7 +1,7 @@
-atmel_start.d atmel_start.o: .././atmel_start.c ../atmel_start.h \
- ../driver_init.h ../atmel_start_pins.h ../hal/include/hal_gpio.h \
- ../hal/include/hpl_gpio.h ../hal/utils/include/compiler.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
+SX1262 Drivers MG/device_specific_implementation.d \
+ SX1262 Drivers MG/device_specific_implementation.o: \
+ ../SX1262\ Drivers\ MG/device_specific_implementation.c \
+ ../SX1262\ Drivers\ MG/device_specific_implementation.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
@@ -9,6 +9,9 @@ atmel_start.d atmel_start.o: .././atmel_start.c ../atmel_start.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
+ ../hal/include/hal_gpio.h ../hal/include/hpl_gpio.h \
+ ../hal/utils/include/compiler.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h \
  ../hal/utils/include/parts.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include/samd51.h \
@@ -130,34 +133,13 @@ atmel_start.d atmel_start.o: .././atmel_start.c ../atmel_start.h \
  ../hri/hri_usb_d51.h ../hri/hri_wdt_d51.h \
  ../hal/utils/include/err_codes.h ../hpl/port/hpl_gpio_base.h \
  ../hal/utils/include/utils_assert.h ../Config/hpl_port_config.h \
- ../hal/include/hal_delay.h ../hal/include/hpl_irq.h \
- ../hal/include/hpl_reset.h ../hal/include/hpl_sleep.h \
- ../hal/include/hal_init.h ../hal/include/hpl_init.h \
- ../hal/include/hal_io.h ../hal/include/hal_sleep.h \
  ../hal/include/hal_ext_irq.h ../hal/include/hpl_ext_irq.h \
- ../hal/include/hal_spi_m_sync.h ../hal/include/hpl_spi_m_sync.h \
- ../hal/include/hpl_spi.h ../hal/utils/include/utils.h \
- ../hal/include/hpl_spi_sync.h ../hal/include/hal_usart_async.h \
- ../hal/include/hal_io.h ../hal/include/hpl_usart_async.h \
- ../hal/include/hpl_usart.h ../hal/include/hpl_irq.h \
- ../hal/utils/include/utils_ringbuffer.h ../hal/utils/include/compiler.h \
- ../hal/utils/include/utils_assert.h ../hal/include/hal_timer.h \
- ../hal/utils/include/utils_list.h ../hal/include/hpl_timer.h \
- ../hpl/tc/hpl_tc_base.h ../hal/include/hpl_pwm.h
+ ../hal/include/hal_spi_m_sync.h ../hal/include/hal_io.h \
+ ../hal/include/hpl_spi_m_sync.h ../hal/include/hpl_spi.h \
+ ../hal/utils/include/utils.h ../hal/include/hpl_spi_sync.h \
+ ../atmel_start_pins.h
 
-../atmel_start.h:
-
-../driver_init.h:
-
-../atmel_start_pins.h:
-
-../hal/include/hal_gpio.h:
-
-../hal/include/hpl_gpio.h:
-
-../hal/utils/include/compiler.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
+../SX1262\ Drivers\ MG/device_specific_implementation.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
@@ -172,6 +154,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
+
+../hal/include/hal_gpio.h:
+
+../hal/include/hpl_gpio.h:
+
+../hal/utils/include/compiler.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h:
 
@@ -467,27 +457,13 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a
 
 ../Config/hpl_port_config.h:
 
-../hal/include/hal_delay.h:
-
-../hal/include/hpl_irq.h:
-
-../hal/include/hpl_reset.h:
-
-../hal/include/hpl_sleep.h:
-
-../hal/include/hal_init.h:
-
-../hal/include/hpl_init.h:
-
-../hal/include/hal_io.h:
-
-../hal/include/hal_sleep.h:
-
 ../hal/include/hal_ext_irq.h:
 
 ../hal/include/hpl_ext_irq.h:
 
 ../hal/include/hal_spi_m_sync.h:
+
+../hal/include/hal_io.h:
 
 ../hal/include/hpl_spi_m_sync.h:
 
@@ -497,28 +473,4 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a
 
 ../hal/include/hpl_spi_sync.h:
 
-../hal/include/hal_usart_async.h:
-
-../hal/include/hal_io.h:
-
-../hal/include/hpl_usart_async.h:
-
-../hal/include/hpl_usart.h:
-
-../hal/include/hpl_irq.h:
-
-../hal/utils/include/utils_ringbuffer.h:
-
-../hal/utils/include/compiler.h:
-
-../hal/utils/include/utils_assert.h:
-
-../hal/include/hal_timer.h:
-
-../hal/utils/include/utils_list.h:
-
-../hal/include/hpl_timer.h:
-
-../hpl/tc/hpl_tc_base.h:
-
-../hal/include/hpl_pwm.h:
+../atmel_start_pins.h:

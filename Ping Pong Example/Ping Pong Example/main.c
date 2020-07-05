@@ -1,4 +1,6 @@
 #include <atmel_start.h>
+//#include "./SX1262 Drivers MG/sx126x_commands.h"
+#include "./SX1262 Drivers MG/device_specific_implementation.h"
 
 extern struct usart_async_descriptor USART_0;
 struct io_descriptor *usart;
@@ -12,7 +14,7 @@ static void tx_cb_USART_0(const struct usart_async_descriptor *const io_descr);
 void USART_init(void);
 void Timer_init(void);
 
-uint8_t welome_USART[13] = "Hello World!\n";
+uint8_t welcome_USART[13] = "Hello World!\n";
 
 int main(void)
 {
@@ -21,9 +23,25 @@ int main(void)
 	
 	USART_init();
 	Timer_init();
- 
+	
+	io_write(usart, welcome_USART, 13);
+	
+	SPI_init();
+	RESET_ON
+	wait_ms(10);
+	RESET_OFF
+	WAIT
+
+	uint8_t read_from_spi[13];
+	uint8_t status = 0xC0;
+	
 	while (1) {
-		//delay_ms(100);
+		NSS_ON
+		SendSpi(&status, 1);
+		ReadSpi(read_from_spi, 1);
+		NSS_OFF
+		io_write(usart, read_from_spi, 1);
+		delay_ms(100);
 	}
 }
 
@@ -34,7 +52,7 @@ void USART_init(void){
 	usart_async_get_io_descriptor(&USART_0, &usart);
 	usart_async_enable(&USART_0);
 }
-
+	
 static void tx_cb_USART_0(const struct usart_async_descriptor *const io_descr){
 	gpio_toggle_pin_level(LED);
 }
@@ -49,5 +67,5 @@ void Timer_init(void){
 
 static void TIMER_0_task1_cb(const struct timer_task *const timer_task)
 {
-	io_write(usart, welome_USART, 13);
+	//io_write(usart, welcome_USART, 13);
 }

@@ -74,3 +74,5 @@ hpl\tc\hpl_tc.c
 
 main.c
 
+SX1262 Drivers MG\device_specific_implementation.c
+

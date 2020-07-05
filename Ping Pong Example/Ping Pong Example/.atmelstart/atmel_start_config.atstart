@@ -1036,9 +1036,53 @@ drivers:
     variant: null
     clocks:
       domain_group: null
+  SPI_0:
+    user_label: SPI_0
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM0::driver_config_definition::SPI.Master::HAL:Driver:SPI.Master.Sync
+    functionality: SPI
+    api: HAL:Driver:SPI_Master_Sync
+    configuration:
+      spi_master_advanced: false
+      spi_master_arch_cpha: Sample input on leading edge
+      spi_master_arch_cpol: SCK is low when idle
+      spi_master_arch_dbgstop: Keep running
+      spi_master_arch_dord: MSB first
+      spi_master_arch_ibon: In data stream
+      spi_master_arch_runstdby: false
+      spi_master_baud_rate: 50000
+      spi_master_character_size: 8 bits
+      spi_master_dummybyte: 511
+      spi_master_rx_enable: true
+    optional_signals: []
+    variant:
+      specification: TXPO=0, RXPO=2
+      required_signals:
+      - name: SERCOM0/PAD/0
+        pad: PA04
+        label: MOSI
+      - name: SERCOM0/PAD/1
+        pad: PA05
+        label: SCK
+      - name: SERCOM0/PAD/2
+        pad: PA06
+        label: MISO
+    clocks:
+      domain_group:
+        nodes:
+        - name: Core
+          input: Generic clock generator 0
+          external: false
+          external_frequency: 0
+        - name: Slow
+          input: Generic clock generator 3
+          external: false
+          external_frequency: 0
+        configuration:
+          core_gclk_selection: Generic clock generator 0
+          slow_gclk_selection: Generic clock generator 3
   USART_0:
     user_label: USART_0
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM0::driver_config_definition::UART::HAL:Driver:USART.Async
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM4::driver_config_definition::UART::HAL:Driver:USART.Async
     functionality: USART
     api: HAL:Driver:USART_Async
     configuration:
@@ -1065,56 +1109,12 @@ drivers:
     variant:
       specification: TXPO=0, RXPO=1, CMODE=0
       required_signals:
-      - name: SERCOM0/PAD/0
-        pad: PB24
+      - name: SERCOM4/PAD/0
+        pad: PB08
         label: TX
-      - name: SERCOM0/PAD/1
-        pad: PB25
+      - name: SERCOM4/PAD/1
+        pad: PB09
         label: RX
-    clocks:
-      domain_group:
-        nodes:
-        - name: Core
-          input: Generic clock generator 0
-          external: false
-          external_frequency: 0
-        - name: Slow
-          input: Generic clock generator 3
-          external: false
-          external_frequency: 0
-        configuration:
-          core_gclk_selection: Generic clock generator 0
-          slow_gclk_selection: Generic clock generator 3
-  SPI_0:
-    user_label: SPI_0
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM1::driver_config_definition::SPI.Master::HAL:Driver:SPI.Master.Sync
-    functionality: SPI
-    api: HAL:Driver:SPI_Master_Sync
-    configuration:
-      spi_master_advanced: false
-      spi_master_arch_cpha: Sample input on leading edge
-      spi_master_arch_cpol: SCK is low when idle
-      spi_master_arch_dbgstop: Keep running
-      spi_master_arch_dord: MSB first
-      spi_master_arch_ibon: In data stream
-      spi_master_arch_runstdby: false
-      spi_master_baud_rate: 50000
-      spi_master_character_size: 8 bits
-      spi_master_dummybyte: 511
-      spi_master_rx_enable: true
-    optional_signals: []
-    variant:
-      specification: TXPO=0, RXPO=2
-      required_signals:
-      - name: SERCOM1/PAD/0
-        pad: PA00
-        label: MOSI
-      - name: SERCOM1/PAD/1
-        pad: PA01
-        label: SCK
-      - name: SERCOM1/PAD/2
-        pad: PA18
-        label: MISO
     clocks:
       domain_group:
         nodes:
@@ -1172,29 +1172,41 @@ drivers:
         configuration:
           tc_gclk_selection: Generic clock generator 0
 pads:
-  PA00:
-    name: PA00
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA00
-    mode: Digital output
-    user_label: PA00
-    configuration: null
-  PA01:
-    name: PA01
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA01
-    mode: Digital output
-    user_label: PA01
-    configuration: null
   DIO1:
     name: PC00
     definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PC00
     mode: Digital input
     user_label: DIO1
     configuration: null
-  PA18:
-    name: PA18
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA18
+  PB08:
+    name: PB08
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PB08
+    mode: Peripheral IO
+    user_label: PB08
+    configuration: null
+  PB09:
+    name: PB09
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PB09
+    mode: Peripheral IO
+    user_label: PB09
+    configuration: null
+  PA04:
+    name: PA04
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA04
+    mode: Digital output
+    user_label: PA04
+    configuration: null
+  PA05:
+    name: PA05
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA05
+    mode: Digital output
+    user_label: PA05
+    configuration: null
+  PA06:
+    name: PA06
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PA06
     mode: Digital input
-    user_label: PA18
+    user_label: PA06
     configuration: null
   NSS:
     name: PC18
@@ -1215,18 +1227,6 @@ pads:
     definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PC20
     mode: Digital input
     user_label: BUSY
-    configuration: null
-  PB24:
-    name: PB24
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PB24
-    mode: Peripheral IO
-    user_label: PB24
-    configuration: null
-  PB25:
-    name: PB25
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PB25
-    mode: Peripheral IO
-    user_label: PB25
     configuration: null
   LED:
     name: PB01

@@ -14,8 +14,8 @@
 /*! The buffer size for USART */
 #define USART_0_BUFFER_SIZE 16
 
-struct usart_async_descriptor USART_0;
 struct spi_m_sync_descriptor  SPI_0;
+struct usart_async_descriptor USART_0;
 struct timer_descriptor       TIMER_0;
 
 static uint8_t USART_0_buffer[USART_0_BUFFER_SIZE];
@@ -41,6 +41,62 @@ void EXTERNAL_IRQ_0_init(void)
 	ext_irq_init();
 }
 
+void SPI_0_PORT_init(void)
+{
+
+	gpio_set_pin_level(PA04,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(PA04, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(PA04, PINMUX_PA04D_SERCOM0_PAD0);
+
+	gpio_set_pin_level(PA05,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(PA05, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(PA05, PINMUX_PA05D_SERCOM0_PAD1);
+
+	// Set pin direction to input
+	gpio_set_pin_direction(PA06, GPIO_DIRECTION_IN);
+
+	gpio_set_pin_pull_mode(PA06,
+	                       // <y> Pull configuration
+	                       // <id> pad_pull_config
+	                       // <GPIO_PULL_OFF"> Off
+	                       // <GPIO_PULL_UP"> Pull-up
+	                       // <GPIO_PULL_DOWN"> Pull-down
+	                       GPIO_PULL_OFF);
+
+	gpio_set_pin_function(PA06, PINMUX_PA06D_SERCOM0_PAD2);
+}
+
+void SPI_0_CLOCK_init(void)
+{
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_SLOW, CONF_GCLK_SERCOM0_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+
+	hri_mclk_set_APBAMASK_SERCOM0_bit(MCLK);
+}
+
+void SPI_0_init(void)
+{
+	SPI_0_CLOCK_init();
+	spi_m_sync_init(&SPI_0, SERCOM0);
+	SPI_0_PORT_init();
+}
+
 /**
  * \brief USART Clock initialization function
  *
@@ -49,10 +105,10 @@ void EXTERNAL_IRQ_0_init(void)
 void USART_0_CLOCK_init()
 {
 
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_SLOW, CONF_GCLK_SERCOM0_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_CORE, CONF_GCLK_SERCOM4_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_SLOW, CONF_GCLK_SERCOM4_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
 
-	hri_mclk_set_APBAMASK_SERCOM0_bit(MCLK);
+	hri_mclk_set_APBDMASK_SERCOM4_bit(MCLK);
 }
 
 /**
@@ -63,9 +119,9 @@ void USART_0_CLOCK_init()
 void USART_0_PORT_init()
 {
 
-	gpio_set_pin_function(PB24, PINMUX_PB24C_SERCOM0_PAD0);
+	gpio_set_pin_function(PB08, PINMUX_PB08D_SERCOM4_PAD0);
 
-	gpio_set_pin_function(PB25, PINMUX_PB25C_SERCOM0_PAD1);
+	gpio_set_pin_function(PB09, PINMUX_PB09D_SERCOM4_PAD1);
 }
 
 /**
@@ -76,64 +132,8 @@ void USART_0_PORT_init()
 void USART_0_init(void)
 {
 	USART_0_CLOCK_init();
-	usart_async_init(&USART_0, SERCOM0, USART_0_buffer, USART_0_BUFFER_SIZE, (void *)NULL);
+	usart_async_init(&USART_0, SERCOM4, USART_0_buffer, USART_0_BUFFER_SIZE, (void *)NULL);
 	USART_0_PORT_init();
-}
-
-void SPI_0_PORT_init(void)
-{
-
-	gpio_set_pin_level(PA00,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   false);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(PA00, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(PA00, PINMUX_PA00D_SERCOM1_PAD0);
-
-	gpio_set_pin_level(PA01,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   false);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(PA01, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(PA01, PINMUX_PA01D_SERCOM1_PAD1);
-
-	// Set pin direction to input
-	gpio_set_pin_direction(PA18, GPIO_DIRECTION_IN);
-
-	gpio_set_pin_pull_mode(PA18,
-	                       // <y> Pull configuration
-	                       // <id> pad_pull_config
-	                       // <GPIO_PULL_OFF"> Off
-	                       // <GPIO_PULL_UP"> Pull-up
-	                       // <GPIO_PULL_DOWN"> Pull-down
-	                       GPIO_PULL_OFF);
-
-	gpio_set_pin_function(PA18, PINMUX_PA18C_SERCOM1_PAD2);
-}
-
-void SPI_0_CLOCK_init(void)
-{
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_CORE, CONF_GCLK_SERCOM1_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_SLOW, CONF_GCLK_SERCOM1_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-
-	hri_mclk_set_APBAMASK_SERCOM1_bit(MCLK);
-}
-
-void SPI_0_init(void)
-{
-	SPI_0_CLOCK_init();
-	spi_m_sync_init(&SPI_0, SERCOM1);
-	SPI_0_PORT_init();
 }
 
 void delay_driver_init(void)
@@ -217,9 +217,8 @@ void system_init(void)
 
 	EXTERNAL_IRQ_0_init();
 
-	USART_0_init();
-
 	SPI_0_init();
+	USART_0_init();
 
 	delay_driver_init();
 

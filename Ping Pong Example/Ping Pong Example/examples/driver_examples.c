@@ -24,6 +24,20 @@ void EXTERNAL_IRQ_0_example(void)
 }
 
 /**
+ * Example of using SPI_0 to write "Hello World" using the IO abstraction.
+ */
+static uint8_t example_SPI_0[12] = "Hello World!";
+
+void SPI_0_example(void)
+{
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+
+	spi_m_sync_enable(&SPI_0);
+	io_write(io, example_SPI_0, 12);
+}
+
+/**
  * Example of using USART_0 to write "Hello World" using the IO abstraction.
  *
  * Since the driver is asynchronous we need to use statically allocated memory for string
@@ -50,20 +64,6 @@ void USART_0_example(void)
 	usart_async_enable(&USART_0);
 
 	io_write(io, example_USART_0, 12);
-}
-
-/**
- * Example of using SPI_0 to write "Hello World" using the IO abstraction.
- */
-static uint8_t example_SPI_0[12] = "Hello World!";
-
-void SPI_0_example(void)
-{
-	struct io_descriptor *io;
-	spi_m_sync_get_io_descriptor(&SPI_0, &io);
-
-	spi_m_sync_enable(&SPI_0);
-	io_write(io, example_SPI_0, 12);
 }
 
 void delay_example(void)

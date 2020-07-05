@@ -58,7 +58,8 @@ SUBDIRS :=  \
 ../hpl/sercom/ \
 ../hpl/systick/ \
 ../hpl/tc/ \
-../hri/
+../hri/ \
+../SX1262\ Drivers\ MG/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -98,7 +99,8 @@ C_SRCS +=  \
 ../hpl/sercom/hpl_sercom.c \
 ../hpl/systick/hpl_systick.c \
 ../hpl/tc/hpl_tc.c \
-../main.c
+../main.c \
+../SX1262\ Drivers\ MG/device_specific_implementation.c
 
 
 PREPROCESSING_SRCS += 
@@ -143,7 +145,8 @@ hpl/ramecc/hpl_ramecc.o \
 hpl/sercom/hpl_sercom.o \
 hpl/systick/hpl_systick.o \
 hpl/tc/hpl_tc.o \
-main.o
+main.o \
+SX1262\ Drivers\ MG/device_specific_implementation.o
 
 OBJS_AS_ARGS +=  \
 atmel_start.o \
@@ -181,7 +184,8 @@ hpl/ramecc/hpl_ramecc.o \
 hpl/sercom/hpl_sercom.o \
 hpl/systick/hpl_systick.o \
 hpl/tc/hpl_tc.o \
-main.o
+main.o \
+"SX1262 Drivers MG/device_specific_implementation.o"
 
 C_DEPS +=  \
 atmel_start.d \
@@ -219,7 +223,8 @@ hpl/ramecc/hpl_ramecc.d \
 hpl/sercom/hpl_sercom.d \
 hpl/systick/hpl_systick.d \
 hpl/tc/hpl_tc.d \
-main.d
+main.d \
+SX1262\ Drivers\ MG/device_specific_implementation.d
 
 C_DEPS_AS_ARGS +=  \
 atmel_start.d \
@@ -257,7 +262,8 @@ hpl/ramecc/hpl_ramecc.d \
 hpl/sercom/hpl_sercom.d \
 hpl/systick/hpl_systick.d \
 hpl/tc/hpl_tc.d \
-main.d
+main.d \
+"SX1262 Drivers MG/device_specific_implementation.d"
 
 OUTPUT_FILE_PATH +=Ping\ Pong\ Example.elf
 
@@ -521,6 +527,13 @@ hpl/tc/hpl_tc.o: ../hpl/tc/hpl_tc.c
 	
 
 ./main.o: .././main.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD51P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SX1262\ Drivers\ MG/device_specific_implementation.o: ../SX1262\ Drivers\ MG/device_specific_implementation.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD51P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
