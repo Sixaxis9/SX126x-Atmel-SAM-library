@@ -204,10 +204,6 @@ uint32_t SX126x_GetRandom( void )
 
 void SX126x_SetSleep( SleepParams_t sleepConfig )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetSleep ");
-#endif
-
     AntSwOff( );
 
     SX126xHal_WriteCommand( RADIO_SET_SLEEP, &sleepConfig.Value, 1 );
@@ -216,9 +212,6 @@ void SX126x_SetSleep( SleepParams_t sleepConfig )
 
 void SX126x_SetStandby( RadioStandbyModes_t standbyConfig )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetStandby ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_STANDBY, ( uint8_t* )&standbyConfig, 1 );
     if( standbyConfig == STDBY_RC )
     {
@@ -232,9 +225,6 @@ void SX126x_SetStandby( RadioStandbyModes_t standbyConfig )
 
 void SX126x_SetFs( void )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetFs ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_FS, 0, 0 );
     OperatingMode = MODE_FS;
 }
@@ -245,10 +235,6 @@ void SX126x_SetTx( uint32_t timeout )
 
     OperatingMode = MODE_TX;
  
-#ifdef ADV_DEBUG_SX126X
-    printf("SetTx ");
-#endif
-
     buf[0] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
     buf[1] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
     buf[2] = ( uint8_t )( timeout & 0xFF );
@@ -260,10 +246,6 @@ void SX126x_SetRxBoosted( uint32_t timeout )
     uint8_t buf[3];
 
     OperatingMode = MODE_RX;
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetRxBoosted ");
-#endif
 
     SX126xHal_WriteReg( REG_RX_GAIN, 0x96 ); // max LNA gain, increase current by ~2mA for around ~3dB in sensivity
 
@@ -278,10 +260,6 @@ void SX126x_SetRx( uint32_t timeout )
     uint8_t buf[3];
 
     OperatingMode = MODE_RX;
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetRx ");
-#endif
 
     buf[0] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
     buf[1] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
@@ -311,17 +289,11 @@ void SX126x_SetCad( void )
 
 void SX126x_SetTxContinuousWave( void )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetTxContinuousWave ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_TXCONTINUOUSWAVE, 0, 0 );
 }
 
 void SX126x_SetTxInfinitePreamble( void )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetTxContinuousPreamble ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_TXCONTINUOUSPREAMBLE, 0, 0 );
 }
 
@@ -337,9 +309,6 @@ void SX126x_SetLoRaSymbNumTimeout( uint8_t SymbNum )
 
 void SX126x_SetRegulatorMode( RadioRegulatorMode_t mode )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetRegulatorMode ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_REGULATORMODE, ( uint8_t* )&mode, 1 );
 }
 
@@ -384,10 +353,6 @@ void SX126x_SetPaConfig( uint8_t paDutyCycle, uint8_t HpMax, uint8_t deviceSel, 
 {
     uint8_t buf[4];
 
-#ifdef ADV_DEBUG_SX126X
-    printf("SetPaConfig ");
-#endif
-
     buf[0] = paDutyCycle;
     buf[1] = HpMax;
     buf[2] = deviceSel;
@@ -403,10 +368,6 @@ void SX126x_SetRxTxFallbackMode( uint8_t fallbackMode )
 void SX126x_SetDioIrqParams( uint16_t irqMask, uint16_t dio1Mask, uint16_t dio2Mask, uint16_t dio3Mask )
 {
     uint8_t buf[8];
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetDioIrqParams ");
-#endif
 
     buf[0] = ( uint8_t )( ( irqMask >> 8 ) & 0x00FF );
     buf[1] = ( uint8_t )( irqMask & 0x00FF );
@@ -429,9 +390,6 @@ uint16_t SX126x_GetIrqStatus( void )
 
 void SX126x_SetDio2AsRfSwitchCtrl( uint8_t enable )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetDio2AsRfSwitchCtrl ");
-#endif
     SX126xHal_WriteCommand( RADIO_SET_RFSWITCHMODE, &enable, 1 );
 }
 
@@ -452,10 +410,6 @@ void SX126x_SetRfFrequency( uint32_t frequency )
     uint8_t buf[4];
     uint32_t freq = 0;
 
-#ifdef ADV_DEBUG_SX126X
-    printf("SetRfFrequency ");
-#endif
-
     if( ImageCalibrated == false )
     {
         CalibrateImage( frequency );
@@ -472,10 +426,6 @@ void SX126x_SetRfFrequency( uint32_t frequency )
 
 void SX126x_SetPacketType( RadioPacketTypes_t packetType )
 {
-#ifdef ADV_DEBUG_SX126X
-    printf("SetPacketType ");
-#endif
-
     // Save packet type internally to avoid questioning the radio
     PacketType = packetType;
     SX126xHal_WriteCommand( RADIO_SET_PACKETTYPE, ( uint8_t* )&packetType, 1 );
@@ -489,10 +439,6 @@ RadioPacketTypes_t SX126x_GetPacketType( void )
 void SX126x_SetTxParams( int8_t power, RadioRampTimes_t rampTime )
 {
     uint8_t buf[2];
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetTxParams ");
-#endif
 
     if( GetDeviceType( ) == SX1261 )
     {
@@ -551,10 +497,6 @@ void SX126x_SetModulationParams( ModulationParams_t *modulationParams )
     uint8_t n;
     uint32_t tempVal = 0;
     uint8_t buf[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetModulationParams ");
-#endif
 
     // Check if required configuration corresponds to the stored packet type
     // If not, silently update radio packet type
@@ -653,10 +595,6 @@ void SX126x_SetPacketParams( PacketParams_t *packetParams )
     uint8_t crcVal = 0;
     uint8_t buf[9] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-#ifdef ADV_DEBUG_SX126X
-    printf("SetPacketParams ");
-#endif
-
     // Check if required configuration corresponds to the stored packet type
     // If not, silently update radio packet type
     if( PacketType != packetParams->PacketType )
@@ -731,10 +669,6 @@ void SX126x_SetCadParams( RadioLoRaCadSymbols_t cadSymbolNum, uint8_t cadDetPeak
 void SX126x_SetBufferBaseAddresses( uint8_t txBaseAddress, uint8_t rxBaseAddress )
 {
     uint8_t buf[2];
-
-#ifdef ADV_DEBUG_SX126X
-    printf("SetBufferBaseAddresses ");
-#endif
 
     buf[0] = txBaseAddress;
     buf[1] = rxBaseAddress;
@@ -822,9 +756,7 @@ RadioError_t SX126x_GetDeviceErrors( void )
 void SX126x_ClearIrqStatus( uint16_t irq )
 {
     uint8_t buf[2];
-#ifdef ADV_DEBUG_SX126X
-    printf("ClearIrqStatus ");
-#endif
+
     buf[0] = ( uint8_t )( ( ( uint16_t )irq >> 8 ) & 0x00FF );
     buf[1] = ( uint8_t )( ( uint16_t )irq & 0x00FF );
     SX126xHal_WriteCommand( RADIO_CLR_IRQSTATUS, buf, 2 );
@@ -875,10 +807,6 @@ void SX126x_ProcessIrqs( void )
 
     uint16_t irqRegs = GetIrqStatus( );
     ClearIrqStatus( IRQ_RADIO_ALL );
-
-#ifdef ADV_DEBUG_SX126X
-    printf("0x%04x\n\r", irqRegs );
-#endif
 
     if( ( irqRegs & IRQ_HEADER_VALID ) == IRQ_HEADER_VALID )
     {

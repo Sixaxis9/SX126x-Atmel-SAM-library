@@ -22,6 +22,7 @@ Author: Marco Giordano
 
 extern struct spi_m_sync_descriptor SPI_0;
 struct io_descriptor *spi;
+extern struct io_descriptor *usart;
 
 uint8_t read_pin(const uint8_t pin){
     return gpio_get_pin_level(pin);
@@ -51,7 +52,7 @@ int32_t ReadSpi(uint8_t *rx_data, uint8_t len){
 
     uint8_t noop[len];
     for(int i=0; i<len; i++){
-        noop[i] = 0xC0; // Fill with noop, 0x00
+        noop[i] = 0x00; // Fill with noop, 0x00
     }
 
     temp.txbuf = noop;
@@ -70,4 +71,6 @@ void IRQ_Init(void)
 static void DIO1_IRQ(void)
 {
     // Do something in the ISR
+	uint8_t tx_done_see[6] = "Sent!\n";
+	io_write(usart, tx_done_see, 6);
 }

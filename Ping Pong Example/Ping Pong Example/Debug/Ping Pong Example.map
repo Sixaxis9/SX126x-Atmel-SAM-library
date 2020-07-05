@@ -79,12 +79,12 @@ Allocating common symbols
 Common symbol       size              file
 
 errno               0x4               c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-reent.o)
-__atomic            0x4               main.o
 usart               0x4               main.o
 _irq_table          0x224             hpl/core/hpl_core_m4.o
 SPI_0               0x18              driver_init.o
 USART_0             0x50              driver_init.o
 TIMER_0_task1       0x14              main.o
+commands            0x1               main.o
 spi                 0x4               SX1262 Drivers MG/device_specific_implementation.o
 device              0x10              hpl/ramecc/hpl_ramecc.o
 TIMER_0             0x1c              driver_init.o
@@ -2455,8 +2455,6 @@ Discarded input sections
  .data          0x00000000        0x0 hal/src/hal_ext_irq.o
  .text.ext_irq_deinit
                 0x00000000        0xc hal/src/hal_ext_irq.o
- .text.ext_irq_register
-                0x00000000       0x40 hal/src/hal_ext_irq.o
  .text.ext_irq_enable
                 0x00000000       0x10 hal/src/hal_ext_irq.o
  .text.ext_irq_disable
@@ -7684,8 +7682,6 @@ Discarded input sections
  .data          0x00000000        0x0 hpl/eic/hpl_eic.o
  .text._ext_irq_deinit
                 0x00000000       0x4c hpl/eic/hpl_eic.o
- .text._ext_irq_enable
-                0x00000000       0x28 hpl/eic/hpl_eic.o
  .debug_macro   0x00000000      0x8b0 hpl/eic/hpl_eic.o
  .debug_macro   0x00000000      0x16d hpl/eic/hpl_eic.o
  .debug_macro   0x00000000       0x22 hpl/eic/hpl_eic.o
@@ -11377,10 +11373,6 @@ Discarded input sections
  .text          0x00000000        0x0 SX1262 Drivers MG/device_specific_implementation.o
  .data          0x00000000        0x0 SX1262 Drivers MG/device_specific_implementation.o
  .bss           0x00000000        0x0 SX1262 Drivers MG/device_specific_implementation.o
- .text.DIO1_IRQ
-                0x00000000        0x2 SX1262 Drivers MG/device_specific_implementation.o
- .text.IRQ_Init
-                0x00000000       0x14 SX1262 Drivers MG/device_specific_implementation.o
  .debug_macro   0x00000000      0x8b0 SX1262 Drivers MG/device_specific_implementation.o
  .debug_macro   0x00000000       0x22 SX1262 Drivers MG/device_specific_implementation.o
  .debug_macro   0x00000000       0x87 SX1262 Drivers MG/device_specific_implementation.o
@@ -11534,7 +11526,341 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 SX1262 Drivers MG/device_specific_implementation.o
  .debug_macro   0x00000000      0x185 SX1262 Drivers MG/device_specific_implementation.o
  .debug_macro   0x00000000       0xc9 SX1262 Drivers MG/device_specific_implementation.o
- .debug_macro   0x00000000       0x34 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_macro   0x00000000       0x3a SX1262 Drivers MG/device_specific_implementation.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_commands.o
+ .text          0x00000000        0x0 SX1262 Drivers MG/sx126x_commands.o
+ .data          0x00000000        0x0 SX1262 Drivers MG/sx126x_commands.o
+ .bss           0x00000000        0x0 SX1262 Drivers MG/sx126x_commands.o
+ .debug_info    0x00000000       0x21 SX1262 Drivers MG/sx126x_commands.o
+ .debug_abbrev  0x00000000       0x13 SX1262 Drivers MG/sx126x_commands.o
+ .debug_aranges
+                0x00000000       0x18 SX1262 Drivers MG/sx126x_commands.o
+ .debug_macro   0x00000000       0x11 SX1262 Drivers MG/sx126x_commands.o
+ .debug_macro   0x00000000      0x8b0 SX1262 Drivers MG/sx126x_commands.o
+ .debug_line    0x00000000       0x47 SX1262 Drivers MG/sx126x_commands.o
+ .debug_str     0x00000000     0x2597 SX1262 Drivers MG/sx126x_commands.o
+ .comment       0x00000000       0x5a SX1262 Drivers MG/sx126x_commands.o
+ .ARM.attributes
+                0x00000000       0x37 SX1262 Drivers MG/sx126x_commands.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .group         0x00000000        0x8 SX1262 Drivers MG/sx126x_hal.o
+ .text          0x00000000        0x0 SX1262 Drivers MG/sx126x_hal.o
+ .data          0x00000000        0x0 SX1262 Drivers MG/sx126x_hal.o
+ .bss           0x00000000        0x0 SX1262 Drivers MG/sx126x_hal.o
+ .text.SX126xHal_WriteCommand
+                0x00000000       0x44 SX1262 Drivers MG/sx126x_hal.o
+ .text.SX126xHal_WriteBuffer
+                0x00000000       0x54 SX1262 Drivers MG/sx126x_hal.o
+ .text.SX126xHal_ReadBuffer
+                0x00000000       0x68 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x8b0 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x22 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x87 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x51 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xef SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x6a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x1df SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x16d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x22 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x54 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x1c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x22 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xdf SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x102d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x11f SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x706 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0xb5b SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x3c0 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x336 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x3b7 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x668 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x143f SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x651 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x67b SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x6d7 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x172 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x395 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x3a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x72a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0xb12 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x59f SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0xbc0 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x9b9 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x2a3 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x877 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x1ea SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x8f4 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x216 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x3f9 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x620 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x10d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xb8 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x1df7 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x2e69 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x11ed SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x50e SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x930 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x1ad8 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xe7 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x13e6 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x36a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x94 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xdc SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xe2 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xdc SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x46 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x4c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xc4 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x7d5 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xb8 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x7c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0xc19 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x46 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25b SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x170 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x7c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xbe SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x4c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x82 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x1a3 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x46 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x6a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x46 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x88 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x46 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x24e SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x1c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x76 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x3a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x2e SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x196 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x16f SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x16f SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x25d SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x52 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xfa SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x148 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x124 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x106 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xee SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xee SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x2e SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x46a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x3a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x559 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000     0x4c73 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xcf SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x10 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x10 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x40 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0xe5c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x9b6 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x94 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xbe SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x28c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x4d8 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xca SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x1c SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x16 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000      0x185 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0xc9 SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x9a SX1262 Drivers MG/sx126x_hal.o
+ .debug_macro   0x00000000       0x3a SX1262 Drivers MG/sx126x_hal.o
  .text          0x00000000      0x370 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubdf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubdf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubdf3.o)
@@ -11937,6 +12263,8 @@ LOAD hpl/systick/hpl_systick.o
 LOAD hpl/tc/hpl_tc.o
 LOAD main.o
 LOAD SX1262 Drivers MG/device_specific_implementation.o
+LOAD SX1262 Drivers MG/sx126x_commands.o
+LOAD SX1262 Drivers MG/sx126x_hal.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a
 END GROUP
@@ -11952,7 +12280,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
                 0x00010000                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:DEFINED (__stack_size__)?__stack_size__:0x10000
 
-.text           0x00000000     0x1ecc
+.text           0x00000000     0x21d4
                 0x00000000                . = ALIGN (0x4)
                 0x00000000                _sfixed = .
  *(.vectors .vectors.*)
@@ -12148,332 +12476,375 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .text.ext_irq_init
                 0x00000734       0x24 hal/src/hal_ext_irq.o
                 0x00000734                ext_irq_init
+ .text.ext_irq_register
+                0x00000758       0x40 hal/src/hal_ext_irq.o
+                0x00000758                ext_irq_register
  .text.io_write
-                0x00000758       0x30 hal/src/hal_io.o
-                0x00000758                io_write
+                0x00000798       0x30 hal/src/hal_io.o
+                0x00000798                io_write
  .text.spi_m_sync_init
-                0x00000788       0x50 hal/src/hal_spi_m_sync.o
-                0x00000788                spi_m_sync_init
+                0x000007c8       0x50 hal/src/hal_spi_m_sync.o
+                0x000007c8                spi_m_sync_init
  .text.spi_m_sync_enable
-                0x000007d8       0x28 hal/src/hal_spi_m_sync.o
-                0x000007d8                spi_m_sync_enable
+                0x00000818       0x28 hal/src/hal_spi_m_sync.o
+                0x00000818                spi_m_sync_enable
  .text.spi_m_sync_transfer
-                0x00000800       0x40 hal/src/hal_spi_m_sync.o
-                0x00000800                spi_m_sync_transfer
+                0x00000840       0x40 hal/src/hal_spi_m_sync.o
+                0x00000840                spi_m_sync_transfer
  .text._spi_m_sync_io_write
-                0x00000840       0x3c hal/src/hal_spi_m_sync.o
+                0x00000880       0x3c hal/src/hal_spi_m_sync.o
  .text._spi_m_sync_io_read
-                0x0000087c       0x3c hal/src/hal_spi_m_sync.o
+                0x000008bc       0x3c hal/src/hal_spi_m_sync.o
  .text.spi_m_sync_get_io_descriptor
-                0x000008b8       0x2c hal/src/hal_spi_m_sync.o
-                0x000008b8                spi_m_sync_get_io_descriptor
+                0x000008f8       0x2c hal/src/hal_spi_m_sync.o
+                0x000008f8                spi_m_sync_get_io_descriptor
  .text.timer_add_timer_task
-                0x000008e4       0x58 hal/src/hal_timer.o
+                0x00000924       0x58 hal/src/hal_timer.o
  .text.timer_process_counted
-                0x0000093c       0x80 hal/src/hal_timer.o
+                0x0000097c       0x80 hal/src/hal_timer.o
  .text.timer_init
-                0x000009bc       0x3c hal/src/hal_timer.o
-                0x000009bc                timer_init
+                0x000009fc       0x3c hal/src/hal_timer.o
+                0x000009fc                timer_init
  .text.timer_start
-                0x000009f8       0x3c hal/src/hal_timer.o
-                0x000009f8                timer_start
+                0x00000a38       0x3c hal/src/hal_timer.o
+                0x00000a38                timer_start
  .text.timer_add_task
-                0x00000a34       0xa8 hal/src/hal_timer.o
-                0x00000a34                timer_add_task
+                0x00000a74       0xa8 hal/src/hal_timer.o
+                0x00000a74                timer_add_task
  .text.usart_transmission_complete
-                0x00000adc       0x14 hal/src/hal_usart_async.o
+                0x00000b1c       0x14 hal/src/hal_usart_async.o
  .text.usart_error
-                0x00000af0       0x14 hal/src/hal_usart_async.o
+                0x00000b30       0x14 hal/src/hal_usart_async.o
  .text.usart_fill_rx_buffer
-                0x00000b04       0x1c hal/src/hal_usart_async.o
+                0x00000b44       0x1c hal/src/hal_usart_async.o
  .text.usart_async_write
-                0x00000b20       0x60 hal/src/hal_usart_async.o
+                0x00000b60       0x60 hal/src/hal_usart_async.o
  .text.usart_process_byte_sent
-                0x00000b80       0x34 hal/src/hal_usart_async.o
+                0x00000bc0       0x34 hal/src/hal_usart_async.o
  .text.usart_async_read
-                0x00000bb4       0xd8 hal/src/hal_usart_async.o
+                0x00000bf4       0xd8 hal/src/hal_usart_async.o
  .text.usart_async_init
-                0x00000c8c       0x90 hal/src/hal_usart_async.o
-                0x00000c8c                usart_async_init
+                0x00000ccc       0x90 hal/src/hal_usart_async.o
+                0x00000ccc                usart_async_init
  .text.usart_async_enable
-                0x00000d1c       0x2c hal/src/hal_usart_async.o
-                0x00000d1c                usart_async_enable
+                0x00000d5c       0x2c hal/src/hal_usart_async.o
+                0x00000d5c                usart_async_enable
  .text.usart_async_get_io_descriptor
-                0x00000d48       0x28 hal/src/hal_usart_async.o
-                0x00000d48                usart_async_get_io_descriptor
+                0x00000d88       0x28 hal/src/hal_usart_async.o
+                0x00000d88                usart_async_get_io_descriptor
  .text.usart_async_register_callback
-                0x00000d70       0x74 hal/src/hal_usart_async.o
-                0x00000d70                usart_async_register_callback
- .text.assert   0x00000de4        0x6 hal/utils/src/utils_assert.o
-                0x00000de4                assert
+                0x00000db0       0x74 hal/src/hal_usart_async.o
+                0x00000db0                usart_async_register_callback
+ .text.assert   0x00000e24        0x6 hal/utils/src/utils_assert.o
+                0x00000e24                assert
  .text.is_list_element
-                0x00000dea       0x20 hal/utils/src/utils_list.o
-                0x00000dea                is_list_element
- *fill*         0x00000e0a        0x2 
+                0x00000e2a       0x20 hal/utils/src/utils_list.o
+                0x00000e2a                is_list_element
+ *fill*         0x00000e4a        0x2 
  .text.list_insert_as_head
-                0x00000e0c       0x2c hal/utils/src/utils_list.o
-                0x00000e0c                list_insert_as_head
+                0x00000e4c       0x2c hal/utils/src/utils_list.o
+                0x00000e4c                list_insert_as_head
  .text.list_insert_after
-                0x00000e38        0x8 hal/utils/src/utils_list.o
-                0x00000e38                list_insert_after
+                0x00000e78        0x8 hal/utils/src/utils_list.o
+                0x00000e78                list_insert_after
  .text.list_remove_head
-                0x00000e40        0xc hal/utils/src/utils_list.o
-                0x00000e40                list_remove_head
+                0x00000e80        0xc hal/utils/src/utils_list.o
+                0x00000e80                list_remove_head
  .text.ringbuffer_init
-                0x00000e4c       0x50 hal/utils/src/utils_ringbuffer.o
-                0x00000e4c                ringbuffer_init
+                0x00000e8c       0x50 hal/utils/src/utils_ringbuffer.o
+                0x00000e8c                ringbuffer_init
  .text.ringbuffer_get
-                0x00000e9c       0x44 hal/utils/src/utils_ringbuffer.o
-                0x00000e9c                ringbuffer_get
+                0x00000edc       0x44 hal/utils/src/utils_ringbuffer.o
+                0x00000edc                ringbuffer_get
  .text.ringbuffer_put
-                0x00000ee0       0x40 hal/utils/src/utils_ringbuffer.o
-                0x00000ee0                ringbuffer_put
+                0x00000f20       0x40 hal/utils/src/utils_ringbuffer.o
+                0x00000f20                ringbuffer_put
  .text.ringbuffer_num
-                0x00000f20       0x24 hal/utils/src/utils_ringbuffer.o
-                0x00000f20                ringbuffer_num
+                0x00000f60       0x24 hal/utils/src/utils_ringbuffer.o
+                0x00000f60                ringbuffer_num
  .text._irq_set
-                0x00000f44       0x1c hpl/core/hpl_core_m4.o
-                0x00000f44                _irq_set
+                0x00000f84       0x1c hpl/core/hpl_core_m4.o
+                0x00000f84                _irq_set
  .text._get_cycles_for_ms
-                0x00000f60        0xa hpl/core/hpl_core_m4.o
-                0x00000f60                _get_cycles_for_ms
- *fill*         0x00000f6a        0x2 
+                0x00000fa0        0xa hpl/core/hpl_core_m4.o
+                0x00000fa0                _get_cycles_for_ms
+ *fill*         0x00000faa        0x2 
  .text._init_chip
-                0x00000f6c       0x40 hpl/core/hpl_init.o
-                0x00000f6c                _init_chip
+                0x00000fac       0x40 hpl/core/hpl_init.o
+                0x00000fac                _init_chip
  .text._ext_irq_init
-                0x00000fac       0xb8 hpl/eic/hpl_eic.o
-                0x00000fac                _ext_irq_init
+                0x00000fec       0xb8 hpl/eic/hpl_eic.o
+                0x00000fec                _ext_irq_init
+ .text._ext_irq_enable
+                0x000010a4       0x28 hpl/eic/hpl_eic.o
+                0x000010a4                _ext_irq_enable
  .text.EIC_0_Handler
-                0x00001064       0xdc hpl/eic/hpl_eic.o
-                0x00001064                EIC_0_Handler
+                0x000010cc       0xdc hpl/eic/hpl_eic.o
+                0x000010cc                EIC_0_Handler
  .text._gclk_init_generators_by_fref
-                0x00001140       0x40 hpl/gclk/hpl_gclk.o
-                0x00001140                _gclk_init_generators_by_fref
+                0x000011a8       0x40 hpl/gclk/hpl_gclk.o
+                0x000011a8                _gclk_init_generators_by_fref
  .text._mclk_init
-                0x00001180        0xc hpl/mclk/hpl_mclk.o
-                0x00001180                _mclk_init
+                0x000011e8        0xc hpl/mclk/hpl_mclk.o
+                0x000011e8                _mclk_init
  .text._osc32kctrl_init_sources
-                0x0000118c       0x20 hpl/osc32kctrl/hpl_osc32kctrl.o
-                0x0000118c                _osc32kctrl_init_sources
+                0x000011f4       0x20 hpl/osc32kctrl/hpl_osc32kctrl.o
+                0x000011f4                _osc32kctrl_init_sources
  .text._oscctrl_init_sources
-                0x000011ac        0x2 hpl/oscctrl/hpl_oscctrl.o
-                0x000011ac                _oscctrl_init_sources
- *fill*         0x000011ae        0x2 
+                0x00001214        0x2 hpl/oscctrl/hpl_oscctrl.o
+                0x00001214                _oscctrl_init_sources
+ *fill*         0x00001216        0x2 
  .text._oscctrl_init_referenced_generators
-                0x000011b0       0xe8 hpl/oscctrl/hpl_oscctrl.o
-                0x000011b0                _oscctrl_init_referenced_generators
+                0x00001218       0xe8 hpl/oscctrl/hpl_oscctrl.o
+                0x00001218                _oscctrl_init_referenced_generators
  .text.RAMECC_Handler
-                0x00001298       0x44 hpl/ramecc/hpl_ramecc.o
-                0x00001298                RAMECC_Handler
+                0x00001300       0x44 hpl/ramecc/hpl_ramecc.o
+                0x00001300                RAMECC_Handler
  .text._sercom_get_hardware_index
-                0x000012dc       0x44 hpl/sercom/hpl_sercom.o
+                0x00001344       0x44 hpl/sercom/hpl_sercom.o
  .text._sercom_usart_interrupt_handler
-                0x00001320       0x70 hpl/sercom/hpl_sercom.o
+                0x00001388       0x70 hpl/sercom/hpl_sercom.o
  .text._sercom_get_irq_num
-                0x00001390       0x14 hpl/sercom/hpl_sercom.o
+                0x000013f8       0x14 hpl/sercom/hpl_sercom.o
  .text._spi_sync_enable
-                0x000013a4       0x22 hpl/sercom/hpl_sercom.o
- *fill*         0x000013c6        0x2 
+                0x0000140c       0x22 hpl/sercom/hpl_sercom.o
+ *fill*         0x0000142e        0x2 
  .text._usart_init
-                0x000013c8       0xa0 hpl/sercom/hpl_sercom.o
+                0x00001430       0xa0 hpl/sercom/hpl_sercom.o
  .text._usart_async_init
-                0x00001468       0x80 hpl/sercom/hpl_sercom.o
-                0x00001468                _usart_async_init
+                0x000014d0       0x80 hpl/sercom/hpl_sercom.o
+                0x000014d0                _usart_async_init
  .text._usart_async_enable
-                0x000014e8       0x14 hpl/sercom/hpl_sercom.o
-                0x000014e8                _usart_async_enable
+                0x00001550       0x14 hpl/sercom/hpl_sercom.o
+                0x00001550                _usart_async_enable
  .text._usart_async_write_byte
-                0x000014fc        0x6 hpl/sercom/hpl_sercom.o
-                0x000014fc                _usart_async_write_byte
+                0x00001564        0x6 hpl/sercom/hpl_sercom.o
+                0x00001564                _usart_async_write_byte
  .text._usart_async_enable_byte_sent_irq
-                0x00001502        0x8 hpl/sercom/hpl_sercom.o
-                0x00001502                _usart_async_enable_byte_sent_irq
+                0x0000156a        0x8 hpl/sercom/hpl_sercom.o
+                0x0000156a                _usart_async_enable_byte_sent_irq
  .text._usart_async_enable_tx_done_irq
-                0x0000150a        0x8 hpl/sercom/hpl_sercom.o
-                0x0000150a                _usart_async_enable_tx_done_irq
- *fill*         0x00001512        0x2 
+                0x00001572        0x8 hpl/sercom/hpl_sercom.o
+                0x00001572                _usart_async_enable_tx_done_irq
+ *fill*         0x0000157a        0x2 
  .text._usart_async_set_irq_state
-                0x00001514       0x6c hpl/sercom/hpl_sercom.o
-                0x00001514                _usart_async_set_irq_state
+                0x0000157c       0x6c hpl/sercom/hpl_sercom.o
+                0x0000157c                _usart_async_set_irq_state
  .text.SERCOM4_0_Handler
-                0x00001580       0x14 hpl/sercom/hpl_sercom.o
-                0x00001580                SERCOM4_0_Handler
+                0x000015e8       0x14 hpl/sercom/hpl_sercom.o
+                0x000015e8                SERCOM4_0_Handler
  .text.SERCOM4_1_Handler
-                0x00001594       0x14 hpl/sercom/hpl_sercom.o
-                0x00001594                SERCOM4_1_Handler
+                0x000015fc       0x14 hpl/sercom/hpl_sercom.o
+                0x000015fc                SERCOM4_1_Handler
  .text.SERCOM4_2_Handler
-                0x000015a8       0x14 hpl/sercom/hpl_sercom.o
-                0x000015a8                SERCOM4_2_Handler
+                0x00001610       0x14 hpl/sercom/hpl_sercom.o
+                0x00001610                SERCOM4_2_Handler
  .text.SERCOM4_3_Handler
-                0x000015bc       0x14 hpl/sercom/hpl_sercom.o
-                0x000015bc                SERCOM4_3_Handler
+                0x00001624       0x14 hpl/sercom/hpl_sercom.o
+                0x00001624                SERCOM4_3_Handler
  .text._spi_m_sync_init
-                0x000015d0       0xf4 hpl/sercom/hpl_sercom.o
-                0x000015d0                _spi_m_sync_init
+                0x00001638       0xf4 hpl/sercom/hpl_sercom.o
+                0x00001638                _spi_m_sync_init
  .text._spi_m_sync_enable
-                0x000016c4       0x30 hpl/sercom/hpl_sercom.o
-                0x000016c4                _spi_m_sync_enable
+                0x0000172c       0x30 hpl/sercom/hpl_sercom.o
+                0x0000172c                _spi_m_sync_enable
  .text._spi_m_sync_trans
-                0x000016f4       0xe0 hpl/sercom/hpl_sercom.o
-                0x000016f4                _spi_m_sync_trans
+                0x0000175c       0xe0 hpl/sercom/hpl_sercom.o
+                0x0000175c                _spi_m_sync_trans
  .text._delay_init
-                0x000017d4       0x14 hpl/systick/hpl_systick.o
-                0x000017d4                _delay_init
+                0x0000183c       0x14 hpl/systick/hpl_systick.o
+                0x0000183c                _delay_init
  .text._delay_cycles
-                0x000017e8       0x5c hpl/systick/hpl_systick.o
-                0x000017e8                _delay_cycles
+                0x00001850       0x5c hpl/systick/hpl_systick.o
+                0x00001850                _delay_cycles
  .text.get_tc_index
-                0x00001844       0x5c hpl/tc/hpl_tc.o
+                0x000018ac       0x5c hpl/tc/hpl_tc.o
  .text._timer_init
-                0x000018a0      0x1a8 hpl/tc/hpl_tc.o
-                0x000018a0                _timer_init
+                0x00001908      0x1a8 hpl/tc/hpl_tc.o
+                0x00001908                _timer_init
  .text._timer_start
-                0x00001a48       0x14 hpl/tc/hpl_tc.o
-                0x00001a48                _timer_start
+                0x00001ab0       0x14 hpl/tc/hpl_tc.o
+                0x00001ab0                _timer_start
  .text._timer_is_started
-                0x00001a5c       0x12 hpl/tc/hpl_tc.o
-                0x00001a5c                _timer_is_started
+                0x00001ac4       0x12 hpl/tc/hpl_tc.o
+                0x00001ac4                _timer_is_started
  .text._tc_get_timer
-                0x00001a6e        0x4 hpl/tc/hpl_tc.o
-                0x00001a6e                _tc_get_timer
- *fill*         0x00001a72        0x2 
+                0x00001ad6        0x4 hpl/tc/hpl_tc.o
+                0x00001ad6                _tc_get_timer
+ *fill*         0x00001ada        0x2 
  .text._timer_set_irq
-                0x00001a74       0x40 hpl/tc/hpl_tc.o
-                0x00001a74                _timer_set_irq
+                0x00001adc       0x40 hpl/tc/hpl_tc.o
+                0x00001adc                _timer_set_irq
  .text.TC7_Handler
-                0x00001ab4       0x20 hpl/tc/hpl_tc.o
-                0x00001ab4                TC7_Handler
+                0x00001b1c       0x20 hpl/tc/hpl_tc.o
+                0x00001b1c                TC7_Handler
  .text.tx_cb_USART_0
-                0x00001ad4       0x10 main.o
+                0x00001b3c       0x10 main.o
  .text.TIMER_0_task1_cb
-                0x00001ae4        0x2 main.o
- *fill*         0x00001ae6        0x2 
+                0x00001b4c        0x2 main.o
+ *fill*         0x00001b4e        0x2 
  .text.USART_init
-                0x00001ae8       0x38 main.o
-                0x00001ae8                USART_init
+                0x00001b50       0x38 main.o
+                0x00001b50                USART_init
  .text.Timer_init
-                0x00001b20       0x34 main.o
-                0x00001b20                Timer_init
- .text.main     0x00001b54       0xb0 main.o
-                0x00001b54                main
+                0x00001b88       0x34 main.o
+                0x00001b88                Timer_init
+ .text.main     0x00001bbc       0xec main.o
+                0x00001bbc                main
+ .text.DIO1_IRQ
+                0x00001ca8       0x30 SX1262 Drivers MG/device_specific_implementation.o
  .text.read_pin
-                0x00001c04       0x48 SX1262 Drivers MG/device_specific_implementation.o
-                0x00001c04                read_pin
+                0x00001cd8       0x48 SX1262 Drivers MG/device_specific_implementation.o
+                0x00001cd8                read_pin
  .text.write_pin
-                0x00001c4c       0x2a SX1262 Drivers MG/device_specific_implementation.o
-                0x00001c4c                write_pin
- *fill*         0x00001c76        0x2 
+                0x00001d20       0x2a SX1262 Drivers MG/device_specific_implementation.o
+                0x00001d20                write_pin
+ *fill*         0x00001d4a        0x2 
  .text.SPI_init
-                0x00001c78       0x2c SX1262 Drivers MG/device_specific_implementation.o
-                0x00001c78                SPI_init
- .text.SendSpi  0x00001ca4       0x18 SX1262 Drivers MG/device_specific_implementation.o
-                0x00001ca4                SendSpi
- .text.ReadSpi  0x00001cbc       0x40 SX1262 Drivers MG/device_specific_implementation.o
-                0x00001cbc                ReadSpi
+                0x00001d4c       0x2c SX1262 Drivers MG/device_specific_implementation.o
+                0x00001d4c                SPI_init
+ .text.SendSpi  0x00001d78       0x18 SX1262 Drivers MG/device_specific_implementation.o
+                0x00001d78                SendSpi
+ .text.ReadSpi  0x00001d90       0x40 SX1262 Drivers MG/device_specific_implementation.o
+                0x00001d90                ReadSpi
+ .text.IRQ_Init
+                0x00001dd0       0x14 SX1262 Drivers MG/device_specific_implementation.o
+                0x00001dd0                IRQ_Init
+ .text.SX126xHal_SpiInit
+                0x00001de4       0x24 SX1262 Drivers MG/sx126x_hal.o
+                0x00001de4                SX126xHal_SpiInit
+ .text.SX126xHal_IoIrqInit
+                0x00001e08        0xc SX1262 Drivers MG/sx126x_hal.o
+                0x00001e08                SX126xHal_IoIrqInit
+ .text.SX126xHal_Reset
+                0x00001e14       0x40 SX1262 Drivers MG/sx126x_hal.o
+                0x00001e14                SX126xHal_Reset
+ .text.SX126xHal_Wakeup
+                0x00001e54       0x54 SX1262 Drivers MG/sx126x_hal.o
+                0x00001e54                SX126xHal_Wakeup
+ .text.SX126xHal_ReadCommand
+                0x00001ea8       0x48 SX1262 Drivers MG/sx126x_hal.o
+                0x00001ea8                SX126xHal_ReadCommand
+ .text.SX126xHal_WriteRegister
+                0x00001ef0       0x54 SX1262 Drivers MG/sx126x_hal.o
+                0x00001ef0                SX126xHal_WriteRegister
+ .text.SX126xHal_WriteReg
+                0x00001f44       0x10 SX1262 Drivers MG/sx126x_hal.o
+                0x00001f44                SX126xHal_WriteReg
+ .text.SX126xHal_ReadRegister
+                0x00001f54       0x68 SX1262 Drivers MG/sx126x_hal.o
+                0x00001f54                SX126xHal_ReadRegister
+ .text.SX126xHal_ReadReg
+                0x00001fbc       0x10 SX1262 Drivers MG/sx126x_hal.o
+                0x00001fbc                SX126xHal_ReadReg
+ .text.SX126xHal_GetDioStatus
+                0x00001fcc       0x30 SX1262 Drivers MG/sx126x_hal.o
+                0x00001fcc                SX126xHal_GetDioStatus
  .text.__libc_init_array
-                0x00001cfc       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
-                0x00001cfc                __libc_init_array
+                0x00001ffc       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+                0x00001ffc                __libc_init_array
  *(.glue_7t)
- .glue_7t       0x00001d44        0x0 linker stubs
+ .glue_7t       0x00002044        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00001d44        0x0 linker stubs
+ .glue_7        0x00002044        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x00001d44       0x14 hal/src/hal_io.o
+                0x00002044       0x14 hal/src/hal_io.o
  .rodata.str1.4
-                0x00001d58       0x1c hal/src/hal_spi_m_sync.o
+                0x00002058       0x1c hal/src/hal_spi_m_sync.o
  .rodata.str1.4
-                0x00001d74       0x17 hal/src/hal_timer.o
- *fill*         0x00001d8b        0x1 
+                0x00002074       0x17 hal/src/hal_timer.o
+ *fill*         0x0000208b        0x1 
  .rodata.str1.4
-                0x00001d8c       0x1d hal/src/hal_usart_async.o
- *fill*         0x00001da9        0x3 
+                0x0000208c       0x1d hal/src/hal_usart_async.o
+ *fill*         0x000020a9        0x3 
  .rodata.str1.4
-                0x00001dac       0x1e hal/utils/src/utils_list.o
- *fill*         0x00001dca        0x2 
+                0x000020ac       0x1e hal/utils/src/utils_list.o
+ *fill*         0x000020ca        0x2 
  .rodata.str1.4
-                0x00001dcc       0x24 hal/utils/src/utils_ringbuffer.o
- .rodata        0x00001df0        0x8 hpl/eic/hpl_eic.o
+                0x000020cc       0x24 hal/utils/src/utils_ringbuffer.o
+ .rodata        0x000020f0        0x8 hpl/eic/hpl_eic.o
  .rodata.str1.4
-                0x00001df8       0x15 hpl/eic/hpl_eic.o
- *fill*         0x00001e0d        0x3 
- .rodata        0x00001e10       0x38 hpl/sercom/hpl_sercom.o
+                0x000020f8       0x15 hpl/eic/hpl_eic.o
+ *fill*         0x0000210d        0x3 
+ .rodata        0x00002110       0x38 hpl/sercom/hpl_sercom.o
  .rodata.str1.4
-                0x00001e48       0x1b hpl/sercom/hpl_sercom.o
- *fill*         0x00001e63        0x1 
- .rodata        0x00001e64       0x34 hpl/tc/hpl_tc.o
+                0x00002148       0x1b hpl/sercom/hpl_sercom.o
+ *fill*         0x00002163        0x1 
+ .rodata        0x00002164       0x34 hpl/tc/hpl_tc.o
  .rodata.str1.4
-                0x00001e98       0x14 hpl/tc/hpl_tc.o
+                0x00002198       0x14 hpl/tc/hpl_tc.o
                                  0x13 (size before relaxing)
+ .rodata        0x000021ac        0x7 SX1262 Drivers MG/device_specific_implementation.o
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00001eac                . = ALIGN (0x4)
+                0x000021b4                . = ALIGN (0x4)
+ *fill*         0x000021b3        0x1 
  *(.init)
- .init          0x00001eac        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
-                0x00001eac                _init
- .init          0x00001eb0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
-                0x00001eb8                . = ALIGN (0x4)
-                0x00001eb8                __preinit_array_start = .
+ .init          0x000021b4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
+                0x000021b4                _init
+ .init          0x000021b8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x000021c0                . = ALIGN (0x4)
+                0x000021c0                __preinit_array_start = .
  *(.preinit_array)
-                0x00001eb8                __preinit_array_end = .
-                0x00001eb8                . = ALIGN (0x4)
-                0x00001eb8                __init_array_start = .
+                0x000021c0                __preinit_array_end = .
+                0x000021c0                . = ALIGN (0x4)
+                0x000021c0                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00001eb8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
-                0x00001ebc                __init_array_end = .
-                0x00001ebc                . = ALIGN (0x4)
+ .init_array    0x000021c0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+                0x000021c4                __init_array_end = .
+                0x000021c4                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x00001ebc                . = ALIGN (0x4)
+                0x000021c4                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00001ebc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
-                0x00001ebc                _fini
- .fini          0x00001ec0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
-                0x00001ec8                . = ALIGN (0x4)
-                0x00001ec8                __fini_array_start = .
+ .fini          0x000021c4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
+                0x000021c4                _fini
+ .fini          0x000021c8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x000021d0                . = ALIGN (0x4)
+                0x000021d0                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00001ec8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+ .fini_array    0x000021d0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x00001ecc                __fini_array_end = .
+                0x000021d4                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x00001ecc                . = ALIGN (0x4)
-                0x00001ecc                _efixed = .
+                0x000021d4                . = ALIGN (0x4)
+                0x000021d4                _efixed = .
                 [!provide]                PROVIDE (__exidx_start, .)
 
-.vfp11_veneer   0x00001ecc        0x0
- .vfp11_veneer  0x00001ecc        0x0 linker stubs
+.vfp11_veneer   0x000021d4        0x0
+ .vfp11_veneer  0x000021d4        0x0 linker stubs
 
-.v4_bx          0x00001ecc        0x0
- .v4_bx         0x00001ecc        0x0 linker stubs
+.v4_bx          0x000021d4        0x0
+ .v4_bx         0x000021d4        0x0 linker stubs
 
-.iplt           0x00001ecc        0x0
- .iplt          0x00001ecc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.iplt           0x000021d4        0x0
+ .iplt          0x000021d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.eh_frame       0x00001ecc        0x0
- .eh_frame      0x00001ecc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.eh_frame       0x000021d4        0x0
+ .eh_frame      0x000021d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.rel.dyn        0x00001ecc        0x0
- .rel.iplt      0x00001ecc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.rel.dyn        0x000021d4        0x0
+ .rel.iplt      0x000021d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.jcr            0x00001ecc        0x0
- .jcr           0x00001ecc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.jcr            0x000021d4        0x0
+ .jcr           0x000021d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.igot.plt       0x00001ecc        0x0
- .igot.plt      0x00001ecc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.igot.plt       0x000021d4        0x0
+ .igot.plt      0x000021d4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                PROVIDE (__exidx_end, .)
-                0x00001ecc                . = ALIGN (0x4)
-                0x00001ecc                _etext = .
+                0x000021d4                . = ALIGN (0x4)
+                0x000021d4                _etext = .
 
-.relocate       0x20000000       0x10 load address 0x00001ecc
+.relocate       0x20000000       0x10 load address 0x000021d4
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -12498,7 +12869,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x04000000                . = ALIGN (0x8)
                 0x04000000                _eqspi = .
 
-.bss            0x20000010       0xf8 load address 0x00001edc
+.bss            0x20000010       0xf8 load address 0x000021e4
                 0x20000010                . = ALIGN (0x4)
                 0x20000010                _sbss = .
                 0x20000010                _szero = .
@@ -12517,17 +12888,18 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x200000bc                TIMER_0
  COMMON         0x200000d8       0x10 hpl/ramecc/hpl_ramecc.o
                 0x200000d8                device
- COMMON         0x200000e8       0x1c main.o
-                0x200000e8                __atomic
-                0x200000ec                usart
-                0x200000f0                TIMER_0_task1
+ COMMON         0x200000e8       0x19 main.o
+                0x200000e8                usart
+                0x200000ec                TIMER_0_task1
+                0x20000100                commands
+ *fill*         0x20000101        0x3 
  COMMON         0x20000104        0x4 SX1262 Drivers MG/device_specific_implementation.o
                 0x20000104                spi
                 0x20000108                . = ALIGN (0x4)
                 0x20000108                _ebss = .
                 0x20000108                _ezero = .
 
-.stack          0x20000108    0x10000 load address 0x00001fd4
+.stack          0x20000108    0x10000 load address 0x000022dc
                 0x20000108                . = ALIGN (0x8)
                 0x20000108                _sstack = .
                 0x20010108                . = (. + STACK_SIZE)
@@ -12597,9 +12969,11 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .ARM.attributes
                 0x000005ab       0x37 SX1262 Drivers MG/device_specific_implementation.o
  .ARM.attributes
-                0x000005e2       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+                0x000005e2       0x37 SX1262 Drivers MG/sx126x_hal.o
  .ARM.attributes
-                0x00000610       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x00000619       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000647       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
 
 .comment        0x00000000       0x59
  .comment       0x00000000       0x59 atmel_start.o
@@ -12629,8 +13003,9 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .comment       0x00000059       0x5a hpl/tc/hpl_tc.o
  .comment       0x00000059       0x5a main.o
  .comment       0x00000059       0x5a SX1262 Drivers MG/device_specific_implementation.o
+ .comment       0x00000059       0x5a SX1262 Drivers MG/sx126x_hal.o
 
-.debug_info     0x00000000    0x23a61
+.debug_info     0x00000000    0x24721
  .debug_info    0x00000000      0x57d atmel_start.o
  .debug_info    0x0000057d      0xd7a Device_Startup/startup_samd51.o
  .debug_info    0x000012f7     0x6636 driver_init.o
@@ -12655,10 +13030,11 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_info    0x00012bdd     0xbe9f hpl/sercom/hpl_sercom.o
  .debug_info    0x0001ea7c      0x29f hpl/systick/hpl_systick.o
  .debug_info    0x0001ed1b     0x2bde hpl/tc/hpl_tc.o
- .debug_info    0x000218f9     0x11ce main.o
- .debug_info    0x00022ac7      0xf9a SX1262 Drivers MG/device_specific_implementation.o
+ .debug_info    0x000218f9     0x130c main.o
+ .debug_info    0x00022c05      0xfce SX1262 Drivers MG/device_specific_implementation.o
+ .debug_info    0x00023bd3      0xb4e SX1262 Drivers MG/sx126x_hal.o
 
-.debug_abbrev   0x00000000     0x3be7
+.debug_abbrev   0x00000000     0x3d33
  .debug_abbrev  0x00000000      0x104 atmel_start.o
  .debug_abbrev  0x00000104      0x171 Device_Startup/startup_samd51.o
  .debug_abbrev  0x00000275      0x36e driver_init.o
@@ -12683,10 +13059,11 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_abbrev  0x00002893      0x5ef hpl/sercom/hpl_sercom.o
  .debug_abbrev  0x00002e82      0x196 hpl/systick/hpl_systick.o
  .debug_abbrev  0x00003018      0x4f9 hpl/tc/hpl_tc.o
- .debug_abbrev  0x00003511      0x2ef main.o
- .debug_abbrev  0x00003800      0x3e7 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_abbrev  0x00003511      0x2fa main.o
+ .debug_abbrev  0x0000380b      0x3d8 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_abbrev  0x00003be3      0x150 SX1262 Drivers MG/sx126x_hal.o
 
-.debug_loc      0x00000000     0xd2c0
+.debug_loc      0x00000000     0xd81e
  .debug_loc     0x00000000       0x20 atmel_start.o
  .debug_loc     0x00000020       0x6b Device_Startup/startup_samd51.o
  .debug_loc     0x0000008b     0x1070 driver_init.o
@@ -12711,9 +13088,10 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_loc     0x0000c273      0x160 hpl/systick/hpl_systick.o
  .debug_loc     0x0000c3d3      0xa20 hpl/tc/hpl_tc.o
  .debug_loc     0x0000cdf3       0xc1 main.o
- .debug_loc     0x0000ceb4      0x40c SX1262 Drivers MG/device_specific_implementation.o
+ .debug_loc     0x0000ceb4      0x444 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_loc     0x0000d2f8      0x526 SX1262 Drivers MG/sx126x_hal.o
 
-.debug_aranges  0x00000000      0xbe8
+.debug_aranges  0x00000000      0xc68
  .debug_aranges
                 0x00000000       0x20 atmel_start.o
  .debug_aranges
@@ -12766,8 +13144,10 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
                 0x00000b58       0x40 main.o
  .debug_aranges
                 0x00000b98       0x50 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_aranges
+                0x00000be8       0x80 SX1262 Drivers MG/sx126x_hal.o
 
-.debug_ranges   0x00000000      0xfd8
+.debug_ranges   0x00000000     0x1048
  .debug_ranges  0x00000000       0x10 atmel_start.o
  .debug_ranges  0x00000010       0x18 Device_Startup/startup_samd51.o
  .debug_ranges  0x00000028       0x50 driver_init.o
@@ -12794,8 +13174,9 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_ranges  0x00000ed0       0x98 hpl/tc/hpl_tc.o
  .debug_ranges  0x00000f68       0x30 main.o
  .debug_ranges  0x00000f98       0x40 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_ranges  0x00000fd8       0x70 SX1262 Drivers MG/sx126x_hal.o
 
-.debug_macro    0x00000000    0x2f3c7
+.debug_macro    0x00000000    0x2fad8
  .debug_macro   0x00000000      0x7c3 atmel_start.o
  .debug_macro   0x000007c3      0x8b0 atmel_start.o
  .debug_macro   0x00001073      0x16d atmel_start.o
@@ -12992,12 +13373,13 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_macro   0x0002dcef      0x6c2 hpl/tc/hpl_tc.o
  .debug_macro   0x0002e3b1       0x10 hpl/tc/hpl_tc.o
  .debug_macro   0x0002e3c1       0x83 hpl/tc/hpl_tc.o
- .debug_macro   0x0002e444      0x7d0 main.o
- .debug_macro   0x0002ec14       0x34 main.o
- .debug_macro   0x0002ec48      0x6e5 SX1262 Drivers MG/device_specific_implementation.o
- .debug_macro   0x0002f32d       0x9a SX1262 Drivers MG/device_specific_implementation.o
+ .debug_macro   0x0002e444      0x7e0 main.o
+ .debug_macro   0x0002ec24       0x3a main.o
+ .debug_macro   0x0002ec5e      0x6e5 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_macro   0x0002f343       0x9a SX1262 Drivers MG/device_specific_implementation.o
+ .debug_macro   0x0002f3dd      0x6fb SX1262 Drivers MG/sx126x_hal.o
 
-.debug_line     0x00000000    0x167c9
+.debug_line     0x00000000    0x175f9
  .debug_line    0x00000000      0xd9f atmel_start.o
  .debug_line    0x00000d9f      0x88c Device_Startup/startup_samd51.o
  .debug_line    0x0000162b      0xf46 driver_init.o
@@ -13022,64 +13404,67 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_line    0x000105b0     0x2b81 hpl/sercom/hpl_sercom.o
  .debug_line    0x00013131      0xc1d hpl/systick/hpl_systick.o
  .debug_line    0x00013d4e      0xec1 hpl/tc/hpl_tc.o
- .debug_line    0x00014c0f      0xe52 main.o
- .debug_line    0x00015a61      0xd68 SX1262 Drivers MG/device_specific_implementation.o
+ .debug_line    0x00014c0f      0xe85 main.o
+ .debug_line    0x00015a94      0xd6a SX1262 Drivers MG/device_specific_implementation.o
+ .debug_line    0x000167fe      0xdfb SX1262 Drivers MG/sx126x_hal.o
 
-.debug_str      0x00000000    0xfd3eb
+.debug_str      0x00000000    0xfd91f
  .debug_str     0x00000000    0xeb3b7 atmel_start.o
                               0xeb937 (size before relaxing)
  .debug_str     0x000eb3b7      0xbf2 Device_Startup/startup_samd51.o
                               0xd43e8 (size before relaxing)
- .debug_str     0x000ebfa9     0x1677 driver_init.o
+ .debug_str     0x000ebfa9     0x1672 driver_init.o
                               0xed095 (size before relaxing)
- .debug_str     0x000ed620       0x9c hal/src/hal_atomic.o
+ .debug_str     0x000ed61b       0x9c hal/src/hal_atomic.o
                               0xe9cf5 (size before relaxing)
- .debug_str     0x000ed6bc       0x92 hal/src/hal_delay.o
+ .debug_str     0x000ed6b7       0x92 hal/src/hal_delay.o
                               0xe9d5f (size before relaxing)
- .debug_str     0x000ed74e       0xcc hal/src/hal_ext_irq.o
+ .debug_str     0x000ed749       0xcc hal/src/hal_ext_irq.o
                               0xe9da8 (size before relaxing)
- .debug_str     0x000ed81a       0x33 hal/src/hal_io.o
+ .debug_str     0x000ed815       0x33 hal/src/hal_io.o
                               0xe9d90 (size before relaxing)
- .debug_str     0x000ed84d      0x2ef hal/src/hal_spi_m_sync.o
+ .debug_str     0x000ed848      0x2ef hal/src/hal_spi_m_sync.o
                               0xea67d (size before relaxing)
- .debug_str     0x000edb3c      0x2cc hal/src/hal_timer.o
+ .debug_str     0x000edb37      0x2cc hal/src/hal_timer.o
                               0xea622 (size before relaxing)
- .debug_str     0x000ede08      0x674 hal/src/hal_usart_async.o
+ .debug_str     0x000ede03      0x674 hal/src/hal_usart_async.o
                               0xeabda (size before relaxing)
- .debug_str     0x000ee47c       0x2a hal/utils/src/utils_assert.o
+ .debug_str     0x000ee477       0x2a hal/utils/src/utils_assert.o
                               0xe9d05 (size before relaxing)
- .debug_str     0x000ee4a6       0x31 hal/utils/src/utils_list.o
+ .debug_str     0x000ee4a1       0x31 hal/utils/src/utils_list.o
                               0xe9daf (size before relaxing)
- .debug_str     0x000ee4d7       0x24 hal/utils/src/utils_ringbuffer.o
+ .debug_str     0x000ee4d2       0x24 hal/utils/src/utils_ringbuffer.o
                               0xe9d99 (size before relaxing)
- .debug_str     0x000ee4fb      0x84d hpl/core/hpl_core_m4.o
+ .debug_str     0x000ee4f6      0x84d hpl/core/hpl_core_m4.o
                               0xead88 (size before relaxing)
- .debug_str     0x000eed48     0x3109 hpl/core/hpl_init.o
+ .debug_str     0x000eed43     0x3109 hpl/core/hpl_init.o
                               0xee128 (size before relaxing)
- .debug_str     0x000f1e51     0x3d00 hpl/eic/hpl_eic.o
+ .debug_str     0x000f1e4c     0x3d00 hpl/eic/hpl_eic.o
                               0xee7bc (size before relaxing)
- .debug_str     0x000f5b51      0xbf6 hpl/gclk/hpl_gclk.o
+ .debug_str     0x000f5b4c      0xbf6 hpl/gclk/hpl_gclk.o
                               0xeaa32 (size before relaxing)
- .debug_str     0x000f6747       0x47 hpl/mclk/hpl_mclk.o
+ .debug_str     0x000f6742       0x47 hpl/mclk/hpl_mclk.o
                               0xea2d9 (size before relaxing)
- .debug_str     0x000f678e      0x50f hpl/osc32kctrl/hpl_osc32kctrl.o
+ .debug_str     0x000f6789      0x50f hpl/osc32kctrl/hpl_osc32kctrl.o
                               0xea215 (size before relaxing)
- .debug_str     0x000f6c9d      0xcd2 hpl/oscctrl/hpl_oscctrl.o
+ .debug_str     0x000f6c98      0xcd2 hpl/oscctrl/hpl_oscctrl.o
                               0xeb6d1 (size before relaxing)
- .debug_str     0x000f796f      0x25d hpl/ramecc/hpl_ramecc.o
+ .debug_str     0x000f796a      0x25d hpl/ramecc/hpl_ramecc.o
                               0xeac1d (size before relaxing)
- .debug_str     0x000f7bcc     0x4a8c hpl/sercom/hpl_sercom.o
+ .debug_str     0x000f7bc7     0x4a8c hpl/sercom/hpl_sercom.o
                               0xf0760 (size before relaxing)
- .debug_str     0x000fc658       0xcd hpl/systick/hpl_systick.o
+ .debug_str     0x000fc653       0xcd hpl/systick/hpl_systick.o
                               0xe9d4d (size before relaxing)
- .debug_str     0x000fc725      0xa2d hpl/tc/hpl_tc.o
+ .debug_str     0x000fc720      0xa2d hpl/tc/hpl_tc.o
                               0xebb3c (size before relaxing)
- .debug_str     0x000fd152      0x1b7 main.o
-                              0xebe93 (size before relaxing)
- .debug_str     0x000fd309       0xe2 SX1262 Drivers MG/device_specific_implementation.o
-                              0xebafd (size before relaxing)
+ .debug_str     0x000fd14d      0x5bb main.o
+                              0xec27a (size before relaxing)
+ .debug_str     0x000fd708      0x11a SX1262 Drivers MG/device_specific_implementation.o
+                              0xebb15 (size before relaxing)
+ .debug_str     0x000fd822       0xfd SX1262 Drivers MG/sx126x_hal.o
+                              0xebbb7 (size before relaxing)
 
-.debug_frame    0x00000000     0x1dc4
+.debug_frame    0x00000000     0x1f70
  .debug_frame   0x00000000       0x28 atmel_start.o
  .debug_frame   0x00000028       0x38 Device_Startup/startup_samd51.o
  .debug_frame   0x00000060       0xd0 driver_init.o
@@ -13104,6 +13489,7 @@ OUTPUT(Ping Pong Example.elf elf32-littlearm)
  .debug_frame   0x00000c0c      0xecc hpl/sercom/hpl_sercom.o
  .debug_frame   0x00001ad8       0x7c hpl/systick/hpl_systick.o
  .debug_frame   0x00001b54      0x10c hpl/tc/hpl_tc.o
- .debug_frame   0x00001c60       0x78 main.o
- .debug_frame   0x00001cd8       0xc0 SX1262 Drivers MG/device_specific_implementation.o
- .debug_frame   0x00001d98       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00001c60       0x7c main.o
+ .debug_frame   0x00001cdc       0xcc SX1262 Drivers MG/device_specific_implementation.o
+ .debug_frame   0x00001da8      0x19c SX1262 Drivers MG/sx126x_hal.o
+ .debug_frame   0x00001f44       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)

@@ -7,12 +7,11 @@
 
 #include <atmel_start_pins.h>
 
-#define ADV_DEBUG_SX126X 0
 #define USE_CONFIG_PUBLIC_NETOWRK 0
 
-volatile hal_atomic_t __atomic;
-#define CRITICAL_SECTION_ENTER atomic_enter_critical(&__atomic)
-#define CRITICAL_SECTION_LEAVE atomic_leave_critical(&__atomic)
+//volatile hal_atomic_t __atomic;
+//#define CRITICAL_SECTION_ENTER atomic_enter_critical(&__atomic)
+//#define CRITICAL_SECTION_LEAVE atomic_leave_critical(&__atomic)
 	
 /*
 #define DIO1

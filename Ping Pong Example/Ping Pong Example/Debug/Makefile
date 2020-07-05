@@ -100,7 +100,9 @@ C_SRCS +=  \
 ../hpl/systick/hpl_systick.c \
 ../hpl/tc/hpl_tc.c \
 ../main.c \
-../SX1262\ Drivers\ MG/device_specific_implementation.c
+../SX1262\ Drivers\ MG/device_specific_implementation.c \
+../SX1262\ Drivers\ MG/sx126x_commands.c \
+../SX1262\ Drivers\ MG/sx126x_hal.c
 
 
 PREPROCESSING_SRCS += 
@@ -146,7 +148,9 @@ hpl/sercom/hpl_sercom.o \
 hpl/systick/hpl_systick.o \
 hpl/tc/hpl_tc.o \
 main.o \
-SX1262\ Drivers\ MG/device_specific_implementation.o
+SX1262\ Drivers\ MG/device_specific_implementation.o \
+SX1262\ Drivers\ MG/sx126x_commands.o \
+SX1262\ Drivers\ MG/sx126x_hal.o
 
 OBJS_AS_ARGS +=  \
 atmel_start.o \
@@ -185,7 +189,9 @@ hpl/sercom/hpl_sercom.o \
 hpl/systick/hpl_systick.o \
 hpl/tc/hpl_tc.o \
 main.o \
-"SX1262 Drivers MG/device_specific_implementation.o"
+"SX1262 Drivers MG/device_specific_implementation.o" \
+"SX1262 Drivers MG/sx126x_commands.o" \
+"SX1262 Drivers MG/sx126x_hal.o"
 
 C_DEPS +=  \
 atmel_start.d \
@@ -224,7 +230,9 @@ hpl/sercom/hpl_sercom.d \
 hpl/systick/hpl_systick.d \
 hpl/tc/hpl_tc.d \
 main.d \
-SX1262\ Drivers\ MG/device_specific_implementation.d
+SX1262\ Drivers\ MG/device_specific_implementation.d \
+SX1262\ Drivers\ MG/sx126x_commands.d \
+SX1262\ Drivers\ MG/sx126x_hal.d
 
 C_DEPS_AS_ARGS +=  \
 atmel_start.d \
@@ -263,7 +271,9 @@ hpl/sercom/hpl_sercom.d \
 hpl/systick/hpl_systick.d \
 hpl/tc/hpl_tc.d \
 main.d \
-"SX1262 Drivers MG/device_specific_implementation.d"
+"SX1262 Drivers MG/device_specific_implementation.d" \
+"SX1262 Drivers MG/sx126x_commands.d" \
+"SX1262 Drivers MG/sx126x_hal.d"
 
 OUTPUT_FILE_PATH +=Ping\ Pong\ Example.elf
 
@@ -534,6 +544,20 @@ hpl/tc/hpl_tc.o: ../hpl/tc/hpl_tc.c
 	
 
 SX1262\ Drivers\ MG/device_specific_implementation.o: ../SX1262\ Drivers\ MG/device_specific_implementation.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD51P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SX1262\ Drivers\ MG/sx126x_commands.o: ../SX1262\ Drivers\ MG/sx126x_commands.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD51P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SX1262\ Drivers\ MG/sx126x_hal.o: ../SX1262\ Drivers\ MG/sx126x_hal.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD51P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hpl/tc" -I"../hri" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

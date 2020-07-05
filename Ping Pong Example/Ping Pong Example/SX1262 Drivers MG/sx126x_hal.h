@@ -1,17 +1,7 @@
 /*
-  ______                              _
- / _____)             _              | |
-( (____  _____ ____ _| |_ _____  ____| |__
- \____ \| ___ |    (_   _) ___ |/ ___)  _ \
- _____) ) ____| | | || |_| ____( (___| | | |
-(______/|_____)_|_|_| \__)_____)\____)_| |_|
-    (C)2015 Semtech
-
-Description: Handling of the node configuration protocol
-
-License: Revised BSD License, see LICENSE.TXT file include in the project
-
-Maintainer: Miguel Luis, Gregory Cristian & Gilbert Menth
+This library is a device independant implementation of the library by Semtech
+from Miguel Luis, Gregory Cristian and Matthieu Verdy
+-> https://os.mbed.com/teams/Semtech/code/SX126xLib/
 
 __/\\\\____________/\\\\_____/\\\\\\\\\\\\_        
  _\/\\\\\\________/\\\\\\___/\\\//////////__       
@@ -25,14 +15,27 @@ __/\\\\____________/\\\\_____/\\\\\\\\\\\\_
 
 Modifier: Marco Giordano
 */
+
 #ifndef __SX126x_HAL_H__
 #define __SX126x_HAL_H__
 
-#include <stdint.h>
+#include "device_specific_implementation.h"
+#include "sx126x_commands.h"
 
 /*!
- * \brief Actual implementation of a SX126x radio
+ * \brief Abstraction layer for the sx126x commands
  */
+
+
+/*!
+    * \brief Initialize the SPI communication on the selected microcontroller
+    */
+void SX126xHal_SpiInit( void );
+
+/*!
+    * \brief Initialize the interrupt on the selected microcontroller
+    */
+void SX126xHal_IoIrqInit( void );
 
 /*!
     * \brief Soft resets the radio
@@ -51,7 +54,7 @@ void SX126xHal_Wakeup( void );
     * \param [in]  buffer        Buffer to be send to the radio
     * \param [in]  size          Size of the buffer to send
     */
-void SX126xHal_WriteCommand( RadioCommands_t opcode, uint8_t *buffer, uint16_t size );
+void SX126xHal_WriteCommand( RadioCommands_t *opcode, uint8_t *buffer, uint16_t size );
 
 /*!
     * \brief Send a command that read data from the radio
@@ -60,7 +63,7 @@ void SX126xHal_WriteCommand( RadioCommands_t opcode, uint8_t *buffer, uint16_t s
     * \param [out] buffer        Buffer holding data from the radio
     * \param [in]  size          Size of the buffer
     */
-void SX126xHal_ReadCommand( RadioCommands_t opcode, uint8_t *buffer, uint16_t size );
+void SX126xHal_ReadCommand( RadioCommands_t *opcode, uint8_t *buffer, uint16_t size );
 
 /*!
     * \brief Write data to the radio memory
@@ -77,7 +80,7 @@ void SX126xHal_WriteRegister( uint16_t address, uint8_t *buffer, uint16_t size )
     * \param [in]  address       The address of the first byte to write in the radio
     * \param [in]  value         The data to be written in radio's memory
     */
-void SX126xHal_WriteReg( uint16_t address, uint8_t value );
+void SX126xHal_WriteReg( uint16_t address, uint8_t *value );
 
 /*!
     * \brief Read data from the radio memory
@@ -97,7 +100,7 @@ void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size );
     * \retval      value         The value of the byte at the given address in
     *                            radio's memory
     */
-uint8_t SX126xHal_ReadReg( uint16_t address );
+void SX126xHal_ReadReg( uint16_t address , uint8_t *data );
 
 /*!
     * \brief Write data to the buffer holding the payload in the radio
@@ -124,21 +127,6 @@ void SX126xHal_ReadBuffer( uint8_t offset, uint8_t *buffer, uint8_t size );
     *                            [ DIO3 | DIO2 | DIO1 | BUSY ]
     */
 uint8_t SX126xHal_GetDioStatus( void );
-
-/*!
-    * \brief Returns the device type
-    *
-    * \retval      0: SX1261, 1: SX1262, 2: SX1268
-    */
-uint8_t SX126xHal_GetDeviceType( void );
-
-/*!
-    * \brief Returns the matching frequency
-    *
-    * \retval      1: 868 MHz
-    *              0: 915 MHz
-    */
-uint8_t SX126xHal_GetFreqSelect( void );
 
 /*!
     * \brief RF Switch power on

@@ -76,3 +76,7 @@ main.c
 
 SX1262 Drivers MG\device_specific_implementation.c
 
+SX1262 Drivers MG\sx126x_commands.c
+
+SX1262 Drivers MG\sx126x_hal.c
+

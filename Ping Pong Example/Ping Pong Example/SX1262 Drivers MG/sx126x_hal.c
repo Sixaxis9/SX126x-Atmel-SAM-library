@@ -1,6 +1,8 @@
 /*
 This library is a device independant implementation of the library by Semtech
 from Miguel Luis, Gregory Cristian and Matthieu Verdy
+-> https://os.mbed.com/teams/Semtech/code/SX126xLib/
+
 
 __/\\\\____________/\\\\_____/\\\\\\\\\\\\_        
  _\/\\\\\\________/\\\\\\___/\\\//////////__       
@@ -16,7 +18,6 @@ Modifier: Marco Giordano
 */
 
 #include "sx126x_hal.h"
-#include "device_specific_implementation.h"
 
 /*!
  * \brief Used to block execution to give enough time to Busy to go up
@@ -25,17 +26,18 @@ Modifier: Marco Giordano
 #define WaitOnCounter( )          for( uint8_t counter = 0; counter < 15; counter++ ) \
                                   {  __NOP( ); }
 
+
 void SX126xHal_SpiInit( void )
 {
     NSS_OFF
     SPI_init();
 
-    delay_ms( 100 );
+    wait_ms( 100 );
 }
 
-void SX126xHal_IoIrqInit( DioIrqHandler irqHandler )
+void SX126xHal_IoIrqInit( void )
 {
-    IRQ_Init()
+    IRQ_Init();
 }
 
 void SX126xHal_Reset( void )
@@ -54,7 +56,7 @@ void SX126xHal_Wakeup( void )
     CRITICAL_SECTION_ENTER()
 
     //Don't wait for BUSY here
-    uint8_t wakeup_sequence[2] = {RADIO_GET_STATUS, 0x00}
+    uint8_t wakeup_sequence[2] = {RADIO_GET_STATUS, 0x00};
     NSS_ON
     SendSpi(wakeup_sequence, sizeof(wakeup_sequence));
     NSS_OFF
@@ -64,20 +66,11 @@ void SX126xHal_Wakeup( void )
 
     CRITICAL_SECTION_LEAVE()
     
-    AntSwOn( );
+    //AntSwOn( );
 }
 
 void SX126xHal_WriteCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t size )
-{
-#ifdef ADV_DEBUG_SX126X
-    printf("cmd: 0x%02x", command );
-    for( uint8_t i = 0; i < size; i++ )
-    {
-        printf("-%02x", buffer[i] );
-    }
-    printf("\n\r");
-#endif
-    
+{ 
     WAIT_BUSY
 
     NSS_ON
@@ -87,7 +80,7 @@ void SX126xHal_WriteCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t
 
     NSS_OFF
     
-    WaitOnCounter( );
+    //WaitOnCounter( );
 }
 
 void SX126xHal_ReadCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t size )
@@ -96,7 +89,7 @@ void SX126xHal_ReadCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t 
 
     NSS_ON
 
-    SendSpi(( uint8_t* ) command, 1);
+    SendSpi(command, 1);
     ReadSpi(buffer, size);
     
     NSS_OFF
@@ -109,7 +102,8 @@ void SX126xHal_WriteRegister( uint16_t address, uint8_t *buffer, uint16_t size )
 
     NSS_ON
     
-    SendSpi(RADIO_WRITE_REGISTER, 1);
+    RadioCommands_t command = RADIO_WRITE_REGISTER;
+    SendSpi((uint8_t *) &command, 1);
     SendSpi(&address, 2);
     SendSpi(buffer, size);
     
@@ -117,9 +111,9 @@ void SX126xHal_WriteRegister( uint16_t address, uint8_t *buffer, uint16_t size )
 
 }
 
-void SX126xHal_WriteReg( uint16_t address, uint8_t value )
+void SX126xHal_WriteReg( uint16_t address, uint8_t *value )
 {
-    SX126xHal_WriteRegister( address, &value, 1 );
+    SX126xHal_WriteRegister(address, value, 1 );
 }
 
 void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size )
@@ -127,9 +121,12 @@ void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size )
     WAIT_BUSY
 
     NSS_ON
-    
-    SendSpi(&address, 2)
-    ReadSpi(buffer, size) 
+    uint8_t zero = 0;
+    RadioCommands_t command = RADIO_READ_REGISTER;
+    SendSpi((uint8_t *) &command, 1);
+    SendSpi(&address, 2);
+    SendSpi(&zero, 1);
+    ReadSpi(buffer, size); 
    
     NSS_OFF
     
@@ -137,7 +134,7 @@ void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size )
 
 void SX126xHal_ReadReg( uint16_t address, uint8_t *data )
 {
-    ReadRegister( address, data, 1 );
+    SX126xHal_ReadRegister( address, data, 1 );
 }
 
 void SX126xHal_WriteBuffer( uint8_t offset, uint8_t *buffer, uint8_t size )
@@ -146,7 +143,8 @@ void SX126xHal_WriteBuffer( uint8_t offset, uint8_t *buffer, uint8_t size )
 
     NSS_ON
 
-    SendSpi(RADIO_WRITE_BUFFER, 1);
+    RadioCommands_t command = RADIO_WRITE_BUFFER;
+    SendSpi((uint8_t *) &command, 1);
     SendSpi(&offset, 1);
     SendSpi(buffer, size);
     
@@ -159,21 +157,25 @@ void SX126xHal_ReadBuffer( uint8_t offset, uint8_t *buffer, uint8_t size )
     WAIT_BUSY
 
     NSS_ON
+    
+    RadioCommands_t command = RADIO_READ_BUFFER;
+    uint8_t zero = 0;
+    SendSpi((uint8_t *) &command, 1);
+    SendSpi(&offset, 1);
+    SendSpi(&zero, 1);
 
-    SendSpi(RADIO_READ_BUFFER, 1);
-    SendSpi(offset, 1);
-    SendSpi(0, 1);
-
-    rx_data = ReadSpi(buffer, size) 
+    ReadSpi(buffer, size);
 
     NSS_OFF
 }
+
 
 uint8_t SX126xHal_GetDioStatus( void )
 {
     return ( read_pin(DIO3) << 3 ) | ( read_pin(DIO2) << 2 ) | ( read_pin(DIO1) << 1 ) | ( read_pin(BUSY) << 0 );
 }
 
+/*
 void SX126xHal_AntSwOn( void )
 {
     antSwitchPower = 1;
@@ -183,3 +185,4 @@ void SX126xHal_AntSwOff( void )
 {
     antSwitchPower = 0;
 }
+*/

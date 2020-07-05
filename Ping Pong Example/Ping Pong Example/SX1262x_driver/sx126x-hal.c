@@ -84,21 +84,12 @@ void SX126xHal_Wakeup( void )
 }
 
 void SX126xHal_WriteCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t size )
-{
-#ifdef ADV_DEBUG_SX126X
-    printf("cmd: 0x%02x", command );
-    for( uint8_t i = 0; i < size; i++ )
-    {
-        printf("-%02x", buffer[i] );
-    }
-    printf("\n\r");
-#endif
-    
+{   
     WAIT_BUSY
 
     NSS_OFF
 
-    SendSpi((uint8_t *)command, 1);
+    SendSpi((uint8_t *) command, 1);
     SendSpi(buffer, size);
 
     NSS_ON
@@ -112,7 +103,7 @@ void SX126xHal_ReadCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t 
 
     NSS_OFF
 
-    SendSpi(( uint8_t* ) command, 1);
+    SendSpi(( uint8_t *) command, 1);
     ReadSpi(buffer, size);
     
     NSS_ON

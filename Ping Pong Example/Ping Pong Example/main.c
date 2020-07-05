@@ -1,6 +1,6 @@
 #include <atmel_start.h>
 //#include "./SX1262 Drivers MG/sx126x_commands.h"
-#include "./SX1262 Drivers MG/device_specific_implementation.h"
+#include "./SX1262 Drivers MG/sx126x_hal.h"
 
 extern struct usart_async_descriptor USART_0;
 struct io_descriptor *usart;
@@ -15,6 +15,7 @@ void USART_init(void);
 void Timer_init(void);
 
 uint8_t welcome_USART[13] = "Hello World!\n";
+RadioCommands_t commands;
 
 int main(void)
 {
@@ -26,21 +27,26 @@ int main(void)
 	
 	io_write(usart, welcome_USART, 13);
 	
-	SPI_init();
-	RESET_ON
-	wait_ms(10);
-	RESET_OFF
-	WAIT
-
-	uint8_t read_from_spi[13];
-	uint8_t status = 0xC0;
+	SX126xHal_SpiInit();
+	SX126xHal_IoIrqInit();
+	SX126xHal_Wakeup();
+	SX126xHal_Reset();
 	
+	uint8_t read_from_spi[3] = {0x00, 0x00, '\n'};
+
 	while (1) {
-		NSS_ON
-		SendSpi(&status, 1);
-		ReadSpi(read_from_spi, 1);
-		NSS_OFF
-		io_write(usart, read_from_spi, 1);
+		commands = RADIO_GET_STATUS;
+		SX126xHal_ReadCommand(&commands, read_from_spi, 1);
+		read_from_spi[1] = SX126xHal_GetDioStatus();
+		//io_write(usart, read_from_spi, 3);
+		//uint16_t register_address = 0x08AC;
+		uint8_t register_value;
+		uint8_t register_value_w = 0x96;
+		SX126xHal_ReadReg(0xAC08, &register_value);
+		io_write(usart, &register_value, 1);
+		SX126xHal_WriteReg(0xAC08, &register_value_w);
+		SX126xHal_ReadReg(0xAC08, &register_value);
+		io_write(usart, &register_value, 1);
 		delay_ms(100);
 	}
 }
