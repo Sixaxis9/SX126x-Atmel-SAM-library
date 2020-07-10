@@ -1,6 +1,6 @@
-SX1262 Drivers MG/sx126x_hal.d SX1262 Drivers MG/sx126x_hal.o: \
- ../SX1262\ Drivers\ MG/sx126x_hal.c ../SX1262\ Drivers\ MG/sx126x_hal.h \
- ../SX1262\ Drivers\ MG/device_specific_implementation.h \
+SX1262 Drivers/sx126x_hal.d SX1262 Drivers/sx126x_hal.o: \
+ ../SX1262\ Drivers/sx126x_hal.c ../SX1262\ Drivers/sx126x_hal.h \
+ ../SX1262\ Drivers/device_specific_implementation.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
@@ -136,11 +136,11 @@ SX1262 Drivers MG/sx126x_hal.d SX1262 Drivers MG/sx126x_hal.o: \
  ../hal/include/hal_spi_m_sync.h ../hal/include/hal_io.h \
  ../hal/include/hpl_spi_m_sync.h ../hal/include/hpl_spi.h \
  ../hal/utils/include/utils.h ../hal/include/hpl_spi_sync.h \
- ../atmel_start_pins.h ../SX1262\ Drivers\ MG/sx126x_commands.h
+ ../atmel_start_pins.h ../SX1262\ Drivers/sx126x_commands.h
 
-../SX1262\ Drivers\ MG/sx126x_hal.h:
+../SX1262\ Drivers/sx126x_hal.h:
 
-../SX1262\ Drivers\ MG/device_specific_implementation.h:
+../SX1262\ Drivers/device_specific_implementation.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
@@ -476,4 +476,4 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a
 
 ../atmel_start_pins.h:
 
-../SX1262\ Drivers\ MG/sx126x_commands.h:
+../SX1262\ Drivers/sx126x_commands.h:

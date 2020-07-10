@@ -1,17 +1,8 @@
 /*
-  ______                              _
- / _____)             _              | |
-( (____  _____ ____ _| |_ _____  ____| |__
- \____ \| ___ |    (_   _) ___ |/ ___)  _ \
- _____) ) ____| | | || |_| ____( (___| | | |
-(______/|_____)_|_|_| \__)_____)\____)_| |_|
-    (C)2017 Semtech
+This library is a device independant implementation of the library by Semtech
+from Miguel Luis, Gregory Cristian and Matthieu Verdy
+-> https://os.mbed.com/teams/Semtech/code/SX126xLib/
 
-Description: Generic SX126x driver implementation
-
-License: Revised BSD License, see LICENSE.TXT file include in the project
-
-Authors: Miguel Luis, Gregory Cristian
 
 __/\\\\____________/\\\\_____/\\\\\\\\\\\\_        
  _\/\\\\\\________/\\\\\\___/\\\//////////__       
@@ -25,11 +16,11 @@ __/\\\\____________/\\\\_____/\\\\\\\\\\\\_
 
 Modifier: Marco Giordano
 */
-#include "sx126x_commands.h"
-#include "sx126x-hal.h"
-#include "device_agnostic_driver.h"
 
-#define OPT 1 // Clock source selection, OPT = 0 >> TCXO; OPT = 1 >> XTAL
+#include <string.h>
+
+#include "sx126x_commands.h"
+#include "sx126x_hal.h"
 
 /*!
  * \brief Radio registers definition
@@ -51,42 +42,87 @@ volatile uint32_t FrequencyError = 0;
 static bool ImageCalibrated = false;
 
 
-void SX126x_Init( void )
+void SX126x_Init( void ){
+        CalibrationParams_t calibParam;
+
+        SX126xHal_SpiInit();
+
+        SX126xHal_Reset( );
+
+        SX126xHal_IoIrqInit();
+
+        SX126xHal_Wakeup( );
+        SX126x_SetStandby( STDBY_RC );
+
+        if( XTAL == 0 )
+        {
+                SX126x_SetDio3AsTcxoCtrl( TCXO_CTRL_1_7V, 320 ); //5 ms
+                calibParam.Value = 0x7F;
+                SX126x_Calibrate( calibParam );
+        }
+
+        SX126xHal_AntSwOn( );
+        SX126x_SetDio2AsRfSwitchCtrl( true );
+        
+        OperatingMode = MODE_STDBY_RC;
+        
+        SX126x_SetPacketType( PACKET_TYPE_LORA );
+
+        #ifdef USE_CONFIG_PUBLIC_NETOWRK
+                // Change LoRa modem Sync Word for Public Networks
+                SX126xHal_WriteReg( REG_LR_SYNCWORD, (uint8_t *) (( LORA_MAC_PUBLIC_SYNCWORD >> 8 ) & 0xFF) );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PUBLIC_SYNCWORD & 0xFF) );
+        #else
+                // Change LoRa modem SyncWord for Private Networks
+                SX126xHal_WriteReg( REG_LR_SYNCWORD, (uint8_t *) (( LORA_MAC_PRIVATE_SYNCWORD >> 8 ) & 0xFF) );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PRIVATE_SYNCWORD & 0xFF) );
+        #endif
+}
+
+void SX126x_SetStandby( RadioStandbyModes_t standbyConfig )
 {
-    CalibrationParams_t calibParam;
-    
-    SX126xHal_Reset( );
 
-    SX126xHal_IoIrqInit( dioIrq );
-
-    SX126xHal_Wakeup( );
-    SX126x_SetStandby( STDBY_RC );
-
-    if( OPT == 0 )
+    SX126xHal_WriteCommand( RADIO_SET_STANDBY, ( uint8_t* )&standbyConfig, 1 );
+    if( standbyConfig == STDBY_RC )
     {
-        SX126x_SetDio3AsTcxoCtrl( TCXO_CTRL_1_7V, 320 ); //5 ms
-        calibParam.Value = 0x7F;
-        SX126x_Calibrate( calibParam );
+        OperatingMode = MODE_STDBY_RC;
     }
+    else
+    {
+        OperatingMode = MODE_STDBY_XOSC;
+    }
+}
 
-    SX126x_SetPollingMode( );
+void SX126x_SetDio3AsTcxoCtrl( RadioTcxoCtrlVoltage_t tcxoVoltage, uint32_t timeout )
+{
+    uint8_t buf[4];
 
-    SX126xHal_AntSwOn( );
-    SX126x_SetDio2AsRfSwitchCtrl( true );
-    
-    OperatingMode = MODE_STDBY_RC;
-    
-    SX126x_SetPacketType( PACKET_TYPE_LORA );
+    buf[0] = tcxoVoltage & 0x07;
+    buf[1] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
+    buf[2] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
+    buf[3] = ( uint8_t )( timeout & 0xFF );
 
-#ifdef USE_CONFIG_PUBLIC_NETOWRK
-    // Change LoRa modem Sync Word for Public Networks
-    SX126xHal_WriteReg( REG_LR_SYNCWORD, ( LORA_MAC_PUBLIC_SYNCWORD >> 8 ) & 0xFF );
-    SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, LORA_MAC_PUBLIC_SYNCWORD & 0xFF );
-#else
-    // Change LoRa modem SyncWord for Private Networks
-    SX126xHal_WriteReg( REG_LR_SYNCWORD, ( LORA_MAC_PRIVATE_SYNCWORD >> 8 ) & 0xFF );
-    SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, LORA_MAC_PRIVATE_SYNCWORD & 0xFF );
-#endif
+    SX126xHal_WriteCommand( RADIO_SET_TCXOMODE, buf, 4 );
+}
+
+void SX126x_Calibrate( CalibrationParams_t calibParam )
+{
+    SX126xHal_WriteCommand( RADIO_CALIBRATE, &calibParam.Value, 1 );
+}
+
+void SX126x_SetDio2AsRfSwitchCtrl( uint8_t enable )
+{
+
+    SX126xHal_WriteCommand( RADIO_SET_RFSWITCHMODE, &enable, 1 );
+}
+
+void SX126x_SetPacketType( RadioPacketTypes_t packetType )
+{
+
+
+    // Save packet type internally to avoid questioning the radio
+    PacketType = packetType;
+    SX126xHal_WriteCommand( RADIO_SET_PACKETTYPE, ( uint8_t* )&packetType, 1 );
 }
 
 RadioOperatingModes_t SX126x_GetOperatingMode( void )
@@ -100,7 +136,7 @@ void SX126x_CheckDeviceReady( void )
     {
         SX126xHal_Wakeup( );
         // Switch is turned off when device is in sleep mode and turned on is all other modes
-        SX126xHal_AntSwOff( );
+        SX126xHal_AntSwOn( );
     }
 }
 
@@ -109,21 +145,21 @@ void SX126x_SetPayload( uint8_t *payload, uint8_t size )
     SX126xHal_WriteBuffer( 0x00, payload, size );
 }
 
-uint8_t SX126x_GetPayload( uint8_t *buffer, uint8_t *size,  uint8_t offset )
+uint8_t SX126x_GetPayload( uint8_t *buffer, uint8_t *size,  uint8_t maxSize )
 {
-    SX126x_GetRxBufferStatus( size, &offset );
+    SX126x_GetRxBufferStatus( size, (uint8_t *) 0x00 );
     if( *size > maxSize )
     {
         return 1;
     }
-    SX126xHal_ReadBuffer( offset, buffer, *size );
+    SX126xHal_ReadBuffer( 0x00, buffer, *size );
     return 0;
 }
 
 void SX126x_SendPayload( uint8_t *payload, uint8_t size, uint32_t timeout )
 {
-    SetPayload( payload, size );
-    SetTx( timeout );
+    SX126x_SetPayload( payload, size );
+    SX126x_SetTx( timeout );
 }
 
 uint8_t SX126x_SetSyncWord( uint8_t *syncWord )
@@ -139,7 +175,7 @@ void SX126x_SetCrcSeed( uint16_t seed )
     buf[0] = ( uint8_t )( ( seed >> 8 ) & 0xFF );
     buf[1] = ( uint8_t )( seed & 0xFF );
 
-    switch( GetPacketType( ) )
+    switch( SX126x_GetPacketType( ) )
     {
         case PACKET_TYPE_GFSK:
             SX126xHal_WriteRegister( REG_LR_CRCSEEDBASEADDR, buf, 2 );
@@ -157,7 +193,7 @@ void SX126x_SetCrcPolynomial( uint16_t polynomial )
     buf[0] = ( uint8_t )( ( polynomial >> 8 ) & 0xFF );
     buf[1] = ( uint8_t )( polynomial & 0xFF );
 
-    switch( GetPacketType( ) )
+    switch( SX126x_GetPacketType( ) )
     {
         case PACKET_TYPE_GFSK:
             SX126xHal_WriteRegister( REG_LR_CRCPOLYBASEADDR, buf, 2 );
@@ -172,13 +208,14 @@ void SX126x_SetWhiteningSeed( uint16_t seed )
 {
     uint8_t regValue = 0;
 
-    switch( GetPacketType( ) )
+    switch( SX126x_GetPacketType( ) )
     {
         case PACKET_TYPE_GFSK:
-            regValue = ReadReg( REG_LR_WHITSEEDBASEADDR_MSB ) & 0xFE;
+            SX126xHal_ReadReg( REG_LR_WHITSEEDBASEADDR_MSB, &regValue );
+			regValue = regValue & 0xFE;
             regValue = ( ( seed >> 8 ) & 0x01 ) | regValue;
-            SX126xHal_WriteReg( REG_LR_WHITSEEDBASEADDR_MSB, regValue ); // only 1 bit.
-            SX126xHal_WriteReg( REG_LR_WHITSEEDBASEADDR_LSB, ( uint8_t )seed );
+            SX126xHal_WriteReg( REG_LR_WHITSEEDBASEADDR_MSB, &regValue ); // only 1 bit.
+            SX126xHal_WriteReg( REG_LR_WHITSEEDBASEADDR_LSB, (uint8_t *) &seed );
             break;
 
         default:
@@ -191,40 +228,30 @@ uint32_t SX126x_GetRandom( void )
     uint8_t buf[] = { 0, 0, 0, 0 };
 
     // Set radio in continuous reception
-    SetRx( 0 );
+    SX126x_SetRx( 0 );
 
     wait_ms( 1 );
 
-    ReadRegister( RANDOM_NUMBER_GENERATORBASEADDR, buf, 4 );
+    SX126xHal_ReadRegister( RANDOM_NUMBER_GENERATORBASEADDR, buf, 4 );
 
-    SetStandby( STDBY_RC );
+    SX126x_SetStandby( STDBY_RC );
 
     return ( buf[0] << 24 ) | ( buf[1] << 16 ) | ( buf[2] << 8 ) | buf[3];
 }
 
 void SX126x_SetSleep( SleepParams_t sleepConfig )
 {
-    AntSwOff( );
+
+
+    SX126xHal_AntSwOff( );
 
     SX126xHal_WriteCommand( RADIO_SET_SLEEP, &sleepConfig.Value, 1 );
     OperatingMode = MODE_SLEEP;
 }
 
-void SX126x_SetStandby( RadioStandbyModes_t standbyConfig )
-{
-    SX126xHal_WriteCommand( RADIO_SET_STANDBY, ( uint8_t* )&standbyConfig, 1 );
-    if( standbyConfig == STDBY_RC )
-    {
-        OperatingMode = MODE_STDBY_RC;
-    }
-    else
-    {
-        OperatingMode = MODE_STDBY_XOSC;
-    }
-}
-
 void SX126x_SetFs( void )
 {
+
     SX126xHal_WriteCommand( RADIO_SET_FS, 0, 0 );
     OperatingMode = MODE_FS;
 }
@@ -235,6 +262,8 @@ void SX126x_SetTx( uint32_t timeout )
 
     OperatingMode = MODE_TX;
  
+
+
     buf[0] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
     buf[1] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
     buf[2] = ( uint8_t )( timeout & 0xFF );
@@ -247,7 +276,8 @@ void SX126x_SetRxBoosted( uint32_t timeout )
 
     OperatingMode = MODE_RX;
 
-    SX126xHal_WriteReg( REG_RX_GAIN, 0x96 ); // max LNA gain, increase current by ~2mA for around ~3dB in sensivity
+
+    SX126xHal_WriteReg( REG_RX_GAIN, (uint8_t *)0x96 ); // max LNA gain, increase current by ~2mA for around ~3dB in sensivity
 
     buf[0] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
     buf[1] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
@@ -260,6 +290,7 @@ void SX126x_SetRx( uint32_t timeout )
     uint8_t buf[3];
 
     OperatingMode = MODE_RX;
+
 
     buf[0] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
     buf[1] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
@@ -297,7 +328,7 @@ void SX126x_SetTxInfinitePreamble( void )
     SX126xHal_WriteCommand( RADIO_SET_TXCONTINUOUSPREAMBLE, 0, 0 );
 }
 
-void SX126x_SetStopRxTimerOnPreambleDetect( bool enable )
+void SX126x_SetStopRxTimerOnPreambleDetect( uint8_t enable )
 {
     SX126xHal_WriteCommand( RADIO_SET_STOPRXTIMERONPREAMBLE, ( uint8_t* )&enable, 1 );
 }
@@ -312,10 +343,6 @@ void SX126x_SetRegulatorMode( RadioRegulatorMode_t mode )
     SX126xHal_WriteCommand( RADIO_SET_REGULATORMODE, ( uint8_t* )&mode, 1 );
 }
 
-void SX126x_Calibrate( CalibrationParams_t calibParam )
-{
-    SX126xHal_WriteCommand( RADIO_CALIBRATE, &calibParam.Value, 1 );
-}
 
 void SX126x_CalibrateImage( uint32_t freq )
 {
@@ -353,6 +380,7 @@ void SX126x_SetPaConfig( uint8_t paDutyCycle, uint8_t HpMax, uint8_t deviceSel, 
 {
     uint8_t buf[4];
 
+
     buf[0] = paDutyCycle;
     buf[1] = HpMax;
     buf[2] = deviceSel;
@@ -368,6 +396,7 @@ void SX126x_SetRxTxFallbackMode( uint8_t fallbackMode )
 void SX126x_SetDioIrqParams( uint16_t irqMask, uint16_t dio1Mask, uint16_t dio2Mask, uint16_t dio3Mask )
 {
     uint8_t buf[8];
+
 
     buf[0] = ( uint8_t )( ( irqMask >> 8 ) & 0x00FF );
     buf[1] = ( uint8_t )( irqMask & 0x00FF );
@@ -388,31 +417,17 @@ uint16_t SX126x_GetIrqStatus( void )
     return ( irqStatus[0] << 8 ) | irqStatus[1];
 }
 
-void SX126x_SetDio2AsRfSwitchCtrl( uint8_t enable )
-{
-    SX126xHal_WriteCommand( RADIO_SET_RFSWITCHMODE, &enable, 1 );
-}
 
-void SX126x_SetDio3AsTcxoCtrl( RadioTcxoCtrlVoltage_t tcxoVoltage, uint32_t timeout )
-{
-    uint8_t buf[4];
-
-    buf[0] = tcxoVoltage & 0x07;
-    buf[1] = ( uint8_t )( ( timeout >> 16 ) & 0xFF );
-    buf[2] = ( uint8_t )( ( timeout >> 8 ) & 0xFF );
-    buf[3] = ( uint8_t )( timeout & 0xFF );
-
-    SX126xHal_WriteCommand( RADIO_SET_TCXOMODE, buf, 4 );
-}
 
 void SX126x_SetRfFrequency( uint32_t frequency )
 {
     uint8_t buf[4];
     uint32_t freq = 0;
 
+
     if( ImageCalibrated == false )
     {
-        CalibrateImage( frequency );
+        SX126x_CalibrateImage( frequency );
         ImageCalibrated = true;
     }
 
@@ -424,12 +439,6 @@ void SX126x_SetRfFrequency( uint32_t frequency )
     SX126xHal_WriteCommand( RADIO_SET_RFFREQUENCY, buf, 4 );
 }
 
-void SX126x_SetPacketType( RadioPacketTypes_t packetType )
-{
-    // Save packet type internally to avoid questioning the radio
-    PacketType = packetType;
-    SX126xHal_WriteCommand( RADIO_SET_PACKETTYPE, ( uint8_t* )&packetType, 1 );
-}
 
 RadioPacketTypes_t SX126x_GetPacketType( void )
 {
@@ -440,15 +449,16 @@ void SX126x_SetTxParams( int8_t power, RadioRampTimes_t rampTime )
 {
     uint8_t buf[2];
 
-    if( GetDeviceType( ) == SX1261 )
+
+    if( SX1261 )
     {
         if( power == 15 )
         {
-            SetPaConfig( 0x06, 0x00, 0x01, 0x01 );
+            SX126x_SetPaConfig( 0x06, 0x00, 0x01, 0x01 );
         }
         else
         {
-            SetPaConfig( 0x04, 0x00, 0x01, 0x01 );  
+            SX126x_SetPaConfig( 0x04, 0x00, 0x01, 0x01 );  
         }
         if( power >= 14 )
         {
@@ -458,11 +468,11 @@ void SX126x_SetTxParams( int8_t power, RadioRampTimes_t rampTime )
         {
             power = -3;
         }
-        SX126xHal_WriteReg( REG_OCP, 0x18 ); // current max is 80 mA for the whole device
+        SX126xHal_WriteReg( REG_OCP, (uint8_t *) 0x18 ); // current max is 80 mA for the whole device
     }
     else // sx1262 or sx1268
     {
-        SetPaConfig( 0x04, 0x07, 0x00, 0x01 );
+        SX126x_SetPaConfig( 0x04, 0x07, 0x00, 0x01 );
         if( power > 22 )
         {
             power = 22;
@@ -471,10 +481,10 @@ void SX126x_SetTxParams( int8_t power, RadioRampTimes_t rampTime )
         {
             power = -3;
         }
-        SX126xHal_WriteReg( REG_OCP, 0x38 ); // current max 160mA for the whole device
+        SX126xHal_WriteReg( REG_OCP, (uint8_t *) 0x38 ); // current max 160mA for the whole device
     }
     buf[0] = power;
-    if( OPT == 0 )
+    if( XTAL == 0 )
     {
         if( ( uint8_t )rampTime < RADIO_RAMP_200_US )
         {
@@ -498,11 +508,12 @@ void SX126x_SetModulationParams( ModulationParams_t *modulationParams )
     uint32_t tempVal = 0;
     uint8_t buf[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
+
     // Check if required configuration corresponds to the stored packet type
     // If not, silently update radio packet type
     if( PacketType != modulationParams->PacketType )
     {
-        SetPacketType( modulationParams->PacketType );
+        SX126x_SetPacketType( modulationParams->PacketType );
     }
 
     switch( modulationParams->PacketType )
@@ -595,11 +606,12 @@ void SX126x_SetPacketParams( PacketParams_t *packetParams )
     uint8_t crcVal = 0;
     uint8_t buf[9] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
+
     // Check if required configuration corresponds to the stored packet type
     // If not, silently update radio packet type
     if( PacketType != packetParams->PacketType )
     {
-        SetPacketType( packetParams->PacketType );
+        SX126x_SetPacketType( packetParams->PacketType );
     }
 
     switch( packetParams->PacketType )
@@ -607,14 +619,14 @@ void SX126x_SetPacketParams( PacketParams_t *packetParams )
     case PACKET_TYPE_GFSK:
         if( packetParams->Params.Gfsk.CrcLength == RADIO_CRC_2_BYTES_IBM )
         {
-            SetCrcSeed( CRC_IBM_SEED );
-            SetCrcPolynomial( CRC_POLYNOMIAL_IBM );
+            SX126x_SetCrcSeed( CRC_IBM_SEED );
+            SX126x_SetCrcPolynomial( CRC_POLYNOMIAL_IBM );
             crcVal = RADIO_CRC_2_BYTES;
         }
         else if(  packetParams->Params.Gfsk.CrcLength == RADIO_CRC_2_BYTES_CCIT )
         {
-            SetCrcSeed( CRC_CCITT_SEED );
-            SetCrcPolynomial( CRC_POLYNOMIAL_CCITT );
+            SX126x_SetCrcSeed( CRC_CCITT_SEED );
+            SX126x_SetCrcPolynomial( CRC_POLYNOMIAL_CCITT );
             crcVal = RADIO_CRC_2_BYTES_INV;
         }
         else
@@ -670,6 +682,7 @@ void SX126x_SetBufferBaseAddresses( uint8_t txBaseAddress, uint8_t rxBaseAddress
 {
     uint8_t buf[2];
 
+
     buf[0] = txBaseAddress;
     buf[1] = rxBaseAddress;
     SX126xHal_WriteCommand( RADIO_SET_BUFFERBASEADDRESS, buf, 2 );
@@ -701,9 +714,11 @@ void SX126x_GetRxBufferStatus( uint8_t *payloadLength, uint8_t *rxStartBufferPoi
 
     // In case of LORA fixed header, the payloadLength is obtained by reading
     // the register REG_LR_PAYLOADLENGTH
-    if( ( GetPacketType( ) == PACKET_TYPE_LORA ) && ( ReadReg( REG_LR_PACKETPARAMS ) >> 7 == 1 ) )
+	uint8_t buffer_stat_temp = 0;
+	SX126xHal_ReadReg( REG_LR_PACKETPARAMS,  &buffer_stat_temp);
+    if( ( SX126x_GetPacketType( ) == PACKET_TYPE_LORA ) && ( buffer_stat_temp >> 7 == 1 ) )
     {
-        *payloadLength = ReadReg( REG_LR_PAYLOADLENGTH );
+        SX126xHal_ReadReg( REG_LR_PAYLOADLENGTH, payloadLength );
     }
     else
     {
@@ -718,7 +733,7 @@ void SX126x_GetPacketStatus( PacketStatus_t *pktStatus )
 
     SX126xHal_ReadCommand( RADIO_GET_PACKETSTATUS, status, 3 );
 
-    pktStatus->packetType = this -> GetPacketType( );
+    pktStatus->packetType = SX126x_GetPacketType( );
     switch( pktStatus->packetType )
     {
         case PACKET_TYPE_GFSK:
@@ -756,117 +771,69 @@ RadioError_t SX126x_GetDeviceErrors( void )
 void SX126x_ClearIrqStatus( uint16_t irq )
 {
     uint8_t buf[2];
-
     buf[0] = ( uint8_t )( ( ( uint16_t )irq >> 8 ) & 0x00FF );
     buf[1] = ( uint8_t )( ( uint16_t )irq & 0x00FF );
     SX126xHal_WriteCommand( RADIO_CLR_IRQSTATUS, buf, 2 );
 }
 
-void SX126x_SetPollingMode( void )
-{
-    PollingMode = true;
-}
-
-void SX126x_SetInterruptMode( void )
-{
-    PollingMode = false;
-}
-
-void SX126x_OnDioIrq( void )
-{
-    /*
-     * When polling mode is activated, it is up to the application to call
-     * ProcessIrqs( ). Otherwise, the driver automatically calls ProcessIrqs( )
-     * on radio interrupt.
-     */
-    if( PollingMode == true )
-    {
-        IrqState = true;
-    }
-    else
-    {
-        SX126x_ProcessIrqs( );
-    }
-}
-
 void SX126x_ProcessIrqs( void )
 {
-    if( PollingMode == true )
-    {
-        if( IrqState == true )
-        {
-            CRITICAL_SECTION_ENTER
-            IrqState = false;
-            CRITICAL_SECTION_LEAVE
-        }
-        else
-        {
-            return;
-        }
-    }
+    uint16_t irqRegs = SX126x_GetIrqStatus( );
+    SX126x_ClearIrqStatus( IRQ_RADIO_ALL );
 
-    uint16_t irqRegs = GetIrqStatus( );
-    ClearIrqStatus( IRQ_RADIO_ALL );
 
     if( ( irqRegs & IRQ_HEADER_VALID ) == IRQ_HEADER_VALID )
     {
+		uint8_t irq_temp;
         // LoRa Only
-        FrequencyError = 0x000000 | ( ( 0x0F & ReadReg( REG_FREQUENCY_ERRORBASEADDR ) ) << 16 );
-        FrequencyError = FrequencyError | ( ReadReg( REG_FREQUENCY_ERRORBASEADDR + 1 ) << 8 );
-        FrequencyError = FrequencyError | ( ReadReg( REG_FREQUENCY_ERRORBASEADDR + 2 ) );
+		SX126xHal_ReadReg( REG_FREQUENCY_ERRORBASEADDR, &irq_temp );
+        FrequencyError = 0x000000 | ( ( 0x0F & irq_temp ) << 16 );
+		SX126xHal_ReadReg( REG_FREQUENCY_ERRORBASEADDR + 1, &irq_temp );
+        FrequencyError = FrequencyError | ( irq_temp << 8 );
+		SX126xHal_ReadReg( REG_FREQUENCY_ERRORBASEADDR + 2, &irq_temp );
+        FrequencyError = FrequencyError | ( irq_temp );
     }
 
     if( ( irqRegs & IRQ_TX_DONE ) == IRQ_TX_DONE )
     {
-        if( txDone != NULL )
-        {
-            txDone( );
-        }
+       // Do something: Tx done
     }
 
     if( ( irqRegs & IRQ_RX_DONE ) == IRQ_RX_DONE )
     {
         if( ( irqRegs & IRQ_CRC_ERROR ) == IRQ_CRC_ERROR )
         {
-            if( rxError != NULL )
-            {
-                rxError( IRQ_CRC_ERROR_CODE );
-            }
+            // Do something: Rx error
         }
         else
         {
-            if( rxDone != NULL )
-            {
-                rxDone( );
-            }
+           // Do something: Rx succesful
         }
     }
 
     if( ( irqRegs & IRQ_CAD_DONE ) == IRQ_CAD_DONE )
     {
-        if( cadDone != NULL )
-        {
-            cadDone( ( irqRegs & IRQ_CAD_ACTIVITY_DETECTED ) == IRQ_CAD_ACTIVITY_DETECTED );
-        }
+        // Do something: cad done
     }
 
+    // Timeout IRQ
     if( ( irqRegs & IRQ_RX_TX_TIMEOUT ) == IRQ_RX_TX_TIMEOUT )
     {
-        if( ( txTimeout != NULL ) && ( OperatingMode == MODE_TX ) )
+        if( OperatingMode == MODE_TX )
         {
-            txTimeout( );
+            // Do something: Tx timeout;
         }
-        else if( ( rxTimeout != NULL ) && ( OperatingMode == MODE_RX ) )
+        else if( OperatingMode == MODE_RX )
         {
-            rxTimeout( );
+            // Do something: Rx timeout;
         }
         else
         {
-            assert_param( FAIL );
+            //Fail
         }
     }
     
-
+/*
     //IRQ_PREAMBLE_DETECTED                   = 0x0004,
     if( irqRegs & IRQ_PREAMBLE_DETECTED )
     {
@@ -898,13 +865,11 @@ void SX126x_ProcessIrqs( void )
     //IRQ_HEADER_ERROR                        = 0x0020,
     if( irqRegs & IRQ_HEADER_ERROR )
     {
-        if( rxError != NULL )
+        if( )
         {
-            rxError( IRQ_HEADER_ERROR_CODE );
+                        // Do something: Header error;
         }
     }  
+    */
 
 }
-
-
-

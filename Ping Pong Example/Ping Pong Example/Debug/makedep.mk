@@ -74,9 +74,9 @@ hpl\tc\hpl_tc.c
 
 main.c
 
-SX1262 Drivers MG\device_specific_implementation.c
+SX1262 Drivers\device_specific_implementation.c
 
-SX1262 Drivers MG\sx126x_commands.c
+SX1262 Drivers\sx126x_commands.c
 
-SX1262 Drivers MG\sx126x_hal.c
+SX1262 Drivers\sx126x_hal.c
 

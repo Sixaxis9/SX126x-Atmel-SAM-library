@@ -20,7 +20,6 @@ Modifier: Marco Giordano
 #define __SX126x_HAL_H__
 
 #include "device_specific_implementation.h"
-#include "sx126x_commands.h"
 
 /*!
  * \brief Abstraction layer for the sx126x commands
@@ -54,8 +53,8 @@ void SX126xHal_Wakeup( void );
     * \param [in]  buffer        Buffer to be send to the radio
     * \param [in]  size          Size of the buffer to send
     */
-void SX126xHal_WriteCommand( RadioCommands_t *opcode, uint8_t *buffer, uint16_t size );
-
+void SX126xHal_WriteCommand( uint8_t opcode, uint8_t *buffer, uint16_t size );
+//RadioCommands_t
 /*!
     * \brief Send a command that read data from the radio
     *
@@ -63,7 +62,7 @@ void SX126xHal_WriteCommand( RadioCommands_t *opcode, uint8_t *buffer, uint16_t 
     * \param [out] buffer        Buffer holding data from the radio
     * \param [in]  size          Size of the buffer
     */
-void SX126xHal_ReadCommand( RadioCommands_t *opcode, uint8_t *buffer, uint16_t size );
+void SX126xHal_ReadCommand( uint8_t opcode, uint8_t *buffer, uint16_t size );
 
 /*!
     * \brief Write data to the radio memory

@@ -886,22 +886,22 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\device_specific_implementation.c">
+    <Compile Include="SX1262 Drivers\device_specific_implementation.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\device_specific_implementation.h">
+    <Compile Include="SX1262 Drivers\device_specific_implementation.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\sx126x_commands.c">
+    <Compile Include="SX1262 Drivers\sx126x_commands.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\sx126x_commands.h">
+    <Compile Include="SX1262 Drivers\sx126x_commands.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\sx126x_hal.c">
+    <Compile Include="SX1262 Drivers\sx126x_hal.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="SX1262 Drivers MG\sx126x_hal.h">
+    <Compile Include="SX1262 Drivers\sx126x_hal.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -932,7 +932,7 @@
     <Folder Include="hpl\systick\" />
     <Folder Include="hpl\tc\" />
     <Folder Include="hri\" />
-    <Folder Include="SX1262 Drivers MG\" />
+    <Folder Include="SX1262 Drivers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Device_Startup\samd51p20a_flash.ld">

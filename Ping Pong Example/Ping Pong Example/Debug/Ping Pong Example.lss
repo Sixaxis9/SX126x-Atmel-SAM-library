@@ -3,45 +3,45 @@ Ping Pong Example.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000021d4  00000000  00000000  00010000  2**2
+  0 .text         0000211c  00000000  00000000  00010000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     00000010  20000000  000021d4  00020000  2**2
+  1 .relocate     00000010  20000000  0000211c  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   2 .bkupram      00000000  47000000  47000000  00020010  2**0
                   CONTENTS
   3 .qspi         00000000  04000000  04000000  00020010  2**0
                   CONTENTS
-  4 .bss          000000f8  20000010  000021e4  00020010  2**2
+  4 .bss          00000100  20000010  0000212c  00020010  2**2
                   ALLOC
-  5 .stack        00010000  20000108  000022dc  00020010  2**0
+  5 .stack        00010000  20000110  0000222c  00020010  2**0
                   ALLOC
   6 .ARM.attributes 0000002e  00000000  00000000  00020010  2**0
                   CONTENTS, READONLY
   7 .comment      00000059  00000000  00000000  0002003e  2**0
                   CONTENTS, READONLY
-  8 .debug_info   00024721  00000000  00000000  00020097  2**0
+  8 .debug_info   0002707b  00000000  00000000  00020097  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_abbrev 00003d33  00000000  00000000  000447b8  2**0
+  9 .debug_abbrev 000041ec  00000000  00000000  00047112  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000d81e  00000000  00000000  000484eb  2**0
+ 10 .debug_loc    0000ea75  00000000  00000000  0004b2fe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000c68  00000000  00000000  00055d09  2**0
+ 11 .debug_aranges 00000e08  00000000  00000000  00059d73  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00001048  00000000  00000000  00056971  2**0
+ 12 .debug_ranges 000011d8  00000000  00000000  0005ab7b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  0002fad8  00000000  00000000  000579b9  2**0
+ 13 .debug_macro  000304c7  00000000  00000000  0005bd53  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   000175f9  00000000  00000000  00087491  2**0
+ 14 .debug_line   000187df  00000000  00000000  0008c21a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    000fd91f  00000000  00000000  0009ea8a  2**0
+ 15 .debug_str    000fec9a  00000000  00000000  000a49f9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00001f70  00000000  00000000  0019c3ac  2**2
+ 16 .debug_frame  000024e8  00000000  00000000  001a3694  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <exception_table>:
-       0:	08 01 01 20 e1 02 00 00 dd 02 00 00 dd 02 00 00     ... ............
+       0:	10 01 01 20 e1 02 00 00 dd 02 00 00 dd 02 00 00     ... ............
       10:	dd 02 00 00 dd 02 00 00 dd 02 00 00 00 00 00 00     ................
 	...
       2c:	dd 02 00 00 dd 02 00 00 00 00 00 00 dd 02 00 00     ................
@@ -95,7 +95,7 @@ Disassembly of section .text:
      27a:	bd10      	pop	{r4, pc}
      27c:	20000010 	.word	0x20000010
      280:	00000000 	.word	0x00000000
-     284:	000021d4 	.word	0x000021d4
+     284:	0000211c 	.word	0x0000211c
 
 00000288 <frame_dummy>:
      288:	4b0c      	ldr	r3, [pc, #48]	; (2bc <frame_dummy+0x34>)
@@ -123,9 +123,9 @@ Disassembly of section .text:
      2b8:	4718      	bx	r3
      2ba:	bf00      	nop
      2bc:	00000000 	.word	0x00000000
-     2c0:	000021d4 	.word	0x000021d4
+     2c0:	0000211c 	.word	0x0000211c
      2c4:	20000014 	.word	0x20000014
-     2c8:	000021d4 	.word	0x000021d4
+     2c8:	0000211c 	.word	0x0000211c
      2cc:	00000000 	.word	0x00000000
 
 000002d0 <atmel_start_init>:
@@ -220,13 +220,13 @@ __STATIC_FORCEINLINE void __DSB(void)
      350:	e7fe      	b.n	350 <Reset_Handler+0x70>
      352:	bf00      	nop
      354:	20000000 	.word	0x20000000
-     358:	000021d4 	.word	0x000021d4
+     358:	0000211c 	.word	0x0000211c
      35c:	20000010 	.word	0x20000010
-     360:	20000108 	.word	0x20000108
+     360:	20000110 	.word	0x20000110
      364:	20000010 	.word	0x20000010
      368:	e000ed00 	.word	0xe000ed00
      36c:	00000000 	.word	0x00000000
-     370:	00001ffd 	.word	0x00001ffd
+     370:	00001f45 	.word	0x00001f45
      374:	00001bbd 	.word	0x00001bbd
 
 00000378 <EXTERNAL_IRQ_0_init>:
@@ -912,7 +912,7 @@ int32_t io_write(struct io_descriptor *const io_descr, const uint8_t *const buf,
      7ba:	bd70      	pop	{r4, r5, r6, pc}
      7bc:	2000      	movs	r0, #0
      7be:	e7f3      	b.n	7a8 <io_write+0x10>
-     7c0:	00002044 	.word	0x00002044
+     7c0:	00001f8c 	.word	0x00001f8c
      7c4:	00000e25 	.word	0x00000e25
 
 000007c8 <spi_m_sync_init>:
@@ -965,7 +965,7 @@ int32_t spi_m_sync_init(struct spi_m_sync_descriptor *spi, void *const hw)
      7fe:	bd38      	pop	{r3, r4, r5, pc}
      800:	2000      	movs	r0, #0
      802:	e7e8      	b.n	7d6 <spi_m_sync_init+0xe>
-     804:	00002058 	.word	0x00002058
+     804:	00001fa0 	.word	0x00001fa0
      808:	00000e25 	.word	0x00000e25
      80c:	00001639 	.word	0x00001639
      810:	000008bd 	.word	0x000008bd
@@ -994,7 +994,7 @@ void spi_m_sync_enable(struct spi_m_sync_descriptor *spi)
      82e:	4798      	blx	r3
      830:	bd10      	pop	{r4, pc}
      832:	bf00      	nop
-     834:	00002058 	.word	0x00002058
+     834:	00001fa0 	.word	0x00001fa0
      838:	00000e25 	.word	0x00000e25
      83c:	0000172d 	.word	0x0000172d
 
@@ -1040,7 +1040,7 @@ int32_t spi_m_sync_transfer(struct spi_m_sync_descriptor *spi, const struct spi_
      86e:	bd30      	pop	{r4, r5, pc}
      870:	2000      	movs	r0, #0
      872:	e7ed      	b.n	850 <spi_m_sync_transfer+0x10>
-     874:	00002058 	.word	0x00002058
+     874:	00001fa0 	.word	0x00001fa0
      878:	00000e25 	.word	0x00000e25
      87c:	0000175d 	.word	0x0000175d
 
@@ -1075,7 +1075,7 @@ int32_t spi_m_sync_transfer(struct spi_m_sync_descriptor *spi, const struct spi_
      8aa:	b004      	add	sp, #16
      8ac:	bd70      	pop	{r4, r5, r6, pc}
      8ae:	bf00      	nop
-     8b0:	00002058 	.word	0x00002058
+     8b0:	00001fa0 	.word	0x00001fa0
      8b4:	00000e25 	.word	0x00000e25
      8b8:	00000841 	.word	0x00000841
 
@@ -1110,7 +1110,7 @@ int32_t spi_m_sync_transfer(struct spi_m_sync_descriptor *spi, const struct spi_
      8e6:	b004      	add	sp, #16
      8e8:	bd70      	pop	{r4, r5, r6, pc}
      8ea:	bf00      	nop
-     8ec:	00002058 	.word	0x00002058
+     8ec:	00001fa0 	.word	0x00001fa0
      8f0:	00000e25 	.word	0x00000e25
      8f4:	00000841 	.word	0x00000841
 
@@ -1140,7 +1140,7 @@ int32_t spi_m_sync_get_io_descriptor(struct spi_m_sync_descriptor *const spi, st
      916:	2000      	movs	r0, #0
      918:	e7f5      	b.n	906 <spi_m_sync_get_io_descriptor+0xe>
      91a:	bf00      	nop
-     91c:	00002058 	.word	0x00002058
+     91c:	00001fa0 	.word	0x00001fa0
      920:	00000e25 	.word	0x00000e25
 
 00000924 <timer_add_timer_task>:
@@ -1349,7 +1349,7 @@ static void timer_process_counted(struct _timer_device *device)
      a22:	bd38      	pop	{r3, r4, r5, pc}
      a24:	2000      	movs	r0, #0
      a26:	e7f0      	b.n	a0a <timer_init+0xe>
-     a28:	00002074 	.word	0x00002074
+     a28:	00001fbc 	.word	0x00001fbc
      a2c:	00000e25 	.word	0x00000e25
      a30:	00001909 	.word	0x00001909
      a34:	0000097d 	.word	0x0000097d
@@ -1383,7 +1383,7 @@ static void timer_process_counted(struct _timer_device *device)
 }
      a60:	bd10      	pop	{r4, pc}
      a62:	bf00      	nop
-     a64:	00002074 	.word	0x00002074
+     a64:	00001fbc 	.word	0x00001fbc
      a68:	00000e25 	.word	0x00000e25
      a6c:	00001ac5 	.word	0x00001ac5
      a70:	00001ab1 	.word	0x00001ab1
@@ -1470,7 +1470,7 @@ static void timer_process_counted(struct _timer_device *device)
 	return ERR_NONE;
      afc:	2000      	movs	r0, #0
      afe:	e7e0      	b.n	ac2 <timer_add_task+0x4e>
-     b00:	00002074 	.word	0x00002074
+     b00:	00001fbc 	.word	0x00001fbc
      b04:	00000e25 	.word	0x00000e25
      b08:	00000e2b 	.word	0x00000e2b
      b0c:	00000925 	.word	0x00000925
@@ -1589,7 +1589,7 @@ static void usart_error(struct _usart_async_device *device)
 }
      bb0:	bd70      	pop	{r4, r5, r6, pc}
      bb2:	bf00      	nop
-     bb4:	0000208c 	.word	0x0000208c
+     bb4:	00001fd4 	.word	0x00001fd4
      bb8:	00000e25 	.word	0x00000e25
      bbc:	0000156b 	.word	0x0000156b
 
@@ -1731,7 +1731,7 @@ static void usart_error(struct _usart_async_device *device)
      cac:	b002      	add	sp, #8
      cae:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
      cb2:	bf00      	nop
-     cb4:	0000208c 	.word	0x0000208c
+     cb4:	00001fd4 	.word	0x00001fd4
      cb8:	00000e25 	.word	0x00000e25
      cbc:	000006ad 	.word	0x000006ad
      cc0:	00000f61 	.word	0x00000f61
@@ -1802,7 +1802,7 @@ static void usart_error(struct _usart_async_device *device)
 		return ERR_INVALID_ARG;
      d2e:	f06f 030c 	mvn.w	r3, #12
      d32:	e7f4      	b.n	d1e <usart_async_init+0x52>
-     d34:	0000208c 	.word	0x0000208c
+     d34:	00001fd4 	.word	0x00001fd4
      d38:	00000e25 	.word	0x00000e25
      d3c:	00000e8d 	.word	0x00000e8d
      d40:	000014d1 	.word	0x000014d1
@@ -1833,7 +1833,7 @@ static void usart_error(struct _usart_async_device *device)
      d76:	2000      	movs	r0, #0
      d78:	bd10      	pop	{r4, pc}
      d7a:	bf00      	nop
-     d7c:	0000208c 	.word	0x0000208c
+     d7c:	00001fd4 	.word	0x00001fd4
      d80:	00000e25 	.word	0x00000e25
      d84:	00001551 	.word	0x00001551
 
@@ -1858,7 +1858,7 @@ static void usart_error(struct _usart_async_device *device)
      da2:	bd38      	pop	{r3, r4, r5, pc}
      da4:	2000      	movs	r0, #0
      da6:	e7f6      	b.n	d96 <usart_async_get_io_descriptor+0xe>
-     da8:	0000208c 	.word	0x0000208c
+     da8:	00001fd4 	.word	0x00001fd4
      dac:	00000e25 	.word	0x00000e25
 
 00000db0 <usart_async_register_callback>:
@@ -1927,7 +1927,7 @@ static void usart_error(struct _usart_async_device *device)
      e14:	2000      	movs	r0, #0
 		break;
      e16:	bd70      	pop	{r4, r5, r6, pc}
-     e18:	0000208c 	.word	0x0000208c
+     e18:	00001fd4 	.word	0x00001fd4
      e1c:	00000e25 	.word	0x00000e25
      e20:	0000157d 	.word	0x0000157d
 
@@ -2006,7 +2006,7 @@ void list_insert_as_head(struct list_descriptor *const list, void *const element
      e68:	6025      	str	r5, [r4, #0]
      e6a:	bd38      	pop	{r3, r4, r5, pc}
      e6c:	00000e2b 	.word	0x00000e2b
-     e70:	000020ac 	.word	0x000020ac
+     e70:	00001ff4 	.word	0x00001ff4
      e74:	00000e25 	.word	0x00000e25
 
 00000e78 <list_insert_after>:
@@ -2106,7 +2106,7 @@ int32_t ringbuffer_init(struct ringbuffer *const rb, void *buf, uint32_t size)
      ece:	1e6b      	subs	r3, r5, #1
      ed0:	e7eb      	b.n	eaa <ringbuffer_init+0x1e>
      ed2:	bf00      	nop
-     ed4:	000020cc 	.word	0x000020cc
+     ed4:	00002014 	.word	0x00002014
      ed8:	00000e25 	.word	0x00000e25
 
 00000edc <ringbuffer_get>:
@@ -2155,7 +2155,7 @@ int32_t ringbuffer_get(struct ringbuffer *const rb, uint8_t *data)
      f12:	f06f 0009 	mvn.w	r0, #9
 }
      f16:	bd38      	pop	{r3, r4, r5, pc}
-     f18:	000020cc 	.word	0x000020cc
+     f18:	00002014 	.word	0x00002014
      f1c:	00000e25 	.word	0x00000e25
 
 00000f20 <ringbuffer_put>:
@@ -2209,7 +2209,7 @@ int32_t ringbuffer_put(struct ringbuffer *const rb, uint8_t data)
      f52:	2000      	movs	r0, #0
      f54:	bd38      	pop	{r3, r4, r5, pc}
      f56:	bf00      	nop
-     f58:	000020cc 	.word	0x000020cc
+     f58:	00002014 	.word	0x00002014
      f5c:	00000e25 	.word	0x00000e25
 
 00000f60 <ringbuffer_num>:
@@ -2237,7 +2237,7 @@ uint32_t ringbuffer_num(const struct ringbuffer *const rb)
      f76:	1ac0      	subs	r0, r0, r3
      f78:	bd10      	pop	{r4, pc}
      f7a:	bf00      	nop
-     f7c:	000020cc 	.word	0x000020cc
+     f7c:	00002014 	.word	0x00002014
      f80:	00000e25 	.word	0x00000e25
 
 00000f84 <_irq_set>:
@@ -2642,9 +2642,9 @@ void EIC_0_Handler(void)
     1192:	bf00      	nop
     1194:	40002800 	.word	0x40002800
     1198:	20000048 	.word	0x20000048
-    119c:	000020f8 	.word	0x000020f8
+    119c:	00002040 	.word	0x00002040
     11a0:	00000e25 	.word	0x00000e25
-    11a4:	000020f0 	.word	0x000020f0
+    11a4:	00002038 	.word	0x00002038
 
 000011a8 <_gclk_init_generators_by_fref>:
 
@@ -3059,7 +3059,7 @@ static uint8_t _sercom_get_hardware_index(const void *const hw)
     137e:	b2c0      	uxtb	r0, r0
     1380:	e7f9      	b.n	1376 <_sercom_get_hardware_index+0x32>
     1382:	bf00      	nop
-    1384:	00002110 	.word	0x00002110
+    1384:	00002058 	.word	0x00002058
 
 00001388 <_sercom_usart_interrupt_handler>:
  * \internal Sercom interrupt handler
@@ -3307,7 +3307,7 @@ static int32_t _spi_sync_enable(void *const hw)
     14b8:	bd10      	pop	{r4, pc}
     14ba:	bf00      	nop
     14bc:	00001345 	.word	0x00001345
-    14c0:	00002148 	.word	0x00002148
+    14c0:	00002090 	.word	0x00002090
     14c4:	00000e25 	.word	0x00000e25
     14c8:	40100004 	.word	0x40100004
     14cc:	00700002 	.word	0x00700002
@@ -3374,7 +3374,7 @@ static int32_t _spi_sync_enable(void *const hw)
     1536:	d1e8      	bne.n	150a <_usart_async_init+0x3a>
     1538:	e7d9      	b.n	14ee <_usart_async_init+0x1e>
     153a:	bf00      	nop
-    153c:	00002148 	.word	0x00002148
+    153c:	00002090 	.word	0x00002090
     1540:	00000e25 	.word	0x00000e25
     1544:	00001431 	.word	0x00001431
     1548:	2000004c 	.word	0x2000004c
@@ -3488,7 +3488,7 @@ static int32_t _spi_sync_enable(void *const hw)
     15da:	2280      	movs	r2, #128	; 0x80
     15dc:	751a      	strb	r2, [r3, #20]
     15de:	bd70      	pop	{r4, r5, r6, pc}
-    15e0:	00002148 	.word	0x00002148
+    15e0:	00002090 	.word	0x00002090
     15e4:	00000e25 	.word	0x00000e25
 
 000015e8 <SERCOM4_0_Handler>:
@@ -3706,7 +3706,7 @@ int32_t _spi_m_sync_init(struct _spi_m_sync_dev *dev, void *const hw)
     1718:	e7aa      	b.n	1670 <_spi_m_sync_init+0x38>
     171a:	bf00      	nop
     171c:	00001345 	.word	0x00001345
-    1720:	00002148 	.word	0x00002148
+    1720:	00002090 	.word	0x00002090
     1724:	00000e25 	.word	0x00000e25
     1728:	0020000c 	.word	0x0020000c
 
@@ -3738,7 +3738,7 @@ int32_t _spi_m_sync_enable(struct _spi_m_sync_dev *dev)
     174a:	bd10      	pop	{r4, pc}
     174c:	2000      	movs	r0, #0
     174e:	e7f4      	b.n	173a <_spi_m_sync_enable+0xe>
-    1750:	00002148 	.word	0x00002148
+    1750:	00002090 	.word	0x00002090
     1754:	00000e25 	.word	0x00000e25
     1758:	0000140d 	.word	0x0000140d
 
@@ -3892,7 +3892,7 @@ int32_t _spi_m_sync_trans(struct _spi_m_sync_dev *dev, const struct spi_msg *msg
 	((Sercom *)hw)->SPI.DATA.reg = data;
     1830:	62a1      	str	r1, [r4, #40]	; 0x28
     1832:	e7b6      	b.n	17a2 <_spi_m_sync_trans+0x46>
-    1834:	00002148 	.word	0x00002148
+    1834:	00002090 	.word	0x00002090
     1838:	00000e25 	.word	0x00000e25
 
 0000183c <_delay_init>:
@@ -4041,8 +4041,8 @@ static inline uint8_t _get_hardware_offset(const void *const hw)
 			return i;
     18f8:	2000      	movs	r0, #0
     18fa:	e7f7      	b.n	18ec <get_tc_index+0x40>
-    18fc:	00002164 	.word	0x00002164
-    1900:	00002198 	.word	0x00002198
+    18fc:	000020ac 	.word	0x000020ac
+    1900:	000020e0 	.word	0x000020e0
     1904:	00000e25 	.word	0x00000e25
 
 00001908 <_timer_init>:
@@ -4282,9 +4282,9 @@ static inline void hri_tccount32_write_CC_reg(const void *const hw, uint8_t inde
     1a90:	d1fb      	bne.n	1a8a <_timer_init+0x182>
     1a92:	e796      	b.n	19c2 <_timer_init+0xba>
     1a94:	000018ad 	.word	0x000018ad
-    1a98:	00002198 	.word	0x00002198
+    1a98:	000020e0 	.word	0x000020e0
     1a9c:	00000e25 	.word	0x00000e25
-    1aa0:	00002164 	.word	0x00002164
+    1aa0:	000020ac 	.word	0x000020ac
     1aa4:	43001800 	.word	0x43001800
     1aa8:	20000050 	.word	0x20000050
     1aac:	e000e100 	.word	0xe000e100
@@ -4345,9 +4345,9 @@ static inline void hri_tccount32_write_CC_reg(const void *const hw, uint8_t inde
     1b04:	bd10      	pop	{r4, pc}
     1b06:	bf00      	nop
     1b08:	000018ad 	.word	0x000018ad
-    1b0c:	00002198 	.word	0x00002198
+    1b0c:	000020e0 	.word	0x000020e0
     1b10:	00000e25 	.word	0x00000e25
-    1b14:	00002164 	.word	0x00002164
+    1b14:	000020ac 	.word	0x000020ac
     1b18:	00000f85 	.word	0x00000f85
 
 00001b1c <TC7_Handler>:
@@ -4417,7 +4417,7 @@ void USART_init(void){
     1b70:	2000006c 	.word	0x2000006c
     1b74:	00001b3d 	.word	0x00001b3d
     1b78:	00000db1 	.word	0x00000db1
-    1b7c:	200000e8 	.word	0x200000e8
+    1b7c:	200000ec 	.word	0x200000ec
     1b80:	00000d89 	.word	0x00000d89
     1b84:	00000d5d 	.word	0x00000d5d
 
@@ -4444,7 +4444,7 @@ void Timer_init(void){
     1ba2:	4b05      	ldr	r3, [pc, #20]	; (1bb8 <Timer_init+0x30>)
     1ba4:	4798      	blx	r3
     1ba6:	bd10      	pop	{r4, pc}
-    1ba8:	200000ec 	.word	0x200000ec
+    1ba8:	200000f4 	.word	0x200000f4
     1bac:	00001b4d 	.word	0x00001b4d
     1bb0:	200000bc 	.word	0x200000bc
     1bb4:	00000a75 	.word	0x00000a75
@@ -4452,778 +4452,712 @@ void Timer_init(void){
 
 00001bbc <main>:
 {
-    1bbc:	e92d 4880 	stmdb	sp!, {r7, fp, lr}
-    1bc0:	b083      	sub	sp, #12
+    1bbc:	b508      	push	{r3, lr}
 	atmel_start_init();
-    1bc2:	4b29      	ldr	r3, [pc, #164]	; (1c68 <main+0xac>)
-    1bc4:	4798      	blx	r3
+    1bbe:	4b07      	ldr	r3, [pc, #28]	; (1bdc <main+0x20>)
+    1bc0:	4798      	blx	r3
 	USART_init();
-    1bc6:	4b29      	ldr	r3, [pc, #164]	; (1c6c <main+0xb0>)
-    1bc8:	4798      	blx	r3
+    1bc2:	4b07      	ldr	r3, [pc, #28]	; (1be0 <main+0x24>)
+    1bc4:	4798      	blx	r3
 	Timer_init();
-    1bca:	4b29      	ldr	r3, [pc, #164]	; (1c70 <main+0xb4>)
-    1bcc:	4798      	blx	r3
+    1bc6:	4b07      	ldr	r3, [pc, #28]	; (1be4 <main+0x28>)
+    1bc8:	4798      	blx	r3
 	io_write(usart, welcome_USART, 13);
-    1bce:	220d      	movs	r2, #13
-    1bd0:	4928      	ldr	r1, [pc, #160]	; (1c74 <main+0xb8>)
-    1bd2:	4b29      	ldr	r3, [pc, #164]	; (1c78 <main+0xbc>)
-    1bd4:	6818      	ldr	r0, [r3, #0]
-    1bd6:	4b29      	ldr	r3, [pc, #164]	; (1c7c <main+0xc0>)
+    1bca:	220d      	movs	r2, #13
+    1bcc:	4906      	ldr	r1, [pc, #24]	; (1be8 <main+0x2c>)
+    1bce:	4b07      	ldr	r3, [pc, #28]	; (1bec <main+0x30>)
+    1bd0:	6818      	ldr	r0, [r3, #0]
+    1bd2:	4b07      	ldr	r3, [pc, #28]	; (1bf0 <main+0x34>)
+    1bd4:	4798      	blx	r3
+	SX126x_Init();
+    1bd6:	4b07      	ldr	r3, [pc, #28]	; (1bf4 <main+0x38>)
     1bd8:	4798      	blx	r3
-	SX126xHal_SpiInit();
-    1bda:	4b29      	ldr	r3, [pc, #164]	; (1c80 <main+0xc4>)
-    1bdc:	4798      	blx	r3
-	SX126xHal_IoIrqInit();
-    1bde:	4b29      	ldr	r3, [pc, #164]	; (1c84 <main+0xc8>)
-    1be0:	4798      	blx	r3
-	SX126xHal_Wakeup();
-    1be2:	4b29      	ldr	r3, [pc, #164]	; (1c88 <main+0xcc>)
-    1be4:	4798      	blx	r3
-	SX126xHal_Reset();
-    1be6:	4b29      	ldr	r3, [pc, #164]	; (1c8c <main+0xd0>)
-    1be8:	4798      	blx	r3
-	uint8_t read_from_spi[3] = {0x00, 0x00, '\n'};
-    1bea:	2300      	movs	r3, #0
-    1bec:	f88d 3004 	strb.w	r3, [sp, #4]
-    1bf0:	f88d 3005 	strb.w	r3, [sp, #5]
-    1bf4:	230a      	movs	r3, #10
-    1bf6:	f88d 3006 	strb.w	r3, [sp, #6]
-		commands = RADIO_GET_STATUS;
-    1bfa:	f8df 80a0 	ldr.w	r8, [pc, #160]	; 1c9c <main+0xe0>
-    1bfe:	f06f 0b3f 	mvn.w	fp, #63	; 0x3f
-		SX126xHal_ReadCommand(&commands, read_from_spi, 1);
-    1c02:	2401      	movs	r4, #1
-    1c04:	f8df a098 	ldr.w	sl, [pc, #152]	; 1ca0 <main+0xe4>
-		read_from_spi[1] = SX126xHal_GetDioStatus();
-    1c08:	f8df 9098 	ldr.w	r9, [pc, #152]	; 1ca4 <main+0xe8>
-		commands = RADIO_GET_STATUS;
-    1c0c:	f888 b000 	strb.w	fp, [r8]
-		SX126xHal_ReadCommand(&commands, read_from_spi, 1);
-    1c10:	4622      	mov	r2, r4
-    1c12:	a901      	add	r1, sp, #4
-    1c14:	4640      	mov	r0, r8
-    1c16:	47d0      	blx	sl
-		read_from_spi[1] = SX126xHal_GetDioStatus();
-    1c18:	47c8      	blx	r9
-    1c1a:	f88d 0005 	strb.w	r0, [sp, #5]
-		uint8_t register_value_w = 0x96;
-    1c1e:	2396      	movs	r3, #150	; 0x96
-    1c20:	f88d 3003 	strb.w	r3, [sp, #3]
-		SX126xHal_ReadReg(0xAC08, &register_value);
-    1c24:	f10d 0102 	add.w	r1, sp, #2
-    1c28:	f64a 4008 	movw	r0, #44040	; 0xac08
-    1c2c:	4f18      	ldr	r7, [pc, #96]	; (1c90 <main+0xd4>)
-    1c2e:	47b8      	blx	r7
-		io_write(usart, &register_value, 1);
-    1c30:	4e11      	ldr	r6, [pc, #68]	; (1c78 <main+0xbc>)
-    1c32:	4622      	mov	r2, r4
-    1c34:	f10d 0102 	add.w	r1, sp, #2
-    1c38:	6830      	ldr	r0, [r6, #0]
-    1c3a:	4d10      	ldr	r5, [pc, #64]	; (1c7c <main+0xc0>)
-    1c3c:	47a8      	blx	r5
-		SX126xHal_WriteReg(0xAC08, &register_value_w);
-    1c3e:	f10d 0103 	add.w	r1, sp, #3
-    1c42:	f64a 4008 	movw	r0, #44040	; 0xac08
-    1c46:	4b13      	ldr	r3, [pc, #76]	; (1c94 <main+0xd8>)
-    1c48:	4798      	blx	r3
-		SX126xHal_ReadReg(0xAC08, &register_value);
-    1c4a:	f10d 0102 	add.w	r1, sp, #2
-    1c4e:	f64a 4008 	movw	r0, #44040	; 0xac08
-    1c52:	47b8      	blx	r7
-		io_write(usart, &register_value, 1);
-    1c54:	4622      	mov	r2, r4
-    1c56:	f10d 0102 	add.w	r1, sp, #2
-    1c5a:	6830      	ldr	r0, [r6, #0]
-    1c5c:	47a8      	blx	r5
-		delay_ms(100);
-    1c5e:	2064      	movs	r0, #100	; 0x64
-    1c60:	4b0d      	ldr	r3, [pc, #52]	; (1c98 <main+0xdc>)
-    1c62:	4798      	blx	r3
-    1c64:	e7d2      	b.n	1c0c <main+0x50>
-    1c66:	bf00      	nop
-    1c68:	000002d1 	.word	0x000002d1
-    1c6c:	00001b51 	.word	0x00001b51
-    1c70:	00001b89 	.word	0x00001b89
-    1c74:	20000000 	.word	0x20000000
-    1c78:	200000e8 	.word	0x200000e8
-    1c7c:	00000799 	.word	0x00000799
-    1c80:	00001de5 	.word	0x00001de5
-    1c84:	00001e09 	.word	0x00001e09
-    1c88:	00001e55 	.word	0x00001e55
-    1c8c:	00001e15 	.word	0x00001e15
-    1c90:	00001fbd 	.word	0x00001fbd
-    1c94:	00001f45 	.word	0x00001f45
-    1c98:	000006dd 	.word	0x000006dd
-    1c9c:	20000100 	.word	0x20000100
-    1ca0:	00001ea9 	.word	0x00001ea9
-    1ca4:	00001fcd 	.word	0x00001fcd
+    1bda:	e7fe      	b.n	1bda <main+0x1e>
+    1bdc:	000002d1 	.word	0x000002d1
+    1be0:	00001b51 	.word	0x00001b51
+    1be4:	00001b89 	.word	0x00001b89
+    1be8:	20000000 	.word	0x20000000
+    1bec:	200000ec 	.word	0x200000ec
+    1bf0:	00000799 	.word	0x00000799
+    1bf4:	00001d69 	.word	0x00001d69
 
-00001ca8 <DIO1_IRQ>:
+00001bf8 <DIO1_IRQ>:
 	ext_irq_register(PIN_PC00, DIO1_IRQ);
     // Possibility to add DIO2 and DIO3 interrupts
 }
 
 static void DIO1_IRQ(void)
 {
-    1ca8:	b500      	push	{lr}
-    1caa:	b083      	sub	sp, #12
+    1bf8:	b500      	push	{lr}
+    1bfa:	b083      	sub	sp, #12
+    // Clear the interrupt in the radio
+    //SX126x_ClearIrqStatus( IRQ_RADIO_ALL );
     // Do something in the ISR
 	uint8_t tx_done_see[6] = "Sent!\n";
-    1cac:	4b07      	ldr	r3, [pc, #28]	; (1ccc <DIO1_IRQ+0x24>)
-    1cae:	e893 0003 	ldmia.w	r3, {r0, r1}
-    1cb2:	9000      	str	r0, [sp, #0]
-    1cb4:	f8ad 1004 	strh.w	r1, [sp, #4]
+    1bfc:	4b07      	ldr	r3, [pc, #28]	; (1c1c <DIO1_IRQ+0x24>)
+    1bfe:	e893 0003 	ldmia.w	r3, {r0, r1}
+    1c02:	9000      	str	r0, [sp, #0]
+    1c04:	f8ad 1004 	strh.w	r1, [sp, #4]
 	io_write(usart, tx_done_see, 6);
-    1cb8:	2206      	movs	r2, #6
-    1cba:	4669      	mov	r1, sp
-    1cbc:	4b04      	ldr	r3, [pc, #16]	; (1cd0 <DIO1_IRQ+0x28>)
-    1cbe:	6818      	ldr	r0, [r3, #0]
-    1cc0:	4b04      	ldr	r3, [pc, #16]	; (1cd4 <DIO1_IRQ+0x2c>)
-    1cc2:	4798      	blx	r3
-    1cc4:	b003      	add	sp, #12
-    1cc6:	f85d fb04 	ldr.w	pc, [sp], #4
-    1cca:	bf00      	nop
-    1ccc:	000021ac 	.word	0x000021ac
-    1cd0:	200000e8 	.word	0x200000e8
-    1cd4:	00000799 	.word	0x00000799
+    1c08:	2206      	movs	r2, #6
+    1c0a:	4669      	mov	r1, sp
+    1c0c:	4b04      	ldr	r3, [pc, #16]	; (1c20 <DIO1_IRQ+0x28>)
+    1c0e:	6818      	ldr	r0, [r3, #0]
+    1c10:	4b04      	ldr	r3, [pc, #16]	; (1c24 <DIO1_IRQ+0x2c>)
+    1c12:	4798      	blx	r3
+    1c14:	b003      	add	sp, #12
+    1c16:	f85d fb04 	ldr.w	pc, [sp], #4
+    1c1a:	bf00      	nop
+    1c1c:	000020f4 	.word	0x000020f4
+    1c20:	200000ec 	.word	0x200000ec
+    1c24:	00000799 	.word	0x00000799
 
-00001cd8 <read_pin>:
+00001c28 <read_pin>:
 uint8_t read_pin(const uint8_t pin){
-    1cd8:	b530      	push	{r4, r5, lr}
-    1cda:	b083      	sub	sp, #12
-    1cdc:	4605      	mov	r5, r0
+    1c28:	b530      	push	{r4, r5, lr}
+    1c2a:	b083      	sub	sp, #12
+    1c2c:	4605      	mov	r5, r0
  */
 static inline uint32_t _gpio_get_level(const enum gpio_port port)
 {
 	uint32_t tmp;
 
 	CRITICAL_SECTION_ENTER();
-    1cde:	a801      	add	r0, sp, #4
-    1ce0:	4b0c      	ldr	r3, [pc, #48]	; (1d14 <read_pin+0x3c>)
-    1ce2:	4798      	blx	r3
+    1c2e:	a801      	add	r0, sp, #4
+    1c30:	4b0c      	ldr	r3, [pc, #48]	; (1c64 <read_pin+0x3c>)
+    1c32:	4798      	blx	r3
 	return ((Port *)hw)->Group[submodule_index].DIR.reg;
-    1ce4:	096b      	lsrs	r3, r5, #5
-    1ce6:	490c      	ldr	r1, [pc, #48]	; (1d18 <read_pin+0x40>)
-    1ce8:	01db      	lsls	r3, r3, #7
-    1cea:	18ca      	adds	r2, r1, r3
-    1cec:	58c9      	ldr	r1, [r1, r3]
+    1c34:	096b      	lsrs	r3, r5, #5
+    1c36:	490c      	ldr	r1, [pc, #48]	; (1c68 <read_pin+0x40>)
+    1c38:	01db      	lsls	r3, r3, #7
+    1c3a:	18ca      	adds	r2, r1, r3
+    1c3c:	58c9      	ldr	r1, [r1, r3]
 	return ((Port *)hw)->Group[submodule_index].IN.reg;
-    1cee:	6a13      	ldr	r3, [r2, #32]
+    1c3e:	6a13      	ldr	r3, [r2, #32]
 	return ((Port *)hw)->Group[submodule_index].OUT.reg;
-    1cf0:	6914      	ldr	r4, [r2, #16]
+    1c40:	6914      	ldr	r4, [r2, #16]
 
 	uint32_t dir_tmp = hri_port_read_DIR_reg(PORT, port);
 
 	tmp = hri_port_read_IN_reg(PORT, port) & ~dir_tmp;
 	tmp |= hri_port_read_OUT_reg(PORT, port) & dir_tmp;
-    1cf2:	405c      	eors	r4, r3
-    1cf4:	400c      	ands	r4, r1
-    1cf6:	405c      	eors	r4, r3
+    1c42:	405c      	eors	r4, r3
+    1c44:	400c      	ands	r4, r1
+    1c46:	405c      	eors	r4, r3
 
 	CRITICAL_SECTION_LEAVE();
-    1cf8:	a801      	add	r0, sp, #4
-    1cfa:	4b08      	ldr	r3, [pc, #32]	; (1d1c <read_pin+0x44>)
-    1cfc:	4798      	blx	r3
+    1c48:	a801      	add	r0, sp, #4
+    1c4a:	4b08      	ldr	r3, [pc, #32]	; (1c6c <read_pin+0x44>)
+    1c4c:	4798      	blx	r3
  *
  * \param[in] pin       The pin number for device
  */
 static inline bool gpio_get_pin_level(const uint8_t pin)
 {
 	return (bool)(_gpio_get_level((enum gpio_port)GPIO_PORT(pin)) & (0x01U << GPIO_PIN(pin)));
-    1cfe:	f005 051f 	and.w	r5, r5, #31
-    1d02:	2301      	movs	r3, #1
-    1d04:	fa03 f505 	lsl.w	r5, r3, r5
-    1d08:	4225      	tst	r5, r4
+    1c4e:	f005 051f 	and.w	r5, r5, #31
+    1c52:	2301      	movs	r3, #1
+    1c54:	fa03 f505 	lsl.w	r5, r3, r5
+    1c58:	4225      	tst	r5, r4
 }
-    1d0a:	bf14      	ite	ne
-    1d0c:	4618      	movne	r0, r3
-    1d0e:	2000      	moveq	r0, #0
-    1d10:	b003      	add	sp, #12
-    1d12:	bd30      	pop	{r4, r5, pc}
-    1d14:	000006ad 	.word	0x000006ad
-    1d18:	41008000 	.word	0x41008000
-    1d1c:	000006bb 	.word	0x000006bb
+    1c5a:	bf14      	ite	ne
+    1c5c:	4618      	movne	r0, r3
+    1c5e:	2000      	moveq	r0, #0
+    1c60:	b003      	add	sp, #12
+    1c62:	bd30      	pop	{r4, r5, pc}
+    1c64:	000006ad 	.word	0x000006ad
+    1c68:	41008000 	.word	0x41008000
+    1c6c:	000006bb 	.word	0x000006bb
 
-00001d20 <write_pin>:
+00001c70 <write_pin>:
 	_gpio_set_level((enum gpio_port)GPIO_PORT(pin), 1U << GPIO_PIN(pin), level);
-    1d20:	0943      	lsrs	r3, r0, #5
-    1d22:	f000 001f 	and.w	r0, r0, #31
-    1d26:	2201      	movs	r2, #1
-    1d28:	fa02 f000 	lsl.w	r0, r2, r0
+    1c70:	0943      	lsrs	r3, r0, #5
+    1c72:	f000 001f 	and.w	r0, r0, #31
+    1c76:	2201      	movs	r2, #1
+    1c78:	fa02 f000 	lsl.w	r0, r2, r0
 	if (level) {
-    1d2c:	b931      	cbnz	r1, 1d3c <write_pin+0x1c>
+    1c7c:	b931      	cbnz	r1, 1c8c <write_pin+0x1c>
 	((Port *)hw)->Group[submodule_index].OUTCLR.reg = mask;
-    1d2e:	01db      	lsls	r3, r3, #7
-    1d30:	f103 4382 	add.w	r3, r3, #1090519040	; 0x41000000
-    1d34:	f503 4300 	add.w	r3, r3, #32768	; 0x8000
-    1d38:	6158      	str	r0, [r3, #20]
-    1d3a:	4770      	bx	lr
+    1c7e:	01db      	lsls	r3, r3, #7
+    1c80:	f103 4382 	add.w	r3, r3, #1090519040	; 0x41000000
+    1c84:	f503 4300 	add.w	r3, r3, #32768	; 0x8000
+    1c88:	6158      	str	r0, [r3, #20]
+    1c8a:	4770      	bx	lr
 	((Port *)hw)->Group[submodule_index].OUTSET.reg = mask;
-    1d3c:	01db      	lsls	r3, r3, #7
-    1d3e:	f103 4382 	add.w	r3, r3, #1090519040	; 0x41000000
-    1d42:	f503 4300 	add.w	r3, r3, #32768	; 0x8000
-    1d46:	6198      	str	r0, [r3, #24]
-    1d48:	4770      	bx	lr
+    1c8c:	01db      	lsls	r3, r3, #7
+    1c8e:	f103 4382 	add.w	r3, r3, #1090519040	; 0x41000000
+    1c92:	f503 4300 	add.w	r3, r3, #32768	; 0x8000
+    1c96:	6198      	str	r0, [r3, #24]
+    1c98:	4770      	bx	lr
 	...
 
-00001d4c <SPI_init>:
+00001c9c <SPI_init>:
 {
-    1d4c:	b510      	push	{r4, lr}
+    1c9c:	b510      	push	{r4, lr}
     int32_t error_spi = spi_m_sync_get_io_descriptor(&SPI_0, &spi);
-    1d4e:	4906      	ldr	r1, [pc, #24]	; (1d68 <SPI_init+0x1c>)
-    1d50:	4806      	ldr	r0, [pc, #24]	; (1d6c <SPI_init+0x20>)
-    1d52:	4b07      	ldr	r3, [pc, #28]	; (1d70 <SPI_init+0x24>)
-    1d54:	4798      	blx	r3
+    1c9e:	4906      	ldr	r1, [pc, #24]	; (1cb8 <SPI_init+0x1c>)
+    1ca0:	4806      	ldr	r0, [pc, #24]	; (1cbc <SPI_init+0x20>)
+    1ca2:	4b07      	ldr	r3, [pc, #28]	; (1cc0 <SPI_init+0x24>)
+    1ca4:	4798      	blx	r3
 	if(error_spi != ERR_NONE){
-    1d56:	4604      	mov	r4, r0
-    1d58:	b108      	cbz	r0, 1d5e <SPI_init+0x12>
+    1ca6:	4604      	mov	r4, r0
+    1ca8:	b108      	cbz	r0, 1cae <SPI_init+0x12>
 }
-    1d5a:	4620      	mov	r0, r4
-    1d5c:	bd10      	pop	{r4, pc}
+    1caa:	4620      	mov	r0, r4
+    1cac:	bd10      	pop	{r4, pc}
 	spi_m_sync_enable(&SPI_0);
-    1d5e:	4803      	ldr	r0, [pc, #12]	; (1d6c <SPI_init+0x20>)
-    1d60:	4b04      	ldr	r3, [pc, #16]	; (1d74 <SPI_init+0x28>)
-    1d62:	4798      	blx	r3
+    1cae:	4803      	ldr	r0, [pc, #12]	; (1cbc <SPI_init+0x20>)
+    1cb0:	4b04      	ldr	r3, [pc, #16]	; (1cc4 <SPI_init+0x28>)
+    1cb2:	4798      	blx	r3
     return ERR_NONE;
-    1d64:	e7f9      	b.n	1d5a <SPI_init+0xe>
-    1d66:	bf00      	nop
-    1d68:	20000104 	.word	0x20000104
-    1d6c:	20000054 	.word	0x20000054
-    1d70:	000008f9 	.word	0x000008f9
-    1d74:	00000819 	.word	0x00000819
+    1cb4:	e7f9      	b.n	1caa <SPI_init+0xe>
+    1cb6:	bf00      	nop
+    1cb8:	2000010c 	.word	0x2000010c
+    1cbc:	20000054 	.word	0x20000054
+    1cc0:	000008f9 	.word	0x000008f9
+    1cc4:	00000819 	.word	0x00000819
 
-00001d78 <SendSpi>:
+00001cc8 <SendSpi>:
 int32_t SendSpi(uint8_t *data, uint8_t len){
-    1d78:	b508      	push	{r3, lr}
+    1cc8:	b508      	push	{r3, lr}
     return io_write(spi, data, len);
-    1d7a:	460a      	mov	r2, r1
-    1d7c:	4601      	mov	r1, r0
-    1d7e:	4b02      	ldr	r3, [pc, #8]	; (1d88 <SendSpi+0x10>)
-    1d80:	6818      	ldr	r0, [r3, #0]
-    1d82:	4b02      	ldr	r3, [pc, #8]	; (1d8c <SendSpi+0x14>)
-    1d84:	4798      	blx	r3
+    1cca:	460a      	mov	r2, r1
+    1ccc:	4601      	mov	r1, r0
+    1cce:	4b02      	ldr	r3, [pc, #8]	; (1cd8 <SendSpi+0x10>)
+    1cd0:	6818      	ldr	r0, [r3, #0]
+    1cd2:	4b02      	ldr	r3, [pc, #8]	; (1cdc <SendSpi+0x14>)
+    1cd4:	4798      	blx	r3
 }
-    1d86:	bd08      	pop	{r3, pc}
-    1d88:	20000104 	.word	0x20000104
-    1d8c:	00000799 	.word	0x00000799
+    1cd6:	bd08      	pop	{r3, pc}
+    1cd8:	2000010c 	.word	0x2000010c
+    1cdc:	00000799 	.word	0x00000799
 
-00001d90 <ReadSpi>:
-int32_t ReadSpi(uint8_t *rx_data, uint8_t len){	
-    1d90:	b5b0      	push	{r4, r5, r7, lr}
-    1d92:	b084      	sub	sp, #16
-    1d94:	af00      	add	r7, sp, #0
-    uint8_t noop[len];
-    1d96:	1dcb      	adds	r3, r1, #7
-    1d98:	f023 0307 	bic.w	r3, r3, #7
-    1d9c:	ebad 0d03 	sub.w	sp, sp, r3
-    1da0:	466d      	mov	r5, sp
-    for(int i=0; i<len; i++){
-    1da2:	b131      	cbz	r1, 1db2 <ReadSpi+0x22>
-    1da4:	466b      	mov	r3, sp
-    1da6:	186c      	adds	r4, r5, r1
-        noop[i] = 0x00; // Fill with noop, 0x00
-    1da8:	2200      	movs	r2, #0
-    1daa:	f803 2b01 	strb.w	r2, [r3], #1
-    for(int i=0; i<len; i++){
-    1dae:	42a3      	cmp	r3, r4
-    1db0:	d1fb      	bne.n	1daa <ReadSpi+0x1a>
-    temp.txbuf = noop;
-    1db2:	607d      	str	r5, [r7, #4]
-    temp.rxbuf = rx_data;
-    1db4:	60b8      	str	r0, [r7, #8]
-    temp.size  = len;
-    1db6:	60f9      	str	r1, [r7, #12]
-    return spi_m_sync_transfer(&SPI_0, &temp);
-    1db8:	1d39      	adds	r1, r7, #4
-    1dba:	4803      	ldr	r0, [pc, #12]	; (1dc8 <ReadSpi+0x38>)
-    1dbc:	4b03      	ldr	r3, [pc, #12]	; (1dcc <ReadSpi+0x3c>)
-    1dbe:	4798      	blx	r3
-}
-    1dc0:	3710      	adds	r7, #16
-    1dc2:	46bd      	mov	sp, r7
-    1dc4:	bdb0      	pop	{r4, r5, r7, pc}
-    1dc6:	bf00      	nop
-    1dc8:	20000054 	.word	0x20000054
-    1dcc:	00000841 	.word	0x00000841
-
-00001dd0 <IRQ_Init>:
+00001ce0 <IRQ_Init>:
 {
-    1dd0:	b508      	push	{r3, lr}
+    1ce0:	b508      	push	{r3, lr}
 	ext_irq_register(PIN_PC00, DIO1_IRQ);
-    1dd2:	4902      	ldr	r1, [pc, #8]	; (1ddc <IRQ_Init+0xc>)
-    1dd4:	2040      	movs	r0, #64	; 0x40
-    1dd6:	4b02      	ldr	r3, [pc, #8]	; (1de0 <IRQ_Init+0x10>)
-    1dd8:	4798      	blx	r3
-    1dda:	bd08      	pop	{r3, pc}
-    1ddc:	00001ca9 	.word	0x00001ca9
-    1de0:	00000759 	.word	0x00000759
+    1ce2:	4902      	ldr	r1, [pc, #8]	; (1cec <IRQ_Init+0xc>)
+    1ce4:	2040      	movs	r0, #64	; 0x40
+    1ce6:	4b02      	ldr	r3, [pc, #8]	; (1cf0 <IRQ_Init+0x10>)
+    1ce8:	4798      	blx	r3
+    1cea:	bd08      	pop	{r3, pc}
+    1cec:	00001bf9 	.word	0x00001bf9
+    1cf0:	00000759 	.word	0x00000759
 
-00001de4 <SX126xHal_SpiInit>:
+00001cf4 <SX126x_SetStandby>:
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PRIVATE_SYNCWORD & 0xFF) );
+        #endif
+}
+
+void SX126x_SetStandby( RadioStandbyModes_t standbyConfig )
+{
+    1cf4:	b500      	push	{lr}
+    1cf6:	b083      	sub	sp, #12
+    1cf8:	a902      	add	r1, sp, #8
+    1cfa:	f801 0d01 	strb.w	r0, [r1, #-1]!
+
+    SX126xHal_WriteCommand( RADIO_SET_STANDBY, ( uint8_t* )&standbyConfig, 1 );
+    1cfe:	2201      	movs	r2, #1
+    1d00:	2080      	movs	r0, #128	; 0x80
+    1d02:	4b07      	ldr	r3, [pc, #28]	; (1d20 <SX126x_SetStandby+0x2c>)
+    1d04:	4798      	blx	r3
+    if( standbyConfig == STDBY_RC )
+    1d06:	f89d 3007 	ldrb.w	r3, [sp, #7]
+    1d0a:	b12b      	cbz	r3, 1d18 <SX126x_SetStandby+0x24>
+    {
+        OperatingMode = MODE_STDBY_RC;
+    }
+    else
+    {
+        OperatingMode = MODE_STDBY_XOSC;
+    1d0c:	2202      	movs	r2, #2
+    1d0e:	4b05      	ldr	r3, [pc, #20]	; (1d24 <SX126x_SetStandby+0x30>)
+    1d10:	701a      	strb	r2, [r3, #0]
+    }
+}
+    1d12:	b003      	add	sp, #12
+    1d14:	f85d fb04 	ldr.w	pc, [sp], #4
+        OperatingMode = MODE_STDBY_RC;
+    1d18:	2201      	movs	r2, #1
+    1d1a:	4b02      	ldr	r3, [pc, #8]	; (1d24 <SX126x_SetStandby+0x30>)
+    1d1c:	701a      	strb	r2, [r3, #0]
+    1d1e:	e7f8      	b.n	1d12 <SX126x_SetStandby+0x1e>
+    1d20:	00001e95 	.word	0x00001e95
+    1d24:	200000e8 	.word	0x200000e8
+
+00001d28 <SX126x_SetDio2AsRfSwitchCtrl>:
+{
+    SX126xHal_WriteCommand( RADIO_CALIBRATE, &calibParam.Value, 1 );
+}
+
+void SX126x_SetDio2AsRfSwitchCtrl( uint8_t enable )
+{
+    1d28:	b500      	push	{lr}
+    1d2a:	b083      	sub	sp, #12
+    1d2c:	a902      	add	r1, sp, #8
+    1d2e:	f801 0d01 	strb.w	r0, [r1, #-1]!
+
+    SX126xHal_WriteCommand( RADIO_SET_RFSWITCHMODE, &enable, 1 );
+    1d32:	2201      	movs	r2, #1
+    1d34:	209d      	movs	r0, #157	; 0x9d
+    1d36:	4b02      	ldr	r3, [pc, #8]	; (1d40 <SX126x_SetDio2AsRfSwitchCtrl+0x18>)
+    1d38:	4798      	blx	r3
+}
+    1d3a:	b003      	add	sp, #12
+    1d3c:	f85d fb04 	ldr.w	pc, [sp], #4
+    1d40:	00001e95 	.word	0x00001e95
+
+00001d44 <SX126x_SetPacketType>:
+
+void SX126x_SetPacketType( RadioPacketTypes_t packetType )
+{
+    1d44:	b500      	push	{lr}
+    1d46:	b083      	sub	sp, #12
+    1d48:	a902      	add	r1, sp, #8
+    1d4a:	f801 0d01 	strb.w	r0, [r1, #-1]!
+
+
+    // Save packet type internally to avoid questioning the radio
+    PacketType = packetType;
+    1d4e:	4b04      	ldr	r3, [pc, #16]	; (1d60 <SX126x_SetPacketType+0x1c>)
+    1d50:	7018      	strb	r0, [r3, #0]
+    SX126xHal_WriteCommand( RADIO_SET_PACKETTYPE, ( uint8_t* )&packetType, 1 );
+    1d52:	2201      	movs	r2, #1
+    1d54:	208a      	movs	r0, #138	; 0x8a
+    1d56:	4b03      	ldr	r3, [pc, #12]	; (1d64 <SX126x_SetPacketType+0x20>)
+    1d58:	4798      	blx	r3
+}
+    1d5a:	b003      	add	sp, #12
+    1d5c:	f85d fb04 	ldr.w	pc, [sp], #4
+    1d60:	200000f0 	.word	0x200000f0
+    1d64:	00001e95 	.word	0x00001e95
+
+00001d68 <SX126x_Init>:
+void SX126x_Init( void ){
+    1d68:	b510      	push	{r4, lr}
+        SX126xHal_SpiInit();
+    1d6a:	4b0f      	ldr	r3, [pc, #60]	; (1da8 <SX126x_Init+0x40>)
+    1d6c:	4798      	blx	r3
+        SX126xHal_Reset( );
+    1d6e:	4b0f      	ldr	r3, [pc, #60]	; (1dac <SX126x_Init+0x44>)
+    1d70:	4798      	blx	r3
+        SX126xHal_IoIrqInit();
+    1d72:	4b0f      	ldr	r3, [pc, #60]	; (1db0 <SX126x_Init+0x48>)
+    1d74:	4798      	blx	r3
+        SX126xHal_Wakeup( );
+    1d76:	4b0f      	ldr	r3, [pc, #60]	; (1db4 <SX126x_Init+0x4c>)
+    1d78:	4798      	blx	r3
+        SX126x_SetStandby( STDBY_RC );
+    1d7a:	2000      	movs	r0, #0
+    1d7c:	4b0e      	ldr	r3, [pc, #56]	; (1db8 <SX126x_Init+0x50>)
+    1d7e:	4798      	blx	r3
+        SX126xHal_AntSwOn( );
+    1d80:	4b0e      	ldr	r3, [pc, #56]	; (1dbc <SX126x_Init+0x54>)
+    1d82:	4798      	blx	r3
+        SX126x_SetDio2AsRfSwitchCtrl( true );
+    1d84:	2001      	movs	r0, #1
+    1d86:	4b0e      	ldr	r3, [pc, #56]	; (1dc0 <SX126x_Init+0x58>)
+    1d88:	4798      	blx	r3
+        OperatingMode = MODE_STDBY_RC;
+    1d8a:	2001      	movs	r0, #1
+    1d8c:	4b0d      	ldr	r3, [pc, #52]	; (1dc4 <SX126x_Init+0x5c>)
+    1d8e:	7018      	strb	r0, [r3, #0]
+        SX126x_SetPacketType( PACKET_TYPE_LORA );
+    1d90:	4b0d      	ldr	r3, [pc, #52]	; (1dc8 <SX126x_Init+0x60>)
+    1d92:	4798      	blx	r3
+                SX126xHal_WriteReg( REG_LR_SYNCWORD, (uint8_t *) (( LORA_MAC_PUBLIC_SYNCWORD >> 8 ) & 0xFF) );
+    1d94:	2134      	movs	r1, #52	; 0x34
+    1d96:	f44f 60e8 	mov.w	r0, #1856	; 0x740
+    1d9a:	4c0c      	ldr	r4, [pc, #48]	; (1dcc <SX126x_Init+0x64>)
+    1d9c:	47a0      	blx	r4
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PUBLIC_SYNCWORD & 0xFF) );
+    1d9e:	2144      	movs	r1, #68	; 0x44
+    1da0:	f240 7041 	movw	r0, #1857	; 0x741
+    1da4:	47a0      	blx	r4
+    1da6:	bd10      	pop	{r4, pc}
+    1da8:	00001dd1 	.word	0x00001dd1
+    1dac:	00001e01 	.word	0x00001e01
+    1db0:	00001df5 	.word	0x00001df5
+    1db4:	00001e41 	.word	0x00001e41
+    1db8:	00001cf5 	.word	0x00001cf5
+    1dbc:	00001f41 	.word	0x00001f41
+    1dc0:	00001d29 	.word	0x00001d29
+    1dc4:	200000e8 	.word	0x200000e8
+    1dc8:	00001d45 	.word	0x00001d45
+    1dcc:	00001f31 	.word	0x00001f31
+
+00001dd0 <SX126xHal_SpiInit>:
 #define WaitOnCounter( )          for( uint8_t counter = 0; counter < 15; counter++ ) \
                                   {  __NOP( ); }
 
 
 void SX126xHal_SpiInit( void )
 {
-    1de4:	b508      	push	{r3, lr}
+    1dd0:	b508      	push	{r3, lr}
     NSS_OFF
-    1de6:	2101      	movs	r1, #1
-    1de8:	2052      	movs	r0, #82	; 0x52
-    1dea:	4b04      	ldr	r3, [pc, #16]	; (1dfc <SX126xHal_SpiInit+0x18>)
-    1dec:	4798      	blx	r3
+    1dd2:	2101      	movs	r1, #1
+    1dd4:	2052      	movs	r0, #82	; 0x52
+    1dd6:	4b04      	ldr	r3, [pc, #16]	; (1de8 <SX126xHal_SpiInit+0x18>)
+    1dd8:	4798      	blx	r3
     SPI_init();
-    1dee:	4b04      	ldr	r3, [pc, #16]	; (1e00 <SX126xHal_SpiInit+0x1c>)
-    1df0:	4798      	blx	r3
+    1dda:	4b04      	ldr	r3, [pc, #16]	; (1dec <SX126xHal_SpiInit+0x1c>)
+    1ddc:	4798      	blx	r3
 
     wait_ms( 100 );
-    1df2:	2064      	movs	r0, #100	; 0x64
-    1df4:	4b03      	ldr	r3, [pc, #12]	; (1e04 <SX126xHal_SpiInit+0x20>)
-    1df6:	4798      	blx	r3
-    1df8:	bd08      	pop	{r3, pc}
-    1dfa:	bf00      	nop
-    1dfc:	00001d21 	.word	0x00001d21
-    1e00:	00001d4d 	.word	0x00001d4d
-    1e04:	000006dd 	.word	0x000006dd
+    1dde:	2064      	movs	r0, #100	; 0x64
+    1de0:	4b03      	ldr	r3, [pc, #12]	; (1df0 <SX126xHal_SpiInit+0x20>)
+    1de2:	4798      	blx	r3
+    1de4:	bd08      	pop	{r3, pc}
+    1de6:	bf00      	nop
+    1de8:	00001c71 	.word	0x00001c71
+    1dec:	00001c9d 	.word	0x00001c9d
+    1df0:	000006dd 	.word	0x000006dd
 
-00001e08 <SX126xHal_IoIrqInit>:
+00001df4 <SX126xHal_IoIrqInit>:
 }
 
 void SX126xHal_IoIrqInit( void )
 {
-    1e08:	b508      	push	{r3, lr}
+    1df4:	b508      	push	{r3, lr}
     IRQ_Init();
-    1e0a:	4b01      	ldr	r3, [pc, #4]	; (1e10 <SX126xHal_IoIrqInit+0x8>)
-    1e0c:	4798      	blx	r3
-    1e0e:	bd08      	pop	{r3, pc}
-    1e10:	00001dd1 	.word	0x00001dd1
+    1df6:	4b01      	ldr	r3, [pc, #4]	; (1dfc <SX126xHal_IoIrqInit+0x8>)
+    1df8:	4798      	blx	r3
+    1dfa:	bd08      	pop	{r3, pc}
+    1dfc:	00001ce1 	.word	0x00001ce1
 
-00001e14 <SX126xHal_Reset>:
+00001e00 <SX126xHal_Reset>:
 }
 
 void SX126xHal_Reset( void )
 {
-    1e14:	b530      	push	{r4, r5, lr}
-    1e16:	b083      	sub	sp, #12
+    1e00:	b530      	push	{r4, r5, lr}
+    1e02:	b083      	sub	sp, #12
     CRITICAL_SECTION_ENTER()
-    1e18:	a801      	add	r0, sp, #4
-    1e1a:	4b0a      	ldr	r3, [pc, #40]	; (1e44 <SX126xHal_Reset+0x30>)
-    1e1c:	4798      	blx	r3
+    1e04:	a801      	add	r0, sp, #4
+    1e06:	4b0a      	ldr	r3, [pc, #40]	; (1e30 <SX126xHal_Reset+0x30>)
+    1e08:	4798      	blx	r3
     wait_ms( 20 );
-    1e1e:	2014      	movs	r0, #20
-    1e20:	4c09      	ldr	r4, [pc, #36]	; (1e48 <SX126xHal_Reset+0x34>)
-    1e22:	47a0      	blx	r4
+    1e0a:	2014      	movs	r0, #20
+    1e0c:	4c09      	ldr	r4, [pc, #36]	; (1e34 <SX126xHal_Reset+0x34>)
+    1e0e:	47a0      	blx	r4
     RESET_ON
-    1e24:	2100      	movs	r1, #0
-    1e26:	2053      	movs	r0, #83	; 0x53
-    1e28:	4d08      	ldr	r5, [pc, #32]	; (1e4c <SX126xHal_Reset+0x38>)
-    1e2a:	47a8      	blx	r5
+    1e10:	2100      	movs	r1, #0
+    1e12:	2053      	movs	r0, #83	; 0x53
+    1e14:	4d08      	ldr	r5, [pc, #32]	; (1e38 <SX126xHal_Reset+0x38>)
+    1e16:	47a8      	blx	r5
     wait_ms( 50 );
-    1e2c:	2032      	movs	r0, #50	; 0x32
-    1e2e:	47a0      	blx	r4
+    1e18:	2032      	movs	r0, #50	; 0x32
+    1e1a:	47a0      	blx	r4
     RESET_OFF
-    1e30:	2101      	movs	r1, #1
-    1e32:	2053      	movs	r0, #83	; 0x53
-    1e34:	47a8      	blx	r5
+    1e1c:	2101      	movs	r1, #1
+    1e1e:	2053      	movs	r0, #83	; 0x53
+    1e20:	47a8      	blx	r5
     wait_ms( 20 );
-    1e36:	2014      	movs	r0, #20
-    1e38:	47a0      	blx	r4
+    1e22:	2014      	movs	r0, #20
+    1e24:	47a0      	blx	r4
     CRITICAL_SECTION_LEAVE()
-    1e3a:	a801      	add	r0, sp, #4
-    1e3c:	4b04      	ldr	r3, [pc, #16]	; (1e50 <SX126xHal_Reset+0x3c>)
-    1e3e:	4798      	blx	r3
+    1e26:	a801      	add	r0, sp, #4
+    1e28:	4b04      	ldr	r3, [pc, #16]	; (1e3c <SX126xHal_Reset+0x3c>)
+    1e2a:	4798      	blx	r3
 }
-    1e40:	b003      	add	sp, #12
-    1e42:	bd30      	pop	{r4, r5, pc}
-    1e44:	000006ad 	.word	0x000006ad
-    1e48:	000006dd 	.word	0x000006dd
-    1e4c:	00001d21 	.word	0x00001d21
-    1e50:	000006bb 	.word	0x000006bb
+    1e2c:	b003      	add	sp, #12
+    1e2e:	bd30      	pop	{r4, r5, pc}
+    1e30:	000006ad 	.word	0x000006ad
+    1e34:	000006dd 	.word	0x000006dd
+    1e38:	00001c71 	.word	0x00001c71
+    1e3c:	000006bb 	.word	0x000006bb
 
-00001e54 <SX126xHal_Wakeup>:
+00001e40 <SX126xHal_Wakeup>:
 
 void SX126xHal_Wakeup( void )
 {
-    1e54:	b530      	push	{r4, r5, lr}
-    1e56:	b083      	sub	sp, #12
+    1e40:	b530      	push	{r4, r5, lr}
+    1e42:	b083      	sub	sp, #12
     CRITICAL_SECTION_ENTER()
-    1e58:	a801      	add	r0, sp, #4
-    1e5a:	4b0e      	ldr	r3, [pc, #56]	; (1e94 <SX126xHal_Wakeup+0x40>)
-    1e5c:	4798      	blx	r3
+    1e44:	a801      	add	r0, sp, #4
+    1e46:	4b0e      	ldr	r3, [pc, #56]	; (1e80 <SX126xHal_Wakeup+0x40>)
+    1e48:	4798      	blx	r3
 
     //Don't wait for BUSY here
     uint8_t wakeup_sequence[2] = {RADIO_GET_STATUS, 0x00};
-    1e5e:	23c0      	movs	r3, #192	; 0xc0
-    1e60:	f88d 3000 	strb.w	r3, [sp]
-    1e64:	2100      	movs	r1, #0
-    1e66:	f88d 1001 	strb.w	r1, [sp, #1]
+    1e4a:	23c0      	movs	r3, #192	; 0xc0
+    1e4c:	f88d 3000 	strb.w	r3, [sp]
+    1e50:	2100      	movs	r1, #0
+    1e52:	f88d 1001 	strb.w	r1, [sp, #1]
     NSS_ON
-    1e6a:	2052      	movs	r0, #82	; 0x52
-    1e6c:	4c0a      	ldr	r4, [pc, #40]	; (1e98 <SX126xHal_Wakeup+0x44>)
-    1e6e:	47a0      	blx	r4
+    1e56:	2052      	movs	r0, #82	; 0x52
+    1e58:	4c0a      	ldr	r4, [pc, #40]	; (1e84 <SX126xHal_Wakeup+0x44>)
+    1e5a:	47a0      	blx	r4
     SendSpi(wakeup_sequence, sizeof(wakeup_sequence));
-    1e70:	2102      	movs	r1, #2
-    1e72:	4668      	mov	r0, sp
-    1e74:	4b09      	ldr	r3, [pc, #36]	; (1e9c <SX126xHal_Wakeup+0x48>)
-    1e76:	4798      	blx	r3
+    1e5c:	2102      	movs	r1, #2
+    1e5e:	4668      	mov	r0, sp
+    1e60:	4b09      	ldr	r3, [pc, #36]	; (1e88 <SX126xHal_Wakeup+0x48>)
+    1e62:	4798      	blx	r3
     NSS_OFF
-    1e78:	2101      	movs	r1, #1
-    1e7a:	2052      	movs	r0, #82	; 0x52
-    1e7c:	47a0      	blx	r4
+    1e64:	2101      	movs	r1, #1
+    1e66:	2052      	movs	r0, #82	; 0x52
+    1e68:	47a0      	blx	r4
 
     // Wait for chip to be ready.
     WAIT_BUSY
-    1e7e:	2554      	movs	r5, #84	; 0x54
-    1e80:	4c07      	ldr	r4, [pc, #28]	; (1ea0 <SX126xHal_Wakeup+0x4c>)
-    1e82:	4628      	mov	r0, r5
-    1e84:	47a0      	blx	r4
-    1e86:	2800      	cmp	r0, #0
-    1e88:	d1fb      	bne.n	1e82 <SX126xHal_Wakeup+0x2e>
+    1e6a:	2554      	movs	r5, #84	; 0x54
+    1e6c:	4c07      	ldr	r4, [pc, #28]	; (1e8c <SX126xHal_Wakeup+0x4c>)
+    1e6e:	4628      	mov	r0, r5
+    1e70:	47a0      	blx	r4
+    1e72:	2800      	cmp	r0, #0
+    1e74:	d1fb      	bne.n	1e6e <SX126xHal_Wakeup+0x2e>
 
     CRITICAL_SECTION_LEAVE()
-    1e8a:	a801      	add	r0, sp, #4
-    1e8c:	4b05      	ldr	r3, [pc, #20]	; (1ea4 <SX126xHal_Wakeup+0x50>)
-    1e8e:	4798      	blx	r3
+    1e76:	a801      	add	r0, sp, #4
+    1e78:	4b05      	ldr	r3, [pc, #20]	; (1e90 <SX126xHal_Wakeup+0x50>)
+    1e7a:	4798      	blx	r3
     
     //AntSwOn( );
 }
-    1e90:	b003      	add	sp, #12
-    1e92:	bd30      	pop	{r4, r5, pc}
-    1e94:	000006ad 	.word	0x000006ad
-    1e98:	00001d21 	.word	0x00001d21
-    1e9c:	00001d79 	.word	0x00001d79
-    1ea0:	00001cd9 	.word	0x00001cd9
-    1ea4:	000006bb 	.word	0x000006bb
+    1e7c:	b003      	add	sp, #12
+    1e7e:	bd30      	pop	{r4, r5, pc}
+    1e80:	000006ad 	.word	0x000006ad
+    1e84:	00001c71 	.word	0x00001c71
+    1e88:	00001cc9 	.word	0x00001cc9
+    1e8c:	00001c29 	.word	0x00001c29
+    1e90:	000006bb 	.word	0x000006bb
 
-00001ea8 <SX126xHal_ReadCommand>:
+00001e94 <SX126xHal_WriteCommand>:
+
+void SX126xHal_WriteCommand( RadioCommands_t command, uint8_t *buffer, uint16_t size )
+{ 
+    1e94:	b5f0      	push	{r4, r5, r6, r7, lr}
+    1e96:	b083      	sub	sp, #12
+    1e98:	460e      	mov	r6, r1
+    1e9a:	4617      	mov	r7, r2
+    1e9c:	f88d 0007 	strb.w	r0, [sp, #7]
+    WAIT_BUSY
+    1ea0:	2554      	movs	r5, #84	; 0x54
+    1ea2:	4c0b      	ldr	r4, [pc, #44]	; (1ed0 <SX126xHal_WriteCommand+0x3c>)
+    1ea4:	4628      	mov	r0, r5
+    1ea6:	47a0      	blx	r4
+    1ea8:	2800      	cmp	r0, #0
+    1eaa:	d1fb      	bne.n	1ea4 <SX126xHal_WriteCommand+0x10>
+
+    NSS_ON
+    1eac:	2100      	movs	r1, #0
+    1eae:	2052      	movs	r0, #82	; 0x52
+    1eb0:	4c08      	ldr	r4, [pc, #32]	; (1ed4 <SX126xHal_WriteCommand+0x40>)
+    1eb2:	47a0      	blx	r4
+
+    SendSpi((uint8_t *)&command, 1);
+    1eb4:	2101      	movs	r1, #1
+    1eb6:	f10d 0007 	add.w	r0, sp, #7
+    1eba:	4d07      	ldr	r5, [pc, #28]	; (1ed8 <SX126xHal_WriteCommand+0x44>)
+    1ebc:	47a8      	blx	r5
+    SendSpi(buffer, size);
+    1ebe:	b2f9      	uxtb	r1, r7
+    1ec0:	4630      	mov	r0, r6
+    1ec2:	47a8      	blx	r5
+
+    NSS_OFF
+    1ec4:	2101      	movs	r1, #1
+    1ec6:	2052      	movs	r0, #82	; 0x52
+    1ec8:	47a0      	blx	r4
     
     //WaitOnCounter( );
 }
+    1eca:	b003      	add	sp, #12
+    1ecc:	bdf0      	pop	{r4, r5, r6, r7, pc}
+    1ece:	bf00      	nop
+    1ed0:	00001c29 	.word	0x00001c29
+    1ed4:	00001c71 	.word	0x00001c71
+    1ed8:	00001cc9 	.word	0x00001cc9
 
-void SX126xHal_ReadCommand( RadioCommands_t *command, uint8_t *buffer, uint16_t size )
-{
-    1ea8:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
-    1eac:	4680      	mov	r8, r0
-    1eae:	460e      	mov	r6, r1
-    1eb0:	4617      	mov	r7, r2
-    WAIT_BUSY
-    1eb2:	2554      	movs	r5, #84	; 0x54
-    1eb4:	4c0a      	ldr	r4, [pc, #40]	; (1ee0 <SX126xHal_ReadCommand+0x38>)
-    1eb6:	4628      	mov	r0, r5
-    1eb8:	47a0      	blx	r4
-    1eba:	2800      	cmp	r0, #0
-    1ebc:	d1fb      	bne.n	1eb6 <SX126xHal_ReadCommand+0xe>
-
-    NSS_ON
-    1ebe:	2100      	movs	r1, #0
-    1ec0:	2052      	movs	r0, #82	; 0x52
-    1ec2:	4c08      	ldr	r4, [pc, #32]	; (1ee4 <SX126xHal_ReadCommand+0x3c>)
-    1ec4:	47a0      	blx	r4
-
-    SendSpi(command, 1);
-    1ec6:	2101      	movs	r1, #1
-    1ec8:	4640      	mov	r0, r8
-    1eca:	4b07      	ldr	r3, [pc, #28]	; (1ee8 <SX126xHal_ReadCommand+0x40>)
-    1ecc:	4798      	blx	r3
-    ReadSpi(buffer, size);
-    1ece:	b2f9      	uxtb	r1, r7
-    1ed0:	4630      	mov	r0, r6
-    1ed2:	4b06      	ldr	r3, [pc, #24]	; (1eec <SX126xHal_ReadCommand+0x44>)
-    1ed4:	4798      	blx	r3
-    
+00001edc <SX126xHal_WriteRegister>:
     NSS_OFF
-    1ed6:	2101      	movs	r1, #1
-    1ed8:	2052      	movs	r0, #82	; 0x52
-    1eda:	47a0      	blx	r4
-    1edc:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
-    1ee0:	00001cd9 	.word	0x00001cd9
-    1ee4:	00001d21 	.word	0x00001d21
-    1ee8:	00001d79 	.word	0x00001d79
-    1eec:	00001d91 	.word	0x00001d91
-
-00001ef0 <SX126xHal_WriteRegister>:
     
 }
 
 void SX126xHal_WriteRegister( uint16_t address, uint8_t *buffer, uint16_t size )
 {
-    1ef0:	b5f0      	push	{r4, r5, r6, r7, lr}
-    1ef2:	b085      	sub	sp, #20
-    1ef4:	460e      	mov	r6, r1
-    1ef6:	4617      	mov	r7, r2
-    1ef8:	f8ad 0006 	strh.w	r0, [sp, #6]
+    1edc:	b5f0      	push	{r4, r5, r6, r7, lr}
+    1ede:	b085      	sub	sp, #20
+    1ee0:	460e      	mov	r6, r1
+    1ee2:	4617      	mov	r7, r2
+    1ee4:	f8ad 0006 	strh.w	r0, [sp, #6]
     WAIT_BUSY
-    1efc:	2554      	movs	r5, #84	; 0x54
-    1efe:	4c0e      	ldr	r4, [pc, #56]	; (1f38 <SX126xHal_WriteRegister+0x48>)
-    1f00:	4628      	mov	r0, r5
-    1f02:	47a0      	blx	r4
-    1f04:	2800      	cmp	r0, #0
-    1f06:	d1fb      	bne.n	1f00 <SX126xHal_WriteRegister+0x10>
+    1ee8:	2554      	movs	r5, #84	; 0x54
+    1eea:	4c0e      	ldr	r4, [pc, #56]	; (1f24 <SX126xHal_WriteRegister+0x48>)
+    1eec:	4628      	mov	r0, r5
+    1eee:	47a0      	blx	r4
+    1ef0:	2800      	cmp	r0, #0
+    1ef2:	d1fb      	bne.n	1eec <SX126xHal_WriteRegister+0x10>
 
     NSS_ON
-    1f08:	2100      	movs	r1, #0
-    1f0a:	2052      	movs	r0, #82	; 0x52
-    1f0c:	4d0b      	ldr	r5, [pc, #44]	; (1f3c <SX126xHal_WriteRegister+0x4c>)
-    1f0e:	47a8      	blx	r5
+    1ef4:	2100      	movs	r1, #0
+    1ef6:	2052      	movs	r0, #82	; 0x52
+    1ef8:	4d0b      	ldr	r5, [pc, #44]	; (1f28 <SX126xHal_WriteRegister+0x4c>)
+    1efa:	47a8      	blx	r5
     
     RadioCommands_t command = RADIO_WRITE_REGISTER;
-    1f10:	a804      	add	r0, sp, #16
-    1f12:	230d      	movs	r3, #13
-    1f14:	f800 3d01 	strb.w	r3, [r0, #-1]!
+    1efc:	a804      	add	r0, sp, #16
+    1efe:	230d      	movs	r3, #13
+    1f00:	f800 3d01 	strb.w	r3, [r0, #-1]!
     SendSpi((uint8_t *) &command, 1);
-    1f18:	2101      	movs	r1, #1
-    1f1a:	4c09      	ldr	r4, [pc, #36]	; (1f40 <SX126xHal_WriteRegister+0x50>)
-    1f1c:	47a0      	blx	r4
+    1f04:	2101      	movs	r1, #1
+    1f06:	4c09      	ldr	r4, [pc, #36]	; (1f2c <SX126xHal_WriteRegister+0x50>)
+    1f08:	47a0      	blx	r4
     SendSpi(&address, 2);
-    1f1e:	2102      	movs	r1, #2
-    1f20:	f10d 0006 	add.w	r0, sp, #6
-    1f24:	47a0      	blx	r4
+    1f0a:	2102      	movs	r1, #2
+    1f0c:	f10d 0006 	add.w	r0, sp, #6
+    1f10:	47a0      	blx	r4
     SendSpi(buffer, size);
-    1f26:	b2f9      	uxtb	r1, r7
-    1f28:	4630      	mov	r0, r6
-    1f2a:	47a0      	blx	r4
+    1f12:	b2f9      	uxtb	r1, r7
+    1f14:	4630      	mov	r0, r6
+    1f16:	47a0      	blx	r4
     
     NSS_OFF
-    1f2c:	2101      	movs	r1, #1
-    1f2e:	2052      	movs	r0, #82	; 0x52
-    1f30:	47a8      	blx	r5
+    1f18:	2101      	movs	r1, #1
+    1f1a:	2052      	movs	r0, #82	; 0x52
+    1f1c:	47a8      	blx	r5
 
 }
-    1f32:	b005      	add	sp, #20
-    1f34:	bdf0      	pop	{r4, r5, r6, r7, pc}
-    1f36:	bf00      	nop
-    1f38:	00001cd9 	.word	0x00001cd9
-    1f3c:	00001d21 	.word	0x00001d21
-    1f40:	00001d79 	.word	0x00001d79
+    1f1e:	b005      	add	sp, #20
+    1f20:	bdf0      	pop	{r4, r5, r6, r7, pc}
+    1f22:	bf00      	nop
+    1f24:	00001c29 	.word	0x00001c29
+    1f28:	00001c71 	.word	0x00001c71
+    1f2c:	00001cc9 	.word	0x00001cc9
 
-00001f44 <SX126xHal_WriteReg>:
+00001f30 <SX126xHal_WriteReg>:
 
 void SX126xHal_WriteReg( uint16_t address, uint8_t *value )
 {
-    1f44:	b508      	push	{r3, lr}
+    1f30:	b508      	push	{r3, lr}
     SX126xHal_WriteRegister(address, value, 1 );
-    1f46:	2201      	movs	r2, #1
-    1f48:	4b01      	ldr	r3, [pc, #4]	; (1f50 <SX126xHal_WriteReg+0xc>)
-    1f4a:	4798      	blx	r3
-    1f4c:	bd08      	pop	{r3, pc}
-    1f4e:	bf00      	nop
-    1f50:	00001ef1 	.word	0x00001ef1
+    1f32:	2201      	movs	r2, #1
+    1f34:	4b01      	ldr	r3, [pc, #4]	; (1f3c <SX126xHal_WriteReg+0xc>)
+    1f36:	4798      	blx	r3
+    1f38:	bd08      	pop	{r3, pc}
+    1f3a:	bf00      	nop
+    1f3c:	00001edd 	.word	0x00001edd
 
-00001f54 <SX126xHal_ReadRegister>:
-}
-
-void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size )
-{
-    1f54:	b5f0      	push	{r4, r5, r6, r7, lr}
-    1f56:	b085      	sub	sp, #20
-    1f58:	460e      	mov	r6, r1
-    1f5a:	4617      	mov	r7, r2
-    1f5c:	f8ad 0006 	strh.w	r0, [sp, #6]
-    WAIT_BUSY
-    1f60:	2554      	movs	r5, #84	; 0x54
-    1f62:	4c12      	ldr	r4, [pc, #72]	; (1fac <SX126xHal_ReadRegister+0x58>)
-    1f64:	4628      	mov	r0, r5
-    1f66:	47a0      	blx	r4
-    1f68:	2800      	cmp	r0, #0
-    1f6a:	d1fb      	bne.n	1f64 <SX126xHal_ReadRegister+0x10>
-
-    NSS_ON
-    1f6c:	2100      	movs	r1, #0
-    1f6e:	2052      	movs	r0, #82	; 0x52
-    1f70:	4d0f      	ldr	r5, [pc, #60]	; (1fb0 <SX126xHal_ReadRegister+0x5c>)
-    1f72:	47a8      	blx	r5
-    uint8_t zero = 0;
-    1f74:	2300      	movs	r3, #0
-    1f76:	f88d 300f 	strb.w	r3, [sp, #15]
-    RadioCommands_t command = RADIO_READ_REGISTER;
-    1f7a:	a804      	add	r0, sp, #16
-    1f7c:	231d      	movs	r3, #29
-    1f7e:	f800 3d02 	strb.w	r3, [r0, #-2]!
-    SendSpi((uint8_t *) &command, 1);
-    1f82:	2101      	movs	r1, #1
-    1f84:	4c0b      	ldr	r4, [pc, #44]	; (1fb4 <SX126xHal_ReadRegister+0x60>)
-    1f86:	47a0      	blx	r4
-    SendSpi(&address, 2);
-    1f88:	2102      	movs	r1, #2
-    1f8a:	f10d 0006 	add.w	r0, sp, #6
-    1f8e:	47a0      	blx	r4
-    SendSpi(&zero, 1);
-    1f90:	2101      	movs	r1, #1
-    1f92:	f10d 000f 	add.w	r0, sp, #15
-    1f96:	47a0      	blx	r4
-    ReadSpi(buffer, size); 
-    1f98:	b2f9      	uxtb	r1, r7
-    1f9a:	4630      	mov	r0, r6
-    1f9c:	4b06      	ldr	r3, [pc, #24]	; (1fb8 <SX126xHal_ReadRegister+0x64>)
-    1f9e:	4798      	blx	r3
-   
-    NSS_OFF
-    1fa0:	2101      	movs	r1, #1
-    1fa2:	2052      	movs	r0, #82	; 0x52
-    1fa4:	47a8      	blx	r5
-    
-}
-    1fa6:	b005      	add	sp, #20
-    1fa8:	bdf0      	pop	{r4, r5, r6, r7, pc}
-    1faa:	bf00      	nop
-    1fac:	00001cd9 	.word	0x00001cd9
-    1fb0:	00001d21 	.word	0x00001d21
-    1fb4:	00001d79 	.word	0x00001d79
-    1fb8:	00001d91 	.word	0x00001d91
-
-00001fbc <SX126xHal_ReadReg>:
-
-void SX126xHal_ReadReg( uint16_t address, uint8_t *data )
-{
-    1fbc:	b508      	push	{r3, lr}
-    SX126xHal_ReadRegister( address, data, 1 );
-    1fbe:	2201      	movs	r2, #1
-    1fc0:	4b01      	ldr	r3, [pc, #4]	; (1fc8 <SX126xHal_ReadReg+0xc>)
-    1fc2:	4798      	blx	r3
-    1fc4:	bd08      	pop	{r3, pc}
-    1fc6:	bf00      	nop
-    1fc8:	00001f55 	.word	0x00001f55
-
-00001fcc <SX126xHal_GetDioStatus>:
-    NSS_OFF
-}
-
-
-uint8_t SX126xHal_GetDioStatus( void )
-{
-    1fcc:	b570      	push	{r4, r5, r6, lr}
+00001f40 <SX126xHal_AntSwOn>:
     return ( read_pin(DIO3) << 3 ) | ( read_pin(DIO2) << 2 ) | ( read_pin(DIO1) << 1 ) | ( read_pin(BUSY) << 0 );
-    1fce:	2040      	movs	r0, #64	; 0x40
-    1fd0:	4d09      	ldr	r5, [pc, #36]	; (1ff8 <SX126xHal_GetDioStatus+0x2c>)
-    1fd2:	47a8      	blx	r5
-    1fd4:	4606      	mov	r6, r0
-    1fd6:	2040      	movs	r0, #64	; 0x40
-    1fd8:	47a8      	blx	r5
-    1fda:	0084      	lsls	r4, r0, #2
-    1fdc:	ea44 04c6 	orr.w	r4, r4, r6, lsl #3
-    1fe0:	b264      	sxtb	r4, r4
-    1fe2:	2040      	movs	r0, #64	; 0x40
-    1fe4:	47a8      	blx	r5
-    1fe6:	4606      	mov	r6, r0
-    1fe8:	2054      	movs	r0, #84	; 0x54
-    1fea:	47a8      	blx	r5
-    1fec:	4320      	orrs	r0, r4
-    1fee:	ea40 0046 	orr.w	r0, r0, r6, lsl #1
 }
-    1ff2:	b2c0      	uxtb	r0, r0
-    1ff4:	bd70      	pop	{r4, r5, r6, pc}
-    1ff6:	bf00      	nop
-    1ff8:	00001cd9 	.word	0x00001cd9
 
-00001ffc <__libc_init_array>:
-    1ffc:	b570      	push	{r4, r5, r6, lr}
-    1ffe:	4e0d      	ldr	r6, [pc, #52]	; (2034 <__libc_init_array+0x38>)
-    2000:	4c0d      	ldr	r4, [pc, #52]	; (2038 <__libc_init_array+0x3c>)
-    2002:	1ba4      	subs	r4, r4, r6
-    2004:	10a4      	asrs	r4, r4, #2
-    2006:	2500      	movs	r5, #0
-    2008:	42a5      	cmp	r5, r4
-    200a:	d109      	bne.n	2020 <__libc_init_array+0x24>
-    200c:	4e0b      	ldr	r6, [pc, #44]	; (203c <__libc_init_array+0x40>)
-    200e:	4c0c      	ldr	r4, [pc, #48]	; (2040 <__libc_init_array+0x44>)
-    2010:	f000 f8d0 	bl	21b4 <_init>
-    2014:	1ba4      	subs	r4, r4, r6
-    2016:	10a4      	asrs	r4, r4, #2
-    2018:	2500      	movs	r5, #0
-    201a:	42a5      	cmp	r5, r4
-    201c:	d105      	bne.n	202a <__libc_init_array+0x2e>
-    201e:	bd70      	pop	{r4, r5, r6, pc}
-    2020:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
-    2024:	4798      	blx	r3
-    2026:	3501      	adds	r5, #1
-    2028:	e7ee      	b.n	2008 <__libc_init_array+0xc>
-    202a:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
-    202e:	4798      	blx	r3
-    2030:	3501      	adds	r5, #1
-    2032:	e7f2      	b.n	201a <__libc_init_array+0x1e>
-    2034:	000021c0 	.word	0x000021c0
-    2038:	000021c0 	.word	0x000021c0
-    203c:	000021c0 	.word	0x000021c0
-    2040:	000021c4 	.word	0x000021c4
-    2044:	682f2e2e 	.word	0x682f2e2e
-    2048:	732f6c61 	.word	0x732f6c61
-    204c:	682f6372 	.word	0x682f6372
-    2050:	695f6c61 	.word	0x695f6c61
-    2054:	00632e6f 	.word	0x00632e6f
-    2058:	682f2e2e 	.word	0x682f2e2e
-    205c:	732f6c61 	.word	0x732f6c61
-    2060:	682f6372 	.word	0x682f6372
-    2064:	735f6c61 	.word	0x735f6c61
-    2068:	6d5f6970 	.word	0x6d5f6970
-    206c:	6e79735f 	.word	0x6e79735f
-    2070:	00632e63 	.word	0x00632e63
-    2074:	682f2e2e 	.word	0x682f2e2e
-    2078:	732f6c61 	.word	0x732f6c61
-    207c:	682f6372 	.word	0x682f6372
-    2080:	745f6c61 	.word	0x745f6c61
-    2084:	72656d69 	.word	0x72656d69
-    2088:	0000632e 	.word	0x0000632e
-    208c:	682f2e2e 	.word	0x682f2e2e
-    2090:	732f6c61 	.word	0x732f6c61
-    2094:	682f6372 	.word	0x682f6372
-    2098:	755f6c61 	.word	0x755f6c61
-    209c:	74726173 	.word	0x74726173
-    20a0:	7973615f 	.word	0x7973615f
-    20a4:	632e636e 	.word	0x632e636e
-    20a8:	00000000 	.word	0x00000000
-    20ac:	682f2e2e 	.word	0x682f2e2e
-    20b0:	752f6c61 	.word	0x752f6c61
-    20b4:	736c6974 	.word	0x736c6974
-    20b8:	6372732f 	.word	0x6372732f
-    20bc:	6974752f 	.word	0x6974752f
-    20c0:	6c5f736c 	.word	0x6c5f736c
-    20c4:	2e747369 	.word	0x2e747369
-    20c8:	00000063 	.word	0x00000063
-    20cc:	682f2e2e 	.word	0x682f2e2e
-    20d0:	752f6c61 	.word	0x752f6c61
-    20d4:	736c6974 	.word	0x736c6974
-    20d8:	6372732f 	.word	0x6372732f
-    20dc:	6974752f 	.word	0x6974752f
-    20e0:	725f736c 	.word	0x725f736c
-    20e4:	62676e69 	.word	0x62676e69
-    20e8:	65666675 	.word	0x65666675
-    20ec:	00632e72 	.word	0x00632e72
 
-000020f0 <_map>:
-    20f0:	00000000 00000040 682f2e2e 652f6c70     ....@...../hpl/e
-    2100:	682f6369 655f6c70 632e6369 00000000     ic/hpl_eic.c....
-    2110:	40003000 40003400 41012000 41014000     .0.@.4.@. .A.@.A
-    2120:	43000000 43000400 43000800 43000c00     ...C...C...C...C
-
-00002130 <_i2cms>:
+void SX126xHal_AntSwOn( void )
+{
+    1f40:	4770      	bx	lr
 	...
-    2148:	682f2e2e 732f6c70 6f637265 70682f6d     ../hpl/sercom/hp
-    2158:	65735f6c 6d6f6372 0000632e 40003800     l_sercom.c...8.@
-    2168:	40003c00 4101a000 4101c000 42001400     .<.@...A...A...B
-    2178:	42001800 43001400 43001800              ...B...C...C
 
-00002184 <_tcs>:
-    2184:	00720007 00000308 00000000 00001770     ..r.........p...
-    2194:	00000000 682f2e2e 742f6c70 70682f63     ....../hpl/tc/hp
-    21a4:	63745f6c 0000632e 746e6553 00000a21     l_tc.c..Sent!...
+00001f44 <__libc_init_array>:
+    1f44:	b570      	push	{r4, r5, r6, lr}
+    1f46:	4e0d      	ldr	r6, [pc, #52]	; (1f7c <__libc_init_array+0x38>)
+    1f48:	4c0d      	ldr	r4, [pc, #52]	; (1f80 <__libc_init_array+0x3c>)
+    1f4a:	1ba4      	subs	r4, r4, r6
+    1f4c:	10a4      	asrs	r4, r4, #2
+    1f4e:	2500      	movs	r5, #0
+    1f50:	42a5      	cmp	r5, r4
+    1f52:	d109      	bne.n	1f68 <__libc_init_array+0x24>
+    1f54:	4e0b      	ldr	r6, [pc, #44]	; (1f84 <__libc_init_array+0x40>)
+    1f56:	4c0c      	ldr	r4, [pc, #48]	; (1f88 <__libc_init_array+0x44>)
+    1f58:	f000 f8d0 	bl	20fc <_init>
+    1f5c:	1ba4      	subs	r4, r4, r6
+    1f5e:	10a4      	asrs	r4, r4, #2
+    1f60:	2500      	movs	r5, #0
+    1f62:	42a5      	cmp	r5, r4
+    1f64:	d105      	bne.n	1f72 <__libc_init_array+0x2e>
+    1f66:	bd70      	pop	{r4, r5, r6, pc}
+    1f68:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+    1f6c:	4798      	blx	r3
+    1f6e:	3501      	adds	r5, #1
+    1f70:	e7ee      	b.n	1f50 <__libc_init_array+0xc>
+    1f72:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+    1f76:	4798      	blx	r3
+    1f78:	3501      	adds	r5, #1
+    1f7a:	e7f2      	b.n	1f62 <__libc_init_array+0x1e>
+    1f7c:	00002108 	.word	0x00002108
+    1f80:	00002108 	.word	0x00002108
+    1f84:	00002108 	.word	0x00002108
+    1f88:	0000210c 	.word	0x0000210c
+    1f8c:	682f2e2e 	.word	0x682f2e2e
+    1f90:	732f6c61 	.word	0x732f6c61
+    1f94:	682f6372 	.word	0x682f6372
+    1f98:	695f6c61 	.word	0x695f6c61
+    1f9c:	00632e6f 	.word	0x00632e6f
+    1fa0:	682f2e2e 	.word	0x682f2e2e
+    1fa4:	732f6c61 	.word	0x732f6c61
+    1fa8:	682f6372 	.word	0x682f6372
+    1fac:	735f6c61 	.word	0x735f6c61
+    1fb0:	6d5f6970 	.word	0x6d5f6970
+    1fb4:	6e79735f 	.word	0x6e79735f
+    1fb8:	00632e63 	.word	0x00632e63
+    1fbc:	682f2e2e 	.word	0x682f2e2e
+    1fc0:	732f6c61 	.word	0x732f6c61
+    1fc4:	682f6372 	.word	0x682f6372
+    1fc8:	745f6c61 	.word	0x745f6c61
+    1fcc:	72656d69 	.word	0x72656d69
+    1fd0:	0000632e 	.word	0x0000632e
+    1fd4:	682f2e2e 	.word	0x682f2e2e
+    1fd8:	732f6c61 	.word	0x732f6c61
+    1fdc:	682f6372 	.word	0x682f6372
+    1fe0:	755f6c61 	.word	0x755f6c61
+    1fe4:	74726173 	.word	0x74726173
+    1fe8:	7973615f 	.word	0x7973615f
+    1fec:	632e636e 	.word	0x632e636e
+    1ff0:	00000000 	.word	0x00000000
+    1ff4:	682f2e2e 	.word	0x682f2e2e
+    1ff8:	752f6c61 	.word	0x752f6c61
+    1ffc:	736c6974 	.word	0x736c6974
+    2000:	6372732f 	.word	0x6372732f
+    2004:	6974752f 	.word	0x6974752f
+    2008:	6c5f736c 	.word	0x6c5f736c
+    200c:	2e747369 	.word	0x2e747369
+    2010:	00000063 	.word	0x00000063
+    2014:	682f2e2e 	.word	0x682f2e2e
+    2018:	752f6c61 	.word	0x752f6c61
+    201c:	736c6974 	.word	0x736c6974
+    2020:	6372732f 	.word	0x6372732f
+    2024:	6974752f 	.word	0x6974752f
+    2028:	725f736c 	.word	0x725f736c
+    202c:	62676e69 	.word	0x62676e69
+    2030:	65666675 	.word	0x65666675
+    2034:	00632e72 	.word	0x00632e72
 
-000021b4 <_init>:
-    21b4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    21b6:	bf00      	nop
-    21b8:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    21ba:	bc08      	pop	{r3}
-    21bc:	469e      	mov	lr, r3
-    21be:	4770      	bx	lr
+00002038 <_map>:
+    2038:	00000000 00000040 682f2e2e 652f6c70     ....@...../hpl/e
+    2048:	682f6369 655f6c70 632e6369 00000000     ic/hpl_eic.c....
+    2058:	40003000 40003400 41012000 41014000     .0.@.4.@. .A.@.A
+    2068:	43000000 43000400 43000800 43000c00     ...C...C...C...C
 
-000021c0 <__init_array_start>:
-    21c0:	00000289 	.word	0x00000289
+00002078 <_i2cms>:
+	...
+    2090:	682f2e2e 732f6c70 6f637265 70682f6d     ../hpl/sercom/hp
+    20a0:	65735f6c 6d6f6372 0000632e 40003800     l_sercom.c...8.@
+    20b0:	40003c00 4101a000 4101c000 42001400     .<.@...A...A...B
+    20c0:	42001800 43001400 43001800              ...B...C...C
 
-000021c4 <_fini>:
-    21c4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    21c6:	bf00      	nop
-    21c8:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    21ca:	bc08      	pop	{r3}
-    21cc:	469e      	mov	lr, r3
-    21ce:	4770      	bx	lr
+000020cc <_tcs>:
+    20cc:	00720007 00000308 00000000 00001770     ..r.........p...
+    20dc:	00000000 682f2e2e 742f6c70 70682f63     ....../hpl/tc/hp
+    20ec:	63745f6c 0000632e 746e6553 00000a21     l_tc.c..Sent!...
 
-000021d0 <__fini_array_start>:
-    21d0:	00000265 	.word	0x00000265
+000020fc <_init>:
+    20fc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    20fe:	bf00      	nop
+    2100:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    2102:	bc08      	pop	{r3}
+    2104:	469e      	mov	lr, r3
+    2106:	4770      	bx	lr
+
+00002108 <__init_array_start>:
+    2108:	00000289 	.word	0x00000289
+
+0000210c <_fini>:
+    210c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    210e:	bf00      	nop
+    2110:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    2112:	bc08      	pop	{r3}
+    2114:	469e      	mov	lr, r3
+    2116:	4770      	bx	lr
+
+00002118 <__fini_array_start>:
+    2118:	00000265 	.word	0x00000265
