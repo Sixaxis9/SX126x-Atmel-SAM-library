@@ -18,6 +18,7 @@ Modifier: Marco Giordano
 */
 
 #include "sx126x_hal.h"
+#include "sx126x_commands.h"
 
 /*!
  * \brief Used to block execution to give enough time to Busy to go up
@@ -90,6 +91,10 @@ void SX126xHal_ReadCommand( RadioCommands_t command, uint8_t *buffer, uint16_t s
     NSS_ON
 
     SendSpi((uint8_t *)&command, 1);
+    if(command != RADIO_GET_STATUS){
+        uint8_t zero = 0x00; // Throw the status for not-status commands
+        SendSpi( &zero, 1);
+    }
     ReadSpi(buffer, size);
     
     NSS_OFF
@@ -101,10 +106,14 @@ void SX126xHal_WriteRegister( uint16_t address, uint8_t *buffer, uint16_t size )
     WAIT_BUSY
 
     NSS_ON
+
+    uint8_t address_high = (( address >> 8 ) & 0xFF);
+    uint8_t address_low = ( address & 0xFF);
     
     RadioCommands_t command = RADIO_WRITE_REGISTER;
     SendSpi((uint8_t *) &command, 1);
-    SendSpi(&address, 2);
+    SendSpi( &address_high , 1);
+    SendSpi( &address_low , 1);
     SendSpi(buffer, size);
     
     NSS_OFF
@@ -121,10 +130,16 @@ void SX126xHal_ReadRegister( uint16_t address, uint8_t *buffer, uint16_t size )
     WAIT_BUSY
 
     NSS_ON
+    
+    uint8_t address_high = (( address >> 8 ) & 0xFF);
+    uint8_t address_low = ( address & 0xFF);
+
     uint8_t zero = 0;
     RadioCommands_t command = RADIO_READ_REGISTER;
+    
     SendSpi((uint8_t *) &command, 1);
-    SendSpi(&address, 2);
+    SendSpi( &address_high , 1);
+    SendSpi( &address_low , 1);
     SendSpi(&zero, 1);
     ReadSpi(buffer, size); 
    

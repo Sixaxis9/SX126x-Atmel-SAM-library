@@ -1,6 +1,6 @@
-hal/utils/src/utils_ringbuffer.d hal/utils/src/utils_ringbuffer.o: \
- ../hal/utils/src/utils_ringbuffer.c \
- ../hal/utils/include/utils_ringbuffer.h ../hal/utils/include/compiler.h \
+hal/src/hal_usart_sync.d hal/src/hal_usart_sync.o: \
+ ../hal/src/hal_usart_sync.c ../hal/include/hal_usart_sync.h \
+ ../hal/include/hal_io.h ../hal/utils/include/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
@@ -115,8 +115,7 @@ hal/utils/src/utils_ringbuffer.d hal/utils/src/utils_ringbuffer.o: \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include/pio/samd51p20a.h \
  ../hri/hri_d51.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a\include/sam.h \
- ../hri/hri_ac_d51.h ../hal/include/hal_atomic.h \
- ../hal/utils/include/compiler.h ../hri/hri_adc_d51.h \
+ ../hri/hri_ac_d51.h ../hal/include/hal_atomic.h ../hri/hri_adc_d51.h \
  ../hri/hri_aes_d51.h ../hri/hri_ccl_d51.h ../hri/hri_cmcc_d51.h \
  ../hri/hri_dac_d51.h ../hri/hri_dmac_d51.h ../hri/hri_dsu_d51.h \
  ../hri/hri_eic_d51.h ../hri/hri_evsys_d51.h ../hri/hri_freqm_d51.h \
@@ -129,9 +128,13 @@ hal/utils/src/utils_ringbuffer.d hal/utils/src/utils_ringbuffer.o: \
  ../hri/hri_sdhc_d51.h ../hri/hri_sercom_d51.h ../hri/hri_supc_d51.h \
  ../hri/hri_tc_d51.h ../hri/hri_tcc_d51.h ../hri/hri_trng_d51.h \
  ../hri/hri_usb_d51.h ../hri/hri_wdt_d51.h \
- ../hal/utils/include/err_codes.h ../hal/utils/include/utils_assert.h
+ ../hal/utils/include/err_codes.h ../hal/include/hpl_usart_sync.h \
+ ../hal/include/hpl_usart.h ../hal/utils/include/utils_assert.h \
+ ../hal/utils/include/utils.h
 
-../hal/utils/include/utils_ringbuffer.h:
+../hal/include/hal_usart_sync.h:
+
+../hal/include/hal_io.h:
 
 ../hal/utils/include/compiler.h:
 
@@ -367,8 +370,6 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a
 
 ../hal/include/hal_atomic.h:
 
-../hal/utils/include/compiler.h:
-
 ../hri/hri_adc_d51.h:
 
 ../hri/hri_aes_d51.h:
@@ -441,4 +442,10 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD51_DFP\1.2.139\samd51a
 
 ../hal/utils/include/err_codes.h:
 
+../hal/include/hpl_usart_sync.h:
+
+../hal/include/hpl_usart.h:
+
 ../hal/utils/include/utils_assert.h:
+
+../hal/utils/include/utils.h:

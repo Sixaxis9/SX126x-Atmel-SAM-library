@@ -32,15 +32,13 @@ hal\src\hal_spi_m_sync.c
 
 hal\src\hal_timer.c
 
-hal\src\hal_usart_async.c
+hal\src\hal_usart_sync.c
 
 hal\utils\src\utils_assert.c
 
 hal\utils\src\utils_event.c
 
 hal\utils\src\utils_list.c
-
-hal\utils\src\utils_ringbuffer.c
 
 hal\utils\src\utils_syscalls.c
 

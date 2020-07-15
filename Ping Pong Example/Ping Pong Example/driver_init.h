@@ -24,14 +24,16 @@ extern "C" {
 #include <hal_ext_irq.h>
 
 #include <hal_spi_m_sync.h>
-#include <hal_usart_async.h>
+
+#include <hal_usart_sync.h>
 
 #include <hal_delay.h>
 #include <hal_timer.h>
 #include <hpl_tc_base.h>
 
-extern struct spi_m_sync_descriptor  SPI_0;
-extern struct usart_async_descriptor USART_0;
+extern struct spi_m_sync_descriptor SPI_0;
+
+extern struct usart_sync_descriptor USART_0;
 
 extern struct timer_descriptor TIMER_0;
 

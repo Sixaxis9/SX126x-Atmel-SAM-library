@@ -7,10 +7,9 @@
 
 #include <atmel_start_pins.h>
 
-#define USE_CONFIG_PUBLIC_NETOWRK 0
+//#define USE_CONFIG_PUBLIC_NETOWRK 0
 #define XTAL 1
 #define ADV_DEBUG 0
-#define USE_CONFIG_PUBLIC_NETOWRK 0
 
 #define SX1261 0
 #define SX1262 1

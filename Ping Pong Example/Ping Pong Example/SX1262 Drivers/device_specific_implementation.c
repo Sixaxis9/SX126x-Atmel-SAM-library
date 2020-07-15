@@ -69,11 +69,24 @@ void IRQ_Init(void)
     // Possibility to add DIO2 and DIO3 interrupts
 }
 
-static void DIO1_IRQ(void)
+void DIO1_IRQ(void)
 {
+	gpio_toggle_pin_level(LED);
     // Clear the interrupt in the radio
     //SX126x_ClearIrqStatus( IRQ_RADIO_ALL );
     // Do something in the ISR
-	uint8_t tx_done_see[6] = "Sent!\n";
-	io_write(usart, tx_done_see, 6);
+	uint8_t tx_done_see[10] = "Received!\n";
+	io_write(usart, tx_done_see, 10);
+	
+	uint8_t buffer_g[4];
+
+	SX126x_GetPayload(buffer_g, 4, 4);
+	
+	io_write(usart, buffer_g, 4);
+	SX126x_ClearIrqStatus(2);
+	//delay_ms(10);
+	//SX126x_SendPayload((uint8_t *) "PONG", 4, 0); // Be careful timeout
+	//delay_ms(5);
+	SX126x_SetRx(0);
+
 }

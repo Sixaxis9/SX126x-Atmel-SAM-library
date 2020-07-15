@@ -11,14 +11,10 @@
 #include <utils.h>
 #include <hal_init.h>
 
-/*! The buffer size for USART */
-#define USART_0_BUFFER_SIZE 16
+struct spi_m_sync_descriptor SPI_0;
+struct timer_descriptor      TIMER_0;
 
-struct spi_m_sync_descriptor  SPI_0;
-struct usart_async_descriptor USART_0;
-struct timer_descriptor       TIMER_0;
-
-static uint8_t USART_0_buffer[USART_0_BUFFER_SIZE];
+struct usart_sync_descriptor USART_0;
 
 void EXTERNAL_IRQ_0_init(void)
 {
@@ -97,26 +93,7 @@ void SPI_0_init(void)
 	SPI_0_PORT_init();
 }
 
-/**
- * \brief USART Clock initialization function
- *
- * Enables register interface and peripheral clock
- */
-void USART_0_CLOCK_init()
-{
-
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_CORE, CONF_GCLK_SERCOM4_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_SLOW, CONF_GCLK_SERCOM4_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-
-	hri_mclk_set_APBDMASK_SERCOM4_bit(MCLK);
-}
-
-/**
- * \brief USART pinmux initialization function
- *
- * Set each required pin to USART functionality
- */
-void USART_0_PORT_init()
+void USART_0_PORT_init(void)
 {
 
 	gpio_set_pin_function(PB08, PINMUX_PB08D_SERCOM4_PAD0);
@@ -124,15 +101,18 @@ void USART_0_PORT_init()
 	gpio_set_pin_function(PB09, PINMUX_PB09D_SERCOM4_PAD1);
 }
 
-/**
- * \brief USART initialization function
- *
- * Enables USART peripheral, clocks and initializes USART driver
- */
+void USART_0_CLOCK_init(void)
+{
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_CORE, CONF_GCLK_SERCOM4_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM4_GCLK_ID_SLOW, CONF_GCLK_SERCOM4_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+
+	hri_mclk_set_APBDMASK_SERCOM4_bit(MCLK);
+}
+
 void USART_0_init(void)
 {
 	USART_0_CLOCK_init();
-	usart_async_init(&USART_0, SERCOM4, USART_0_buffer, USART_0_BUFFER_SIZE, (void *)NULL);
+	usart_sync_init(&USART_0, SERCOM4, (void *)NULL);
 	USART_0_PORT_init();
 }
 
@@ -171,6 +151,20 @@ void system_init(void)
 	gpio_set_pin_direction(LED, GPIO_DIRECTION_OUT);
 
 	gpio_set_pin_function(LED, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PC10
+
+	gpio_set_pin_level(PC10,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   true);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(PC10, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(PC10, GPIO_PIN_FUNCTION_OFF);
 
 	// GPIO on PC18
 
@@ -218,6 +212,7 @@ void system_init(void)
 	EXTERNAL_IRQ_0_init();
 
 	SPI_0_init();
+
 	USART_0_init();
 
 	delay_driver_init();

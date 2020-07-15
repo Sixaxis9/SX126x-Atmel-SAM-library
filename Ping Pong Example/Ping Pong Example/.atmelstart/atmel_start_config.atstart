@@ -2,16 +2,16 @@ format_version: '2'
 name: My Project
 versions:
   api: '1.0'
-  backend: 1.7.360
-  commit: 1e07622763d149970fd8808a8f12ff3b1e84e0d7
+  backend: 1.7.391
+  commit: d4b7e9f65a05ebffcb0986e4060cb8c0a313e69a
   content: unknown
   content_pack_name: unknown
   format: '2'
-  frontend: 1.7.360
-  packs_version_avr8: 1.0.1415
+  frontend: 1.7.391
+  packs_version_avr8: 1.0.1421
   packs_version_qtouch: unknown
-  packs_version_sam: 1.0.1622
-  version_backend: 1.7.360
+  packs_version_sam: 1.0.1658
+  version_backend: 1.7.391
   version_frontend: ''
 board:
   identifier: CustomBoard
@@ -1082,9 +1082,9 @@ drivers:
           slow_gclk_selection: Generic clock generator 3
   USART_0:
     user_label: USART_0
-    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM4::driver_config_definition::UART::HAL:Driver:USART.Async
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::SERCOM4::driver_config_definition::UART::HAL:Driver:USART.Sync
     functionality: USART
-    api: HAL:Driver:USART_Async
+    api: HAL:Driver:USART_Sync
     configuration:
       usart_advanced: false
       usart_arch_clock_mode: USART with internal clock
@@ -1208,6 +1208,13 @@ pads:
     mode: Digital input
     user_label: PA06
     configuration: null
+  PC10:
+    name: PC10
+    definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PC10
+    mode: Digital output
+    user_label: PC10
+    configuration:
+      pad_initial_level: High
   NSS:
     name: PC18
     definition: Atmel:SAMD51_Drivers:0.0.1::SAMD51P20A-AF::pad::PC18

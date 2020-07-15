@@ -68,14 +68,19 @@ void SX126x_Init( void ){
         
         SX126x_SetPacketType( PACKET_TYPE_LORA );
 
+
         #ifdef USE_CONFIG_PUBLIC_NETOWRK
+                uint8_t pub_sync_h = (( LORA_MAC_PUBLIC_SYNCWORD >> 8 ) & 0xFF);
+                uint8_t pub_sync_l = ( LORA_MAC_PUBLIC_SYNCWORD & 0xFF);
                 // Change LoRa modem Sync Word for Public Networks
-                SX126xHal_WriteReg( REG_LR_SYNCWORD, (uint8_t *) (( LORA_MAC_PUBLIC_SYNCWORD >> 8 ) & 0xFF) );
-                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PUBLIC_SYNCWORD & 0xFF) );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD, &pub_sync_h  );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, &pub_sync_l );
         #else
+                uint8_t priv_sync_h = (( LORA_MAC_PRIVATE_SYNCWORD >> 8 ) & 0xFF);
+                uint8_t priv_sync_l = ( LORA_MAC_PRIVATE_SYNCWORD & 0xFF);
                 // Change LoRa modem SyncWord for Private Networks
-                SX126xHal_WriteReg( REG_LR_SYNCWORD, (uint8_t *) (( LORA_MAC_PRIVATE_SYNCWORD >> 8 ) & 0xFF) );
-                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, (uint8_t *) (LORA_MAC_PRIVATE_SYNCWORD & 0xFF) );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD, &priv_sync_h );
+                SX126xHal_WriteReg( REG_LR_SYNCWORD + 1, &priv_sync_l );
         #endif
 }
 
@@ -142,17 +147,21 @@ void SX126x_CheckDeviceReady( void )
 
 void SX126x_SetPayload( uint8_t *payload, uint8_t size )
 {
-    SX126xHal_WriteBuffer( 0x00, payload, size );
+    uint8_t dummy;
+    uint8_t start_buffer = 0x00;
+    SX126x_GetRxBufferStatus( &dummy, &start_buffer );
+    SX126xHal_WriteBuffer( start_buffer, payload, size );
 }
 
-uint8_t SX126x_GetPayload( uint8_t *buffer, uint8_t *size,  uint8_t maxSize )
+uint8_t SX126x_GetPayload( uint8_t *buffer, uint8_t size,  uint8_t maxSize )
 {
-    SX126x_GetRxBufferStatus( size, (uint8_t *) 0x00 );
-    if( *size > maxSize )
+    uint8_t start_buffer = 0x00;
+    SX126x_GetRxBufferStatus( &size, &start_buffer );
+    if( size > maxSize )
     {
         return 1;
     }
-    SX126xHal_ReadBuffer( 0x00, buffer, *size );
+    SX126xHal_ReadBuffer( start_buffer, buffer, size );
     return 0;
 }
 
@@ -711,10 +720,12 @@ void SX126x_GetRxBufferStatus( uint8_t *payloadLength, uint8_t *rxStartBufferPoi
     uint8_t status[2];
 
     SX126xHal_ReadCommand( RADIO_GET_RXBUFFERSTATUS, status, 2 );
-
+	
+    /* The registers in this part of code are not in the datasheet*/
+	
     // In case of LORA fixed header, the payloadLength is obtained by reading
     // the register REG_LR_PAYLOADLENGTH
-	uint8_t buffer_stat_temp = 0;
+    uint8_t buffer_stat_temp = 0;
 	SX126xHal_ReadReg( REG_LR_PACKETPARAMS,  &buffer_stat_temp);
     if( ( SX126x_GetPacketType( ) == PACKET_TYPE_LORA ) && ( buffer_stat_temp >> 7 == 1 ) )
     {
@@ -724,6 +735,8 @@ void SX126x_GetRxBufferStatus( uint8_t *payloadLength, uint8_t *rxStartBufferPoi
     {
         *payloadLength = status[0];
     }
+
+    //*payloadLength = status[0];
     *rxStartBufferPointer = status[1];
 }
 
@@ -872,4 +885,57 @@ void SX126x_ProcessIrqs( void )
     }  
     */
 
+}
+
+// HELPER FUNCTIONS TO START TX AND RX
+
+void set_rx( uint32_t freq, RadioLoRaBandwidths_t bw, RadioLoRaSpreadingFactors_t sf, RadioLoRaCodingRates_t cd, RadioLoRaPacketLengthsMode_t ht, uint8_t pck_len ){
+    SX126x_SetPacketType(PACKET_TYPE_LORA);
+
+    SX126x_SetRfFrequency(freq);
+
+    SX126x_SetBufferBaseAddresses(10, 10);
+
+
+    ModulationParams_t ModParams;
+    ModParams.PacketType = PACKET_TYPE_LORA;
+
+    struct LoRa_modul lora_modul;
+    lora_modul.SpreadingFactor = sf;
+    lora_modul.Bandwidth = bw;
+    lora_modul.CodingRate = cd;
+    lora_modul.LowDatarateOptimize = 0;
+
+    struct Params_modul params_modul;
+
+    memcpy(&params_modul.LoRa, &lora_modul, sizeof(lora_modul));
+
+    memcpy(&ModParams.Params, &params_modul, sizeof(params_modul));
+
+    SX126x_SetModulationParams(&ModParams);
+
+
+    PacketParams_t PckParam;
+    PckParam.PacketType = PACKET_TYPE_LORA;
+    struct Params_pckt param_pckt;
+    struct LoRa_pckt lora_pckt;
+
+    lora_pckt.PreambleLength = 8;
+    lora_pckt.HeaderType = LORA_PACKET_VARIABLE_LENGTH;
+    lora_pckt.PayloadLength = pck_len;
+    lora_pckt.CrcMode = LORA_CRC_OFF;
+    lora_pckt.InvertIQ = LORA_IQ_NORMAL;
+
+    memcpy(&param_pckt.LoRa, &lora_pckt, sizeof(lora_pckt));
+    memcpy(&PckParam.Params, &param_pckt, sizeof(param_pckt));
+
+    SX126x_SetPacketParams(&PckParam);
+}
+
+void set_tx( uint32_t freq, RadioLoRaBandwidths_t bw, RadioLoRaSpreadingFactors_t sf, RadioLoRaCodingRates_t cd, RadioLoRaPacketLengthsMode_t ht, uint8_t pck_len, int8_t power, RadioRampTimes_t rt ){
+    // Same considerations as RX
+    set_rx( freq, bw, sf, cd, ht, pck_len );
+    // Plus some specific TX
+    SX126x_SetPaConfig( 0x04, 0x07, 0x00, 0x01 );
+    SX126x_SetTxParams(power, rt);
 }
